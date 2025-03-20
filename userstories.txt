@@ -1,2 +1,2 @@
 I want to be able to sign up.
-I want to be able to sign in.
+I want to be able to sign in using my password and email.
