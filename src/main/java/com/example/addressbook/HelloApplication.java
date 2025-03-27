@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/* hello */
+
 public class HelloApplication extends Application {
     public static final String TITLE = "Quiz Coach";
     public static final int WIDTH = 640;
