@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+/* hey hows it going */
 
 public class HelloApplication extends Application {
     public static final String TITLE = "Quiz Coach";
