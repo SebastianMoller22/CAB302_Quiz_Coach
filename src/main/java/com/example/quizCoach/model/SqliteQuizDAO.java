@@ -21,7 +21,7 @@ public class SqliteQuizDAO implements IQuizDAO {
             String clearQuery = "DELETE FROM quizzes";
             clearStatement.execute(clearQuery);
             Statement insertStatement = connection.createStatement();
-            String insertQuery = "INSERT INTO contacts (firstName, lastName, phone, email) VALUES "
+            String insertQuery = "INSERT INTO quizzes (firstName, lastName, phone, email) VALUES "
                     + "('John', 'Doe', '0423423423', 'johndoe@example.com'),"
                     + "('Jane', 'Doe', '0423423424', 'janedoe@example.com'),"
                     + "('Jay', 'Doe', '0423423425', 'jaydoe@example.com')";
