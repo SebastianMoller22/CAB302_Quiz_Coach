@@ -1,6 +1,7 @@
 package com.example.quizCoach.model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -67,6 +68,22 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     @Override
     public Quiz getQuiz(int id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+                String phone = resultSet.getString("phone");
+                String email = resultSet.getString("email");
+                Quiz quiz = new Quiz(firstName, lastName, phone, email);
+                quiz.setId(id);
+                return quiz;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
