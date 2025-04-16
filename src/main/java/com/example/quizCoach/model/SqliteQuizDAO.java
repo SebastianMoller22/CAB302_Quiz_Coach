@@ -12,6 +12,23 @@ public class SqliteQuizDAO implements IQuizDAO {
         createTable();
     }
 
+    private void insertSampleData() {
+        try {
+            // Clear before inserting
+            Statement clearStatement = connection.createStatement();
+            String clearQuery = "DELETE FROM quizzes";
+            clearStatement.execute(clearQuery);
+            Statement insertStatement = connection.createStatement();
+            String insertQuery = "INSERT INTO contacts (firstName, lastName, phone, email) VALUES "
+                    + "('John', 'Doe', '0423423423', 'johndoe@example.com'),"
+                    + "('Jane', 'Doe', '0423423424', 'janedoe@example.com'),"
+                    + "('Jay', 'Doe', '0423423425', 'jaydoe@example.com')";
+            insertStatement.execute(insertQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void createTable() {
         // Create a table if no tables exist
         try {
