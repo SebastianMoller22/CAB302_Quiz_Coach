@@ -14,8 +14,8 @@ public class SqliteQuizDAO implements IQuizDAO {
     public SqliteQuizDAO() {
         connection = SqliteConnection.getInstance();
         createTable();
-        // Used for testing, to be removed later
-        insertSampleData();
+        //// Used for testing, to be removed later
+        //insertSampleData();
     }
 
     private void insertSampleData() {
