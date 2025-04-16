@@ -14,11 +14,11 @@ import java.util.List;
 
 public class MainController {
     @FXML
-    private ListView<Quiz> contactsListView;
-    private IQuizDAO contactDAO;
+    private ListView<Quiz> quizzesListView;
+    private IQuizDAO quizDAO;
     public MainController() {
-        contactDAO = new MockQuizDAO();
-        contactDAO.addQuiz(new Quiz("Jerry", "Doe", "jerrydoe@example.com", "0423423426"));
+        quizDAO = new MockQuizDAO();
+        quizDAO.addQuiz(new Quiz("Jerry", "Doe", "jerrydoe@example.com", "0423423426"));
     }
 
     @FXML
@@ -30,15 +30,15 @@ public class MainController {
     @FXML
     private TextField phoneTextField;
     @FXML
-    private VBox contactContainer;
+    private VBox quizContainer;
 
     /**
-     * Programmatically selects a contact in the list view and
-     * updates the text fields with the contact's information.
-     * @param quiz The contact to select.
+     * Programmatically selects a quiz in the list view and
+     * updates the text fields with the quiz's information.
+     * @param quiz The quiz to select.
      */
-    private void selectContact(Quiz quiz) {
-        contactsListView.getSelectionModel().select(quiz);
+    private void selectQuiz(Quiz quiz) {
+        quizzesListView.getSelectionModel().select(quiz);
         firstNameTextField.setText(quiz.getFirstName());
         lastNameTextField.setText(quiz.getLastName());
         emailTextField.setText(quiz.getEmail());
@@ -46,37 +46,37 @@ public class MainController {
     }
 
     /**
-     * Renders a cell in the contacts list view by setting the text to the contact's full name.
-     * @param contactListView The list view to render the cell for.
+     * Renders a cell in the quizs list view by setting the text to the quiz's full name.
+     * @param quizListView The list view to render the cell for.
      * @return The rendered cell.
      */
-    private ListCell<Quiz> renderCell(ListView<Quiz> contactListView) {
+    private ListCell<Quiz> renderCell(ListView<Quiz> quizListView) {
         return new ListCell<>() {
             /**
-             * Handles the event when a contact is selected in the list view.
+             * Handles the event when a quiz is selected in the list view.
              *
              * @param mouseEvent The event to handle.
              */
-            private void onContactSelected(MouseEvent mouseEvent) {
+            private void onQuizSelected(MouseEvent mouseEvent) {
                 ListCell<Quiz> clickedCell = (ListCell<Quiz>) mouseEvent.getSource();
-                // Get the selected contact from the list view
+                // Get the selected quiz from the list view
                 Quiz selectedQuiz = clickedCell.getItem();
-                if (selectedQuiz != null) selectContact(selectedQuiz);
+                if (selectedQuiz != null) selectQuiz(selectedQuiz);
             }
 
             /**
-             * Updates the item in the cell by setting the text to the contact's full name.
+             * Updates the item in the cell by setting the text to the quiz's full name.
              *
-             * @param quiz The contact to update the cell with.
+             * @param quiz The quiz to update the cell with.
              * @param empty   Whether the cell is empty.
              */
             @Override
             protected void updateItem(Quiz quiz, boolean empty) {
                 super.updateItem(quiz, empty);
-                // If the cell is empty, set the text to null, otherwise set it to the contact's full name
+                // If the cell is empty, set the text to null, otherwise set it to the quiz's full name
                 if (empty || quiz == null || quiz.getFullName() == null) {
                     setText(null);
-                    super.setOnMouseClicked(this::onContactSelected);
+                    super.setOnMouseClicked(this::onQuizSelected);
                 } else {
                     setText(quiz.getFullName());
                 }
@@ -86,83 +86,83 @@ public class MainController {
 
     @FXML
     private void onEditConfirm() {
-        // Get the selected contact from the list view
-        Quiz selectedQuiz = contactsListView.getSelectionModel().getSelectedItem();
+        // Get the selected quiz from the list view
+        Quiz selectedQuiz = quizzesListView.getSelectionModel().getSelectedItem();
         if (selectedQuiz != null) {
             selectedQuiz.setFirstName(firstNameTextField.getText());
             selectedQuiz.setLastName(lastNameTextField.getText());
             selectedQuiz.setEmail(emailTextField.getText());
             selectedQuiz.setPhone(phoneTextField.getText());
-            contactDAO.updateQuiz(selectedQuiz);
-            syncContacts();
+            quizDAO.updateQuiz(selectedQuiz);
+            syncQuizzes();
         }
     }
 
     @FXML
     private void onDelete() {
-        // Get the selected contact from the list view
-        Quiz selectedQuiz = contactsListView.getSelectionModel().getSelectedItem();
+        // Get the selected quiz from the list view
+        Quiz selectedQuiz = quizzesListView.getSelectionModel().getSelectedItem();
         if (selectedQuiz != null) {
-            contactDAO.deleteQuiz(selectedQuiz);
-            syncContacts();
+            quizDAO.deleteQuiz(selectedQuiz);
+            syncQuizzes();
         }
     }
 
     @FXML
     private void onAdd() {
-        // Default values for a new contact
+        // Default values for a new quiz
         final String DEFAULT_FIRST_NAME = "New";
-        final String DEFAULT_LAST_NAME = "Contact";
+        final String DEFAULT_LAST_NAME = "Quiz";
         final String DEFAULT_EMAIL = "";
         final String DEFAULT_PHONE = "";
         Quiz newQuiz = new Quiz(DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
-        // Add the new contact to the database
-        contactDAO.addQuiz(newQuiz);
-        syncContacts();
-        // Select the new contact in the list view
+        // Add the new quiz to the database
+        quizDAO.addQuiz(newQuiz);
+        syncQuizzes();
+        // Select the new quiz in the list view
         // and focus the first name text field
-        selectContact(newQuiz);
+        selectQuiz(newQuiz);
         firstNameTextField.requestFocus();
     }
 
     @FXML
     private void onCancel() {
-        // Find the selected contact
-        Quiz selectedQuiz = contactsListView.getSelectionModel().getSelectedItem();
+        // Find the selected quiz
+        Quiz selectedQuiz = quizzesListView.getSelectionModel().getSelectedItem();
         if (selectedQuiz != null) {
-            // Since the contact hasn't been modified,
+            // Since the quiz hasn't been modified,
             // we can just re-select it to refresh the text fields
-            selectContact(selectedQuiz);
+            selectQuiz(selectedQuiz);
         }
     }
 
     /**
-     * Synchronizes the contacts list view with the contacts in the database.
+     * Synchronizes the quizs list view with the quizs in the database.
      */
-    private void syncContacts() {
-        Quiz currentQuiz = contactsListView.getSelectionModel().getSelectedItem();
-        contactsListView.getItems().clear();
-        List<Quiz> quizzes = contactDAO.getAllQuizs();
-        boolean hasContact = !quizzes.isEmpty();
-        if (hasContact) {
-            contactsListView.getItems().addAll(quizzes);
+    private void syncQuizzes() {
+        Quiz currentQuiz = quizzesListView.getSelectionModel().getSelectedItem();
+        quizzesListView.getItems().clear();
+        List<Quiz> quizzes = quizDAO.getAllQuizs();
+        boolean hasQuiz = !quizzes.isEmpty();
+        if (hasQuiz) {
+            quizzesListView.getItems().addAll(quizzes);
             Quiz nextQuiz = quizzes.contains(currentQuiz) ? currentQuiz : quizzes.get(0);
-            contactsListView.getSelectionModel().select(nextQuiz);
-            selectContact(nextQuiz);
+            quizzesListView.getSelectionModel().select(nextQuiz);
+            selectQuiz(nextQuiz);
         }
-        // Show / hide based on whether there are contacts
-        contactContainer.setVisible(hasContact);
+        // Show / hide based on whether there are quizs
+        quizContainer.setVisible(hasQuiz);
     }
 
     @FXML
     public void initialize() {
-        contactsListView.setCellFactory(this::renderCell);
-        syncContacts();
-        // Select the first contact and display its information
-        contactsListView.getSelectionModel().selectFirst();
-        Quiz firstQuiz = contactsListView.getSelectionModel().getSelectedItem();
+        quizzesListView.setCellFactory(this::renderCell);
+        syncQuizzes();
+        // Select the first quiz and display its information
+        quizzesListView.getSelectionModel().selectFirst();
+        Quiz firstQuiz = quizzesListView.getSelectionModel().getSelectedItem();
         if (firstQuiz != null) {
-            selectContact(firstQuiz);
+            selectQuiz(firstQuiz);
         }
     }
 }
