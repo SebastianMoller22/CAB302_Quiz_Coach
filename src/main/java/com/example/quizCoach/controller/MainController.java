@@ -41,8 +41,8 @@ public class MainController {
         quizzesListView.getSelectionModel().select(quiz);
         firstNameTextField.setText(quiz.getFirstName());
         lastNameTextField.setText(quiz.getLastName());
-        emailTextField.setText(quiz.getEmail());
         phoneTextField.setText(quiz.getPhone());
+        emailTextField.setText(quiz.getEmail());
     }
 
     /**
@@ -91,8 +91,8 @@ public class MainController {
         if (selectedQuiz != null) {
             selectedQuiz.setFirstName(firstNameTextField.getText());
             selectedQuiz.setLastName(lastNameTextField.getText());
-            selectedQuiz.setEmail(emailTextField.getText());
             selectedQuiz.setPhone(phoneTextField.getText());
+            selectedQuiz.setEmail(emailTextField.getText());
             quizDAO.updateQuiz(selectedQuiz);
             syncQuizzes();
         }
@@ -113,9 +113,9 @@ public class MainController {
         // Default values for a new quiz
         final String DEFAULT_FIRST_NAME = "New";
         final String DEFAULT_LAST_NAME = "Quiz";
-        final String DEFAULT_EMAIL = "";
         final String DEFAULT_PHONE = "";
-        Quiz newQuiz = new Quiz(DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
+        final String DEFAULT_EMAIL = "";
+        Quiz newQuiz = new Quiz(DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_PHONE, DEFAULT_EMAIL);
         // Add the new quiz to the database
         quizDAO.addQuiz(newQuiz);
         syncQuizzes();

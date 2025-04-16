@@ -5,14 +5,14 @@ public class Quiz {
     private int id;
     private String firstName;
     private String lastName;
-    private String email;
     private String phone;
+    private String email;
 
-    public Quiz(String firstName, String lastName, String email, String phone) {
+    public Quiz(String firstName, String lastName, String phone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.phone = phone;
+        this.email = email;
     }
 
     public int getId() {
