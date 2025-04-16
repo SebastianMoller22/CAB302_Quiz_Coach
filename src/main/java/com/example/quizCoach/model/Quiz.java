@@ -1,6 +1,6 @@
 package com.example.quizCoach.model;
 
-// TODO Replace this information from the contact class with information for the Quiz class
+//FIXME Replace this information from the contact class with information for the Quiz class
 public class Quiz {
     private int id;
     private String firstName;

@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO Replace contact information with quiz information
+//FIXME Replace contact information with quiz information
 public class SqliteQuizDAO implements IQuizDAO {
     private Connection connection;
 

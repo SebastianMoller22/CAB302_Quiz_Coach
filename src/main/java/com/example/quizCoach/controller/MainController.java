@@ -12,7 +12,7 @@ import javafx.scene.layout.*;
 
 import java.util.List;
 
-//TODO Replace all the contact data with quiz data
+//FIXME Replace all the contact data with quiz data
 public class MainController {
     @FXML
     private ListView<Quiz> quizzesListView;
