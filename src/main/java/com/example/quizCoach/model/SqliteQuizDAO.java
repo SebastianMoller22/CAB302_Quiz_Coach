@@ -53,7 +53,16 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     @Override
     public void addQuiz(Quiz quiz) {
-
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO quizzes (firstName, lastName, phone, email) VALUES (?, ?, ?, ?);");
+            statement.setString(1, quiz.getFirstName());
+            statement.setString(2, quiz.getLastName());
+            statement.setString(3, quiz.getPhone());
+            statement.setString(4, quiz.getEmail());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
