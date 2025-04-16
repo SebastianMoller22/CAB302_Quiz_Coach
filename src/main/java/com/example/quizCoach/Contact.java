@@ -1,4 +1,4 @@
-package com.example.addressbook;
+package com.example.quizCoach;
 
 public class Contact {
     private int id;

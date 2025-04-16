@@ -1,4 +1,4 @@
-package com.example.addressbook;
+package com.example.quizCoach;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

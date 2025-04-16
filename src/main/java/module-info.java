@@ -3,6 +3,6 @@ module com.example.addressbook {
     requires javafx.fxml;
 
 
-    opens com.example.addressbook to javafx.fxml;
-    exports com.example.addressbook;
+    opens com.example.quizCoach to javafx.fxml;
+    exports com.example.quizCoach;
 }
