@@ -1,6 +1,7 @@
 module com.example.addressbook {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.quizCoach to javafx.fxml;
