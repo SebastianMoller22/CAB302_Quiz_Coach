@@ -61,6 +61,11 @@ public class SqliteQuizDAO implements IQuizDAO {
             statement.setString(3, quiz.getPhone());
             statement.setString(4, quiz.getEmail());
             statement.executeUpdate();
+            // Set the id of the new quiz
+            ResultSet generaterdKeys = statement.getGeneratedKeys();
+            if (generaterdKeys.next()) {
+                quiz.setId(generaterdKeys.getInt(1));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
