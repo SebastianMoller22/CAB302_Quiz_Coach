@@ -83,7 +83,13 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     @Override
     public void deleteQuiz(Quiz quiz) {
-
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM quizzes WHERE id = ?");
+            statement.setInt(1, quiz.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
