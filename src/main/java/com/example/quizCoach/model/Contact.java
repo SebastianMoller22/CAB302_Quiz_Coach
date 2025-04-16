@@ -1,4 +1,4 @@
-package com.example.quizCoach;
+package com.example.quizCoach.model;
 
 public class Contact {
     private int id;

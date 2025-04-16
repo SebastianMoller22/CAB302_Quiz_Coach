@@ -1,5 +1,8 @@
-package com.example.quizCoach;
+package com.example.quizCoach.controller;
 
+import com.example.quizCoach.model.Contact;
+import com.example.quizCoach.model.IContactDAO;
+import com.example.quizCoach.model.MockContactDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;

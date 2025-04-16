@@ -1,4 +1,4 @@
-package com.example.quizCoach;
+package com.example.quizCoach.model;
 
 import java.util.List;
 
