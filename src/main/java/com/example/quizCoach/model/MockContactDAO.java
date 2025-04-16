@@ -7,51 +7,51 @@ public class MockContactDAO implements IContactDAO {
     /**
      * A static list of contacts to be used as a mock database.
      */
-    public static final ArrayList<Contact> contacts = new ArrayList<>();
+    public static final ArrayList<Quiz> QUIZZES = new ArrayList<>();
     private static int autoIncrementedId = 0;
 
     public MockContactDAO() {
         // Add some initial contacts to the mock database
-        addContact(new Contact("John", "Doe", "johndoe@example.com", "0423423423"));
-        addContact(new Contact("Jane", "Doe", "janedoe@example.com", "0423423424"));
-        addContact(new Contact("Jay", "Doe", "jaydoe@example.com", "0423423425"));
+        addContact(new Quiz("John", "Doe", "johndoe@example.com", "0423423423"));
+        addContact(new Quiz("Jane", "Doe", "janedoe@example.com", "0423423424"));
+        addContact(new Quiz("Jay", "Doe", "jaydoe@example.com", "0423423425"));
 
     }
 
     @Override
-    public void addContact(Contact contact) {
-        contact.setId(autoIncrementedId);
+    public void addContact(Quiz quiz) {
+        quiz.setId(autoIncrementedId);
         autoIncrementedId++;
-        contacts.add(contact);
+        QUIZZES.add(quiz);
     }
 
     @Override
-    public void updateContact(Contact contact) {
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getId() == contact.getId()) {
-                contacts.set(i, contact);
+    public void updateContact(Quiz quiz) {
+        for (int i = 0; i < QUIZZES.size(); i++) {
+            if (QUIZZES.get(i).getId() == quiz.getId()) {
+                QUIZZES.set(i, quiz);
                 break;
             }
         }
     }
 
     @Override
-    public void deleteContact(Contact contact) {
-        contacts.remove(contact);
+    public void deleteContact(Quiz quiz) {
+        QUIZZES.remove(quiz);
     }
 
     @Override
-    public Contact getContact(int id) {
-        for (Contact contact : contacts) {
-            if (contact.getId() == id) {
-                return contact;
+    public Quiz getContact(int id) {
+        for (Quiz quiz : QUIZZES) {
+            if (quiz.getId() == id) {
+                return quiz;
             }
         }
         return null;
     }
 
     @Override
-    public List<Contact> getAllContacts() {
-        return new ArrayList<>(contacts);
+    public List<Quiz> getAllContacts() {
+        return new ArrayList<>(QUIZZES);
     }
 }

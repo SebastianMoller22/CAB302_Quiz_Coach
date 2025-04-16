@@ -9,29 +9,29 @@ import java.util.List;
 public interface IContactDAO {
     /**
      * Adds a new contact to the database.
-     * @param contact The contact to add.
+     * @param quiz The contact to add.
      */
-    public void addContact(Contact contact);
+    public void addContact(Quiz quiz);
     /**
      * Updates an existing contact in the database.
-     * @param contact The contact to update.
+     * @param quiz The contact to update.
      */
-    public void updateContact(Contact contact);
+    public void updateContact(Quiz quiz);
     /**
      * Deletes a contact from the database.
-     * @param contact The contact to delete.
+     * @param quiz The contact to delete.
      */
-    public void deleteContact(Contact contact);
+    public void deleteContact(Quiz quiz);
     /**
      * Retrieves a contact from the database.
      * @param id The id of the contact to retrieve.
      * @return The contact with the given id, or null if not found.
      */
-    public Contact getContact(int id);
+    public Quiz getContact(int id);
     /**
      * Retrieves all contacts from the database.
      * @return A list of all contacts in the database.
      */
-    public List<Contact> getAllContacts();
+    public List<Quiz> getAllContacts();
 }
 
