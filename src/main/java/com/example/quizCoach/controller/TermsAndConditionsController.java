@@ -1,5 +1,6 @@
-package com.example.quizCoach;
+package com.example.quizCoach.controller;
 
+import com.example.quizCoach.MainApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class TermsAndConditionsScreen {
+public class TermsAndConditionsController {
     @FXML
     private Label welcomeText;
     @FXML
