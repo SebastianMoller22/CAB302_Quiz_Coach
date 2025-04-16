@@ -1,8 +1,8 @@
 package com.example.quizCoach.controller;
 
 import com.example.quizCoach.model.Quiz;
-import com.example.quizCoach.model.IContactDAO;
-import com.example.quizCoach.model.MockContactDAO;
+import com.example.quizCoach.model.IQuizDAO;
+import com.example.quizCoach.model.MockQuizDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -15,10 +15,10 @@ import java.util.List;
 public class MainController {
     @FXML
     private ListView<Quiz> contactsListView;
-    private IContactDAO contactDAO;
+    private IQuizDAO contactDAO;
     public MainController() {
-        contactDAO = new MockContactDAO();
-        contactDAO.addContact(new Quiz("Jerry", "Doe", "jerrydoe@example.com", "0423423426"));
+        contactDAO = new MockQuizDAO();
+        contactDAO.addQuiz(new Quiz("Jerry", "Doe", "jerrydoe@example.com", "0423423426"));
     }
 
     @FXML
@@ -93,7 +93,7 @@ public class MainController {
             selectedQuiz.setLastName(lastNameTextField.getText());
             selectedQuiz.setEmail(emailTextField.getText());
             selectedQuiz.setPhone(phoneTextField.getText());
-            contactDAO.updateContact(selectedQuiz);
+            contactDAO.updateQuiz(selectedQuiz);
             syncContacts();
         }
     }
@@ -103,7 +103,7 @@ public class MainController {
         // Get the selected contact from the list view
         Quiz selectedQuiz = contactsListView.getSelectionModel().getSelectedItem();
         if (selectedQuiz != null) {
-            contactDAO.deleteContact(selectedQuiz);
+            contactDAO.deleteQuiz(selectedQuiz);
             syncContacts();
         }
     }
@@ -117,7 +117,7 @@ public class MainController {
         final String DEFAULT_PHONE = "";
         Quiz newQuiz = new Quiz(DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
         // Add the new contact to the database
-        contactDAO.addContact(newQuiz);
+        contactDAO.addQuiz(newQuiz);
         syncContacts();
         // Select the new contact in the list view
         // and focus the first name text field
@@ -142,7 +142,7 @@ public class MainController {
     private void syncContacts() {
         Quiz currentQuiz = contactsListView.getSelectionModel().getSelectedItem();
         contactsListView.getItems().clear();
-        List<Quiz> quizzes = contactDAO.getAllContacts();
+        List<Quiz> quizzes = contactDAO.getAllQuizs();
         boolean hasContact = !quizzes.isEmpty();
         if (hasContact) {
             contactsListView.getItems().addAll(quizzes);
