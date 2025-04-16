@@ -67,7 +67,17 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     @Override
     public void updateQuiz(Quiz quiz) {
-
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE quizzes SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE id = ?");
+            statement.setString(1, quiz.getFirstName());
+            statement.setString(2, quiz.getLastName());
+            statement.setString(3, quiz.getPhone());
+            statement.setString(4, quiz.getEmail());
+            statement.setInt(5, quiz.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
