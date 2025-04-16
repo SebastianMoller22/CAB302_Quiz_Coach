@@ -52,7 +52,7 @@ public class MockQuizDAO implements IQuizDAO {
     }
 
     @Override
-    public List<Quiz> getAllQuizs() {
+    public List<Quiz> getAllQuizzes() {
         return new ArrayList<>(QUIZZES);
     }
 }

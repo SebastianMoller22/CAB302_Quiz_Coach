@@ -32,6 +32,6 @@ public interface IQuizDAO {
      * Retrieves all Quizs from the database.
      * @return A list of all Quizs in the database.
      */
-    public List<Quiz> getAllQuizs();
+    public List<Quiz> getAllQuizzes();
 }
 

@@ -143,7 +143,7 @@ public class MainController {
     private void syncQuizzes() {
         Quiz currentQuiz = quizzesListView.getSelectionModel().getSelectedItem();
         quizzesListView.getItems().clear();
-        List<Quiz> quizzes = quizDAO.getAllQuizs();
+        List<Quiz> quizzes = quizDAO.getAllQuizzes();
         boolean hasQuiz = !quizzes.isEmpty();
         if (hasQuiz) {
             quizzesListView.getItems().addAll(quizzes);
