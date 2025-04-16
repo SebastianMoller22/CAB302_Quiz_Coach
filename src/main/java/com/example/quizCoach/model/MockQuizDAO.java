@@ -3,7 +3,7 @@ package com.example.quizCoach.model;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO This class is still full of infomation from MockContactDAO and needs to be changed to contain stuff for Quiz's
+// TODO This class is still full of information from MockContactDAO and needs to be changed to contain stuff for Quiz's
 public class MockQuizDAO implements IQuizDAO {
     /**
      * A static list of contacts to be used as a mock database.
