@@ -52,6 +52,10 @@ public class AuthenticationManager {
         }
     }
 
+    public void Logout() {
+        setActiveuser(null);
+    }
+
     public User getUser(String username) {
         // Return the user with that username
         return new User("Johnny", "name", "hello@example.com", "aaBB1212@#@#");
