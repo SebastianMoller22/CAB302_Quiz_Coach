@@ -2,7 +2,7 @@ package com.example.quizCoach.controller;
 
 import com.example.quizCoach.model.Quiz;
 import com.example.quizCoach.model.IQuizDAO;
-import com.example.quizCoach.model.MockQuizDAO;
+import com.example.quizCoach.model.SqliteQuizDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -18,7 +18,7 @@ public class MainController {
     private ListView<Quiz> quizzesListView;
     private IQuizDAO quizDAO;
     public MainController() {
-        quizDAO = new MockQuizDAO();
+        quizDAO = new SqliteQuizDAO();
         quizDAO.addQuiz(new Quiz("Jerry", "Doe", "jerrydoe@example.com", "0423423426"));
     }
 
