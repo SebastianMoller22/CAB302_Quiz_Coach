@@ -19,7 +19,6 @@ public class MainController {
     private IQuizDAO quizDAO;
     public MainController() {
         quizDAO = new SqliteQuizDAO();
-        quizDAO.addQuiz(new Quiz("Jerry", "Doe", "jerrydoe@example.com", "0423423426"));
     }
 
     @FXML
