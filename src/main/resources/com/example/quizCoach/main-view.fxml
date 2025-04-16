@@ -22,7 +22,7 @@
             <ListView fx:id="quizzesListView"  />
             <Button text="New" onAction="#onAdd" maxWidth="Infinity"/>
         </VBox>
-        <VBox spacing="10.0" prefWidth="400" fx:id="contactContainer">
+        <VBox spacing="10.0" prefWidth="400" fx:id="quizContainer">
             <Label text="Enter the quiz's details below." />
             <GridPane hgap="5.0" vgap="5.0" >
                 <columnConstraints>
