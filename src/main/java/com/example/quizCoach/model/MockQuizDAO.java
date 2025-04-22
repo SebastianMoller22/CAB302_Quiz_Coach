@@ -6,13 +6,13 @@ import java.util.List;
 // FIXME This class is still full of information from MockContactDAO and needs to be changed to contain stuff for Quiz's
 public class MockQuizDAO implements IQuizDAO {
     /**
-     * A static list of contacts to be used as a mock database.
+     * A static list of quizzes to be used as a mock database.
      */
     public static final ArrayList<Quiz> QUIZZES = new ArrayList<>();
     private static int autoIncrementedId = 0;
 
     public MockQuizDAO() {
-        // Add some initial contacts to the mock database
+        // Add some initial quizzes to the mock database
         addQuiz(new Quiz("John", "Doe", "johndoe@example.com", "0423423423"));
         addQuiz(new Quiz("Jane", "Doe", "janedoe@example.com", "0423423424"));
         addQuiz(new Quiz("Jay", "Doe", "jaydoe@example.com", "0423423425"));
