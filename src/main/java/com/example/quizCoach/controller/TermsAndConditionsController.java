@@ -1,5 +1,8 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.ollama.OllamaResponse;
+import com.example.quizCoach.ollama.OllamaResponseFetcher;
+
 import com.example.quizCoach.MainApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +44,23 @@ public class TermsAndConditionsController {
     @FXML
     protected void onNextButtonClick() throws IOException {
         String topic = Topic_name.getText();
+        String apiURL = "http://127.0.0.1:11434/api/generate/";
+        String model = "gemma3:12b";
+        String prompt = "Tell me in 10 words or less how to pass my software development university tests?";
+
+        OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
+
+        OllamaResponse response = fetcher.fetchOllamaResponse(model, prompt);
+
+        System.out.println("======================================================");
+        System.out.print("You asked: ");
+        System.out.println(prompt);
+        System.out.println("======================================================");
+        System.out.print("Ollama says: ");
+        System.out.println(response.getResponse());
+        System.out.println("======================================================");
+
+        termsAndConditions.setText(topic);
 
     }
 
@@ -49,4 +69,6 @@ public class TermsAndConditionsController {
         Stage stage = (Stage) nextButton.getScene().getWindow();
         stage.close();
     }
+
+
 }
