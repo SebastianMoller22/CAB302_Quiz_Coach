@@ -1,0 +1,57 @@
+package com.example.quizCoach.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MockUserDAO implements IUserDAO {
+    /**
+     * A static list of contacts to be used as a mock database.
+     */
+    public static final ArrayList<User> USERS = new ArrayList<>();
+    private static int autoIncrementedId = 0;
+
+    public MockUserDAO() {
+        // Add some initial users to the mock database
+        addUser(new User("JBells1", "Password1!", "johndoe@example.com"));
+        addUser(new User("JSmith4", "Password1!", "janedoe@example.com"));
+        addUser(new User("JThom74", "Password1!", "jaydoe@example.com"));
+
+    }
+
+    @Override
+    public void addUser(User user) {
+        user.setId(autoIncrementedId);
+        autoIncrementedId++;
+        USERS.add(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        for (int i = 0; i < USERS.size(); i++) {
+            if (USERS.get(i).getId() == user.getId()) {
+                USERS.set(i, user);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        USERS.remove(user);
+    }
+
+    @Override
+    public User getUser(int id) {
+        for (User user : USERS) {
+            if (user.getId() == id) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return new ArrayList<>(USERS);
+    }
+}
