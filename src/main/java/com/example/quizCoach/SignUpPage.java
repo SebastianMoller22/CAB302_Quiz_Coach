@@ -43,47 +43,52 @@ public class SignUpPage extends Application {
         header.getChildren().addAll(icon, welcomeText, intelliTutorText);
         mainLayout.setTop(header);
 
-        // Create the login form box
-        VBox loginBox = new VBox();
-        loginBox.setPadding(new Insets(20));
-        loginBox.setSpacing(15);
-        loginBox.setStyle("-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 10; -fx-background-radius: 10;");
+        // Create the sign-up form box
+        VBox signUpBox = new VBox();
+        signUpBox.setPadding(new Insets(20));
+        signUpBox.setSpacing(15);
+        signUpBox.setStyle("-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 10; -fx-background-radius: 10;");
 
-        Text loginTitle = new Text("LOG IN");
-        loginTitle.setFont(Font.font("Arial", 24));
-        loginTitle.setFill(Color.BLACK);
+        Text signUpTitle = new Text("SIGN UP");
+        signUpTitle.setFont(Font.font("Arial", 24));
+        signUpTitle.setFill(Color.BLACK);
 
-        // Username and Password fields
+        // Fields
+        TextField firstName = new TextField();
+        firstName.setPromptText("FIRST NAME");
+        firstName.setStyle("-fx-background-radius: 10; -fx-padding: 10;");
+
+        TextField lastName = new TextField();
+        lastName.setPromptText("LAST NAME");
+        lastName.setStyle("-fx-background-radius: 10; -fx-padding: 10;");
+
         TextField usernameField = new TextField();
-        usernameField.setPromptText("USERNAME");
+        usernameField.setPromptText("USERNAME (EMAIL)");
         usernameField.setStyle("-fx-background-radius: 10; -fx-padding: 10;");
 
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("PASSWORD");
         passwordField.setStyle("-fx-background-radius: 10; -fx-padding: 10;");
 
-        // Login button
-        Button loginButton = new Button("LOG IN");
-        loginButton.setStyle("-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;");
+        // Sign Up button
+        Button signUpButton = new Button("SIGN UP");
+        signUpButton.setStyle("-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;");
 
         // Hyperlinks
-        Hyperlink forgotPasswordLink = new Hyperlink("FORGOT PASSWORD?");
-
-        Hyperlink createAccountLink = new Hyperlink("CREATE A NEW ACCOUNT?");
-
+        Hyperlink haveAnAccount = new Hyperlink("ALREADY HAVE AN ACCOUNT?");
 
         // Add elements to the login box
-        loginBox.getChildren().addAll(loginTitle, usernameField, passwordField, loginButton, forgotPasswordLink, createAccountLink);
+        signUpBox.getChildren().addAll(signUpTitle, firstName, lastName, usernameField, passwordField, signUpButton, haveAnAccount);
 
-        // Center the login box
-        mainLayout.setCenter(loginBox);
+        // Center the Sign UP
+        mainLayout.setCenter(signUpBox);
 
         // Place header in layout
         mainLayout.setTop(header); // Or use setCenter(header) if you want it vertically centered too
 
         // Create the scene
         Scene scene = new Scene(mainLayout, 800, 700);
-        primaryStage.setTitle("Login Screen");
+        primaryStage.setTitle("Sign UpScreen");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
