@@ -23,7 +23,14 @@ public class ForgotPasswordController {
         });
 
         existingAccountLink.setOnAction(e -> {
-            // Go back to login screen
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) existingAccountLink.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 700));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
 
         createAccountLink.setOnAction(e -> {
