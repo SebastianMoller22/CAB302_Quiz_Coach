@@ -23,7 +23,7 @@ public interface IUserDAO {
      */
     public void deleteUser(User user);
     /**
-     * Retrieves a User from the database.
+     * Retrieves a User from the database using an id.
      * @param id The id of the User to retrieve.
      * @return The User with the given id, or null if not found.
      */
