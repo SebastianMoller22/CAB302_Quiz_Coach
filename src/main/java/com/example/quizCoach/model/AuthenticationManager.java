@@ -32,6 +32,7 @@ public class AuthenticationManager {
         }
         User newuser = new User(username, email, password);
         // Insert into db
+        userDatabase.addUser(newuser);
     }
 
     public Boolean checkifUserExists(String username) {
