@@ -1,7 +1,13 @@
 package com.example.quizCoach.controller;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 
 public class loginController {
 
@@ -25,7 +31,14 @@ public class loginController {
         });
 
         createAccountLink.setOnAction(e -> {
-            System.out.println("Create account clicked.");
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/sign_up_screen.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) createAccountLink.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 700));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 }
