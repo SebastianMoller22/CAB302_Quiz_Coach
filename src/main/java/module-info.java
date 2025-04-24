@@ -11,4 +11,5 @@ module com.example.addressbook {
     opens com.example.quizCoach.controller to javafx.fxml;
     exports com.example.quizCoach.model;
     opens com.example.quizCoach.model to javafx.fxml;
+    opens com.example.quizCoach.ollama to com.google.gson;
 }
