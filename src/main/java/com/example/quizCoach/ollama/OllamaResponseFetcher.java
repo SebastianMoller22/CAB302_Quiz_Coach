@@ -71,6 +71,7 @@ public class OllamaResponseFetcher {
             logger.info("Attempting POST on " + apiURL);
 
             conn = getConnection();
+
             conn.setRequestMethod("POST");
 
             // send json to server

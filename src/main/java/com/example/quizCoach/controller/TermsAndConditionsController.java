@@ -42,11 +42,11 @@ public class TermsAndConditionsController {
     }
 
     @FXML
-    protected void onNextButtonClick() throws IOException {
+    public void onNextButtonClick() throws IOException {
         String topic = Topic_name.getText();
         String apiURL = "http://127.0.0.1:11434/api/generate/";
         String model = "gemma3:12b";
-        String prompt = "Tell me in 10 words or less how to pass my software development university tests?";
+        String prompt = String.format("Ask me a question about %s, in the formate 'Q:A' with Q being the question and A being the answer",topic);
 
         OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
 
@@ -60,7 +60,7 @@ public class TermsAndConditionsController {
         System.out.println(response.getResponse());
         System.out.println("======================================================");
 
-        termsAndConditions.setText(topic);
+        termsAndConditions.setText(response.getResponse());
 
     }
 
