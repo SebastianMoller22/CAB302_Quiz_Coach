@@ -27,7 +27,14 @@ public class loginController {
         });
 
         forgotPasswordLink.setOnAction(e -> {
-            System.out.println("Forgot password clicked.");
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/forgot_password.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) forgotPasswordLink.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 700));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
 
         createAccountLink.setOnAction(e -> {
