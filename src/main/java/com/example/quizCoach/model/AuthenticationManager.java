@@ -1,15 +1,17 @@
 package com.example.quizCoach.model;
 
 public class AuthenticationManager {
-    private User activeuser;
+    private User activeUser;
+    private SqliteUserDAO userDatabase;
 
     public AuthenticationManager() {
-        activeuser = null;
+        userDatabase = new SqliteUserDAO();
+        activeUser = null;
     }
 
-    public User getActiveuser() {return activeuser;}
+    public User getActiveUser() {return activeUser;}
 
-    public void setActiveuser(User user) {this.activeuser = user;}
+    public void setActiveUser(User user) {this.activeUser = user;}
 
     public Boolean validateString(String the_string, String regex) {
         return the_string.matches(regex);
@@ -42,7 +44,7 @@ public class AuthenticationManager {
 
     public Boolean LoginAsUser(String username, String password) {
         if (matchPasswordandUsername(username, password)) {
-            setActiveuser(getUser(username));
+            setActiveUser(getUser(username));
             return true;
         } else {
             return false;
@@ -50,7 +52,7 @@ public class AuthenticationManager {
     }
 
     public void Logout() {
-        setActiveuser(null);
+        setActiveUser(null);
     }
 
     public User getUser(String username) {
