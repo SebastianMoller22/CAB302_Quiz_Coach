@@ -22,16 +22,13 @@ public class AuthenticationManager {
         if (checkifUserExists(username)) {
             throw new Exception("This Username already existed");
         }
-        if (!validateString(name, AuthenticationConstant.nameRegex)) {
-            throw new Exception("invalid Name");
-        }
         if (!validateString(email, AuthenticationConstant.emailRegex)) {
             throw new Exception("Invalid Email");
         }
         if (!validateString(password, AuthenticationConstant.passwordRegex)) {
             throw new Exception("Invalid Password");
         }
-        User newuser = new User(username, name, email, password);
+        User newuser = new User(username, email, password);
         // Insert into db
     }
 
@@ -58,6 +55,6 @@ public class AuthenticationManager {
 
     public User getUser(String username) {
         // Return the user with that username
-        return new User("Johnny", "name", "hello@example.com", "aaBB1212@#@#");
+        return new User("Johnny", "aaBB1212@#@#", "hello@example.com");
     }
 }
