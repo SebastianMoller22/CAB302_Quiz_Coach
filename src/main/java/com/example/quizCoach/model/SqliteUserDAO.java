@@ -114,6 +114,26 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     @Override
+    public User getUser(String username) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String password = resultSet.getString("password");
+                String email = resultSet.getString("email");
+                User user = new User(username, password, email);
+                user.setId(id);
+                return user;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try {
