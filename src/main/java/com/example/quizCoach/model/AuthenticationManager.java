@@ -1,5 +1,8 @@
 package com.example.quizCoach.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AuthenticationManager {
     private User activeUser;
     private SqliteUserDAO userDatabase;
@@ -36,7 +39,12 @@ public class AuthenticationManager {
     }
 
     public Boolean checkifUserExists(String username) {
-        return false;
+        List<User> users = userDatabase.getAllUsers();
+        List<String> usernames = new ArrayList<>();
+        for (User user : users){
+            usernames.add(user.getUsername());
+        }
+        return usernames.contains(username);
     }
 
     public Boolean matchPasswordandUsername(String username, String password) {
