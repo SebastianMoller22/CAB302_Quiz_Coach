@@ -47,11 +47,18 @@ public class AuthenticationManager {
         return usernames.contains(username);
     }
 
-    public Boolean matchPasswordandUsername(String username, String password) {
+    public Boolean matchPasswordandUsername(String username, String password) throws Exception {
+        User user = userDatabase.getUser(username);
+        if (!checkifUserExists(username)) {
+            throw new Exception("No User with this username");
+        }
+        if (user.getPassword() == password) {
+            return true;
+        }
         return false;
     }
 
-    public Boolean LoginAsUser(String username, String password) {
+    public Boolean LoginAsUser(String username, String password) throws Exception {
         if (matchPasswordandUsername(username, password)) {
             setActiveUser(getUser(username));
             return true;
