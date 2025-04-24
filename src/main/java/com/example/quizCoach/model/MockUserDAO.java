@@ -49,6 +49,15 @@ public class MockUserDAO implements IUserDAO {
         }
         return null;
     }
+    @Override
+    public User getUser(String username) {
+        for (User user : USERS) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
 
     @Override
     public List<User> getAllUsers() {
