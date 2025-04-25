@@ -53,38 +53,47 @@ public class TermsAndConditionsController {
         String topic = Topic_name.getText();
         String apiURL = "http://127.0.0.1:11434/api/generate/";
         String model = "gemma3:12b";
-        String prompt = String.format("Write a multiple chose question about %s, with 4 options. The question should be written in a JSON formate with 4 keys; the question type, the question, the answer and the other options(the answer shouldn't be included in this)",topic);
+        String prompt = String.format("Write a multiple chose question about %s, with 4 options. The question should be scaled to a skill level of 1 where 1 is new to the topic and 100 is and expert. The question should be written in the format Q:A:O where 'Q' is the question, 'A' is the answer and 'O' are the other options, nothing else should be written.",topic);
 
         OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
 
         OllamaResponse response = fetcher.fetchOllamaResponse(model, prompt);
 
-        System.out.println("======================================================");
-        System.out.print("You asked: ");
-        System.out.println(prompt);
-        System.out.println("======================================================");
-        System.out.print("Ollama says: ");
-        System.out.println(response.getResponse());
-        System.out.println("======================================================");
-
         termsAndConditions.setText(response.getResponse());
+
+        String[] Quetion = response.getResponse().split("\n");
+
+        for (int i = 0; i < Quetion.length; i++) {
+            Quetion[i] = Quetion[i].substring(3);
+        }
+        System.out.println(Quetion[0]);
+        System.out.println(Quetion[1]);
+        System.out.println(Quetion[2]);
+        System.out.println(Quetion[3]);
+        System.out.println(Quetion[4]);
 
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode jsonNode = objectMapper.createObjectNode();
         ArrayNode Array = objectMapper.createArrayNode();
-        jsonNode.put("Question_type", "Abul Hasan");
-        jsonNode.put("Question", 23);
-        jsonNode.put("Answer", "Lucknow");
+        jsonNode.put("Question_type", "Multiple choice");
+        jsonNode.put("Question", Quetion[0]);
+        jsonNode.put("Answer", Quetion[1]);
 
-        Array.add("hi");
-        Array.add("hi2");
-        Array.add("hi3");
+        for (int i = 2; i < Quetion.length; i++) {
+            Array.add(Quetion[i]);
+        }
+
 
         jsonNode.put("Other_Options", Array);
 
         objectMapper.writeValue(new File("src/main/java/com/example/quizCoach/JSON/mydata.json"), jsonNode);
 
 
+        ArrayNode NewArray = objectMapper.createArrayNode();
+        NewArray = (ArrayNode) jsonNode.get("Other_Options");
+
+
+        System.out.println(NewArray.get(0).asText());
     }
 
     @FXML
