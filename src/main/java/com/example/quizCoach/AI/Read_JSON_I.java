@@ -1,4 +1,4 @@
 package com.example.quizCoach.AI;
 
-public class Read_JSON_I {
+public interface Read_JSON_I {
 }
