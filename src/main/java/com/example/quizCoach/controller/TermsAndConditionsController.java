@@ -3,9 +3,11 @@ package com.example.quizCoach.controller;
 import com.example.quizCoach.ollama.OllamaResponse;
 import com.example.quizCoach.ollama.OllamaResponseFetcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.example.quizCoach.MainApplication;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class TermsAndConditionsController {
     @FXML
@@ -65,13 +68,20 @@ public class TermsAndConditionsController {
         System.out.println("======================================================");
 
         termsAndConditions.setText(response.getResponse());
+
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode jsonNode = objectMapper.createObjectNode();
-        jsonNode.put("name", "Abul Hasan");
-        jsonNode.put("age", 23);
-        jsonNode.put("city", "Lucknow");
-        jsonNode.put("state", "Uttar Pradesh");
-        jsonNode.put("country", "India");
+        ArrayNode Array = objectMapper.createArrayNode();
+        jsonNode.put("Question_type", "Abul Hasan");
+        jsonNode.put("Question", 23);
+        jsonNode.put("Answer", "Lucknow");
+
+        Array.add("hi");
+        Array.add("hi2");
+        Array.add("hi3");
+
+        jsonNode.put("Other_Options", Array);
+
         objectMapper.writeValue(new File("src/main/java/com/example/quizCoach/JSON/mydata.json"), jsonNode);
 
 
