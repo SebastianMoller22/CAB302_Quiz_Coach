@@ -2,6 +2,10 @@ package com.example.quizCoach.controller;
 
 import com.example.quizCoach.ollama.OllamaResponse;
 import com.example.quizCoach.ollama.OllamaResponseFetcher;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.io.File;
+import java.io.IOException;
 
 import com.example.quizCoach.MainApplication;
 import javafx.fxml.FXML;
@@ -46,7 +50,7 @@ public class TermsAndConditionsController {
         String topic = Topic_name.getText();
         String apiURL = "http://127.0.0.1:11434/api/generate/";
         String model = "gemma3:12b";
-        String prompt = String.format("Ask me a question about %s, in the formate 'Q:A' with Q being the question and A being the answer",topic);
+        String prompt = String.format("Write a multiple chose question about %s, with 4 options. The question should be written in a JSON formate with 4 keys; the question type, the question, the answer and the other options(the answer shouldn't be included in this)",topic);
 
         OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
 
@@ -61,6 +65,15 @@ public class TermsAndConditionsController {
         System.out.println("======================================================");
 
         termsAndConditions.setText(response.getResponse());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode jsonNode = objectMapper.createObjectNode();
+        jsonNode.put("name", "Abul Hasan");
+        jsonNode.put("age", 23);
+        jsonNode.put("city", "Lucknow");
+        jsonNode.put("state", "Uttar Pradesh");
+        jsonNode.put("country", "India");
+        objectMapper.writeValue(new File("src/main/java/com/example/quizCoach/JSON/mydata.json"), jsonNode);
+
 
     }
 
