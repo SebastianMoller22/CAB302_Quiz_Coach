@@ -1,29 +1,19 @@
 package com.example.quizCoach;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import com.example.quizCoach.AI.Multiple_Choice_Maker;
+import com.example.quizCoach.AI.Quiz_Maker;
 
-import java.io.IOException;
 
-/* hello */
+public class MainApplication {
 
-public class MainApplication extends Application {
-    public static final String TITLE = "Quiz Coach";
-    public static final int WIDTH = 640;
-    public static final int HEIGHT = 360;
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-        stage.setTitle(TITLE);
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public static void main(String[] args) {
-        launch();
+        Quiz_Maker Test = new Quiz_Maker("sharks", 1, 1, 0);
+        System.out.println(Test.getMultipleChoiceArray().get(0).getQuestion());
+        System.out.println(Test.getMultipleChoiceArray().get(0).getAnswer());
+        System.out.println(Test.getMultipleChoiceArray().get(0).getOptions());
+        Test.UploadJSON();
     }
+
+
 }
