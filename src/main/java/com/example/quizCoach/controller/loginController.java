@@ -8,7 +8,6 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-
 public class loginController {
 
     @FXML private TextField usernameField;
@@ -22,8 +21,17 @@ public class loginController {
         loginButton.setOnAction(e -> {
             String username = usernameField.getText();
             String password = passwordField.getText();
-            // TODO: Add your login validation logic
             System.out.println("Logging in: " + username);
+
+            // After login, navigate to Home Page
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home_page.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 700));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
 
         forgotPasswordLink.setOnAction(e -> {
