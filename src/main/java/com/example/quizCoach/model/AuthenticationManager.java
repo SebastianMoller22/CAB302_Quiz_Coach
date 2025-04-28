@@ -31,7 +31,7 @@ public class AuthenticationManager {
         if (!validateString(password, AuthenticationConstant.passwordRegex)) {
             throw new Exception("Invalid Password");
         }
-        User newuser = new User(username, name, email, password);
+        User newuser = new User(username, password, email);
         // Insert into db
     }
 
@@ -58,6 +58,6 @@ public class AuthenticationManager {
 
     public User getUser(String username) {
         // Return the user with that username
-        return new User("Johnny", "name", "hello@example.com", "aaBB1212@#@#");
+        return new User("Johnny", "aaBB1212@#@#", "hello@example.com");
     }
 }

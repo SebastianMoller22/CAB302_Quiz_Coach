@@ -49,6 +49,7 @@ public class MockUserDAO implements IUserDAO {
         }
         return null;
     }
+
     @Override
     public User getUser(String username) {
         for (User user : USERS) {
@@ -58,6 +59,7 @@ public class MockUserDAO implements IUserDAO {
         }
         return null;
     }
+
 
     @Override
     public List<User> getAllUsers() {
