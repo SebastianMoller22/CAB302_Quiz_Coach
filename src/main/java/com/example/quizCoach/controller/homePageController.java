@@ -1,69 +1,50 @@
 package com.example.quizCoach.controller;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import java.io.IOException;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
 
 public class homePageController {
 
-    @FXML private Button startNewQuizButton;
-    @FXML private Label pastScoresLabel;
-    @FXML private Label nextQuizLabel;
-    @FXML private Label pastQuizzesLabel;
+    @FXML
+    private Hyperlink pastScoresLink;
+
+    @FXML
+    private Hyperlink nextQuizLink;
+
+    @FXML
+    private Hyperlink pastQuizzesLink;
+
+    @FXML
+    private Button startNewQuizButton;
 
     @FXML
     public void initialize() {
-        // Start New Quiz Button Action
-        startNewQuizButton.setOnAction(e -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/start_quiz.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) startNewQuizButton.getScene().getWindow();
-                stage.setScene(new Scene(root, 800, 700));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+        // Initialization logic can go here if needed
+    }
 
-        // Past Scores Label Click Action
-        pastScoresLabel.setOnMouseClicked((MouseEvent e) -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/past_scores.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) pastScoresLabel.getScene().getWindow();
-                stage.setScene(new Scene(root, 800, 700));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+    @FXML
+    private void handlePastScoresLink(ActionEvent event) {
+        // Logic to handle past scores link click
+        System.out.println("Past Scores link clicked");
+    }
 
-        // Next Quiz Label Click Action
-        nextQuizLabel.setOnMouseClicked((MouseEvent e) -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/next_quiz.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) nextQuizLabel.getScene().getWindow();
-                stage.setScene(new Scene(root, 800, 700));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+    @FXML
+    private void handleNextQuizLink(ActionEvent event) {
+        // Logic to handle next quiz link click
+        System.out.println("Next Quiz link clicked");
+    }
 
-        // Past Quizzes Label Click Action
-        pastQuizzesLabel.setOnMouseClicked((MouseEvent e) -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/past_quizzes.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) pastQuizzesLabel.getScene().getWindow();
-                stage.setScene(new Scene(root, 800, 700));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+    @FXML
+    private void handlePastQuizzesLink(ActionEvent event) {
+        // Logic to handle past quizzes link click
+        System.out.println("Past Quizzes link clicked");
+    }
+
+    @FXML
+    private void handleStartNewQuizButton(ActionEvent event) {
+        // Logic to start a new quiz
+        System.out.println("Start a New Quiz button clicked");
     }
 }

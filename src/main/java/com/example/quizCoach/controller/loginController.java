@@ -25,7 +25,7 @@ public class loginController {
 
             // After login, navigate to Home Page
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home_page.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
