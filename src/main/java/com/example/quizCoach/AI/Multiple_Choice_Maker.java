@@ -42,10 +42,9 @@ public class Multiple_Choice_Maker {
         String model = "gemma3:12b";
         /*
         The prompt give to the AI to create the multiple choice question in a consistent formate
-        Takes in the topic, and skill level
-        NOTE: Skill level hasn't been implemented
+        Takes in the topic, and skill level to change the question topic and difficulty
          */
-        String prompt = String.format("Write a multiple Choice question about %s, with 4 options. The question should be scaled to a skill level of 1 where 1 is new to the topic and 100 is and expert. The question should be written in the format Q:A:O where 'Q' is the question, 'A' is the answer and 'O' are the other options, nothing else should be written.",topic);
+        String prompt = String.format("Write a multiple Choice question about %s, with 4 options. The question should be scaled to a skill level of 1 where 1 is new to the topic and 100 is and expert. The question should be written in the format Q:A:O where 'Q' is the question, 'A' is the answer and 'O' are the other options, nothing else should be written.The question difficulty should be based on the number %d, with 1 being easy and 100 being extremely difficult.",topic, skill_level);
 
         /*
         Collects AI answer
@@ -85,6 +84,55 @@ public class Multiple_Choice_Maker {
          */
         jsonNode.put("Other_Options", Array);
 
+    }
+
+    /*
+    THIS IS A TEST CONSTRUCTOR
+    ONLY TO BE CALLED DURING TESTING
+     */
+    public Multiple_Choice_Maker(boolean Testvar){
+
+        /*
+        Make an AI prompt to be used for testing
+         */
+
+        String TestAI = "Q: Which of the following is a primary reason sharks are considered apex predators in most marine ecosystems?\n" +
+                "A: They have few natural predators themselves.\n" +
+                "O: They primarily feed on algae and seaweed.\n" +
+                "O: They are typically smaller than most fish species.\n" +
+                "O: They rely on symbiotic relationships with other marine animals for survival.";
+
+        /*
+        Serrated the AI answer by the end of line
+         */
+        String[] Quetion = TestAI.split("\n");
+
+        /*
+        Removes the first 3 characters form each line
+         */
+        for (int i = 0; i < Quetion.length; i++) {
+            Quetion[i] = Quetion[i].substring(3);
+        }
+
+        /*
+        Stores the Question and answer into the variables and jons node
+         */
+        jsonNode.put("Question", Quetion[0]);
+        this.Question = Quetion[0];
+        jsonNode.put("Answer", Quetion[1]);
+        this.Answer = Quetion[1];
+
+        /*
+        Stores the Alterative WORDING options into Options and array node
+         */
+        for (int i = 2; i < Quetion.length; i++) {
+            Array.add(Quetion[i]);
+            this.Options.add(Quetion[i]);
+        }
+        /*
+        Added the Array node to the json node
+         */
+        jsonNode.put("Other_Options", Array);
     }
 
     /*

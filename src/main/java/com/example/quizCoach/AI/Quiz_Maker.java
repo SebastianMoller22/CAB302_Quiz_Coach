@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public class Quiz_Maker {
 
     /*
+    test variable, when true will go through a predetermined scenario to allow for testing
+     */
+    private boolean Testvar = false;
+
+    /*
     The following are variables related to the quiz
     --------------------------------------------------------------------------------------------------------------------
     Topic: Is the inputted 'topic' that the AI will create the question about
@@ -65,18 +70,57 @@ public class Quiz_Maker {
 
     }
 
-    private ArrayNode MakeMutipleChoice(String topic, int skill_level, int numMultipleChoice){
+    public Quiz_Maker(boolean TestVar){
 
         /*
-        Prompted the AI to crete a set number of multiple choice questions and store
-        them in MultipleChoiceArray and MultipleChoiceList.
-        Return MultipleChoiceList
+        Set Testvar to true no matter what the input is.
          */
-        for (int j = 0; j < numMultipleChoice; j++) {
+        this.Testvar = true;
+        /*
+        Store all inputs into their respective variables
+         */
+        this.Topic = "Sharks";
+        this.Skill_level = 1;
+        this.NumMultipleChoice = 1;
+        this.NumShortResponse = 0;
 
-            Multiple_Choice_Maker Question = new Multiple_Choice_Maker(Topic, Skill_level);
-            MultipleChoiceArray.add(Question);
-            MultipleChoiceList.add(Question.getJsonNode());
+        /*
+        Store the updated variables into the JsonNode
+        And create the questions and store them in Json node
+         */
+        this.JsonNode.put("Topic", Topic);
+        JsonNode.put("Number of MultipleChoice", NumMultipleChoice);
+        JsonNode.put("Multiple Choice Questions", MakeMutipleChoice(Topic, Skill_level, NumMultipleChoice));
+        JsonNode.put("Number of Short Response", NumShortResponse);
+        JsonNode.put("Short Response Questions", MakeShortResponse(Topic, Skill_level, NumShortResponse));
+
+    }
+
+    private ArrayNode MakeMutipleChoice(String topic, int skill_level, int numMultipleChoice){
+
+        if (Testvar == true) {
+            /*
+            IF in test mode run through predetermined prompt
+             */
+            for (int j = 0; j < numMultipleChoice; j++) {
+
+                Multiple_Choice_Maker Question = new Multiple_Choice_Maker(true);
+                MultipleChoiceArray.add(Question);
+                MultipleChoiceList.add(Question.getJsonNode());
+            }
+        }
+        else {
+            /*
+            Prompted the AI to crete a set number of multiple choice questions and store
+            them in MultipleChoiceArray and MultipleChoiceList.
+            Return MultipleChoiceList
+             */
+            for (int j = 0; j < numMultipleChoice; j++) {
+
+                Multiple_Choice_Maker Question = new Multiple_Choice_Maker(Topic, Skill_level);
+                MultipleChoiceArray.add(Question);
+                MultipleChoiceList.add(Question.getJsonNode());
+            }
         }
 
         return MultipleChoiceList;
@@ -89,6 +133,18 @@ public class Quiz_Maker {
          */
         return ShortResponse;
     }
+
+    /*
+    Basic get variables, Topic, Skill_level, NumMultipleChoice, NumShortResponse so that other classes have access to it.
+     */
+    public String getTopic(){return Topic;}
+
+    public int getSkill_level(){return Skill_level;}
+
+    public int getNumMultipleChoice(){return NumMultipleChoice;}
+
+    public int getNumShortResponse() {return NumShortResponse;}
+
 
     /*
     Get MultipleChoiceArray, so other classes can access the multiple choice questions
