@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.quizCoach.controller.homePageController"
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.quizCoach.controller.HomePageController"
             style="-fx-background-color: #9cc9d0;" prefWidth="800.0" prefHeight="700.0">
 
     <!-- Top Bar -->
