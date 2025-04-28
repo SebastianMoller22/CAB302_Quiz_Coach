@@ -19,7 +19,14 @@ public class ForgotPasswordController {
     @FXML
     public void initialize() {
         resetButton.setOnAction(e -> {
-            System.out.println("Reset link sent to: " + usernameField.getText());
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/reset_password.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) resetButton.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 700));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
 
         existingAccountLink.setOnAction(e -> {
