@@ -62,7 +62,11 @@
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button layoutX="423.0" layoutY="146.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="284.0" text="Button" />
+            <Button layoutX="423.0" layoutY="146.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="284.0" text="NOTIFICATIONS">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Button>
             <Button layoutX="96.0" layoutY="272.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="284.0" text="Button" />
             <Button layoutX="423.0" layoutY="272.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="284.0" text="Button" />
             <Button layoutX="96.0" layoutY="403.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="613.0" text="Button" />
