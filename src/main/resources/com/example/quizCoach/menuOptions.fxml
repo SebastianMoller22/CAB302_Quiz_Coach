@@ -84,7 +84,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="-29.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;">
+            <Button layoutX="-21.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;" text="👤 PROFILE">
                <font>
                   <Font size="24.0" />
                </font>
