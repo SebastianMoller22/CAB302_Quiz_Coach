@@ -82,6 +82,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
+            <Line endX="100.0" layoutX="211.0" layoutY="265.0" startX="-100.0" />
       </children>
     </AnchorPane>
   </children>
