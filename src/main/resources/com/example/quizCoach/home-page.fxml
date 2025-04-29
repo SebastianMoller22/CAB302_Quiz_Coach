@@ -89,7 +89,7 @@
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Button>
-            <Circle fill="DODGERBLUE" layoutX="470.0" layoutY="185.0" radius="87.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#0a3201" layoutX="470.0" layoutY="185.0" radius="87.0" stroke="BLACK" strokeType="INSIDE" />
       </children>
     </AnchorPane>
   </children>
