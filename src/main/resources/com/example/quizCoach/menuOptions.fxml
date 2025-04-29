@@ -89,6 +89,11 @@
                   <Font size="24.0" />
                </font>
             </Button>
+            <Button layoutX="-21.0" layoutY="242.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>
