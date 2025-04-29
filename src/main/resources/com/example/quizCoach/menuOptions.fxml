@@ -79,17 +79,17 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="-29.0" layoutY="158.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;" text="🏠 HOME">
+            <Button layoutX="-29.0" layoutY="159.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;" text="🏠 HOME">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="-21.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;" text="👤 PROFILE">
+            <Button layoutX="-21.0" layoutY="204.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;" text="👤 PROFILE">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="-21.0" layoutY="242.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;">
+            <Button layoutX="-14.0" layoutY="246.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;" text="⚙ SETTINGS">
                <font>
                   <Font size="24.0" />
                </font>
