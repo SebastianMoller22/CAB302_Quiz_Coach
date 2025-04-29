@@ -71,7 +71,7 @@
             </Button>
             <Line endX="100.0" layoutX="207.0" layoutY="154.0" startX="-100.0" />
             <Line endX="100.0" layoutX="208.0" layoutY="105.0" startX="-100.0" />
-            <Button layoutX="80.0" layoutY="166.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="255.0" style="-fx-background-color: lightblue;" textFill="#00a2ff">
+            <Button layoutX="80.0" layoutY="166.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="255.0" style="-fx-background-color: lightblue;" text="🙋‍♂️" textFill="#00a2ff">
                <font>
                   <Font size="24.0" />
                </font>
