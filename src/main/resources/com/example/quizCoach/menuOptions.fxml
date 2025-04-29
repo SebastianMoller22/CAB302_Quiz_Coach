@@ -94,7 +94,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="-14.0" layoutY="285.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;">
+            <Button layoutX="25.0" layoutY="286.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="319.0" style="-fx-background-color: TRANSPARENT;" text="➕ ADD STUDY MATERIAL">
                <font>
                   <Font size="24.0" />
                </font>
