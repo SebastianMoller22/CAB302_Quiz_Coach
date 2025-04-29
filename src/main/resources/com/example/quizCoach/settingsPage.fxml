@@ -42,7 +42,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="533.0" prefWidth="785.0" style="-fx-background-color: lightblue;" VBox.vgrow="ALWAYS">
       <children>
-            <Text layoutX="217.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🎓 IntelliTutor" textAlignment="CENTER" wrappingWidth="400.99383544921875">
+            <Text layoutX="218.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🎓 IntelliTutor" textAlignment="CENTER" wrappingWidth="400.99383544921875">
                <font>
                   <Font name="Comic Sans MS" size="48.0" />
                </font>
