@@ -77,6 +77,11 @@
                </font>
             </Button>
             <Line endX="100.0" layoutX="209.0" layoutY="212.0" startX="-100.0" />
+            <Button layoutX="79.0" layoutY="217.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="255.0" style="-fx-background-color: lightblue;" textFill="#00a2ff">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>
