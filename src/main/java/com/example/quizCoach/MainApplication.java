@@ -11,7 +11,7 @@ import java.util.Objects;
 public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/quizCoach/login_screen.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/quizCoach/home-page.fxml")));
         primaryStage.setTitle("Login Screen");
         primaryStage.setScene(new Scene(root, 800, 700));
         primaryStage.show();
