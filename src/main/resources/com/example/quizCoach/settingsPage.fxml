@@ -67,7 +67,7 @@
                   <Font size="32.0" />
                </font>
             </Button>
-            <Button layoutX="96.0" layoutY="272.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="284.0" style="-fx-background-color: darkcyan;" text="BACKGROUND MUSIC">
+            <Button layoutX="97.0" layoutY="272.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="284.0" style="-fx-background-color: darkcyan;" text="BACKGROUND MUSIC">
                <font>
                   <Font size="24.0" />
                </font>
