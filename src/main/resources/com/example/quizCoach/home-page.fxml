@@ -91,7 +91,7 @@
             </Button>
             <Circle fill="#05286f" layoutX="470.0" layoutY="185.0" radius="87.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fill="#195fcf" layoutX="470.0" layoutY="185.0" radius="75.0" stroke="BLACK" strokeType="INSIDE" />
-            <Button layoutX="419.0" layoutY="145.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="102.0" style="-fx-background-color: #18d137;" text="STATS" underline="true">
+            <Button layoutX="419.0" layoutY="145.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="102.0" style="-fx-background-color: #195fcf;" text="STATS" underline="true">
                <font>
                   <Font size="24.0" />
                </font>
