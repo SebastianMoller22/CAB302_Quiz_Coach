@@ -99,7 +99,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="25.0" layoutY="324.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="319.0" style="-fx-background-color: TRANSPARENT;">
+            <Button layoutX="-67.0" layoutY="326.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="319.0" style="-fx-background-color: TRANSPARENT;" text="❓HELP!">
                <font>
                   <Font size="24.0" />
                </font>
