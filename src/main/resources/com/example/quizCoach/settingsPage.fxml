@@ -77,7 +77,7 @@
                   <Font size="32.0" />
                </font>
             </Button>
-            <Button layoutX="96.0" layoutY="403.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="613.0" style="-fx-background-color: darkcyan;" text="LOG OUT">
+            <Button layoutX="96.0" layoutY="402.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="613.0" style="-fx-background-color: darkcyan;" text="LOG OUT">
                <font>
                   <Font size="48.0" />
                </font>
