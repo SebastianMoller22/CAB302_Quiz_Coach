@@ -53,9 +53,9 @@
                   <Font name="Comic Sans MS" size="30.0" />
                </font>
             </Text>
-            <Button layoutX="23.0" layoutY="22.0" mnemonicParsing="false" text="☰" textAlignment="CENTER">
+            <Button layoutX="23.0" layoutY="22.0" mnemonicParsing="false" style="-fx-background-color: lightblue;" text="☰" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Button>
             <Button layoutX="574.0" layoutY="20.0" mnemonicParsing="false" text="👤">
