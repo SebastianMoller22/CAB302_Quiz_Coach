@@ -63,7 +63,11 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="79.0" layoutY="103.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="255.0" text="Button" />
+            <Button layoutX="79.0" layoutY="103.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="255.0" text="📝 PAST SCORE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>
