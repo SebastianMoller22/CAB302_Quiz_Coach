@@ -63,7 +63,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="79.0" layoutY="103.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="255.0" text="📝 PAST SCORE" textFill="#00a2ff">
+            <Button layoutX="79.0" layoutY="103.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="255.0" style="-fx-background-color: lightblue;" text="📝 PAST SCORE" textFill="#00a2ff">
                <font>
                   <Font size="24.0" />
                </font>
