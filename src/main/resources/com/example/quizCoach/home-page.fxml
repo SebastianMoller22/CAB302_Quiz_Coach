@@ -70,6 +70,7 @@
                </font>
             </Button>
             <Line endX="100.0" layoutX="207.0" layoutY="154.0" startX="-100.0" />
+            <Line endX="100.0" layoutX="208.0" layoutY="105.0" startX="-100.0" />
       </children>
     </AnchorPane>
   </children>
