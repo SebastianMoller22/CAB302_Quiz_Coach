@@ -91,7 +91,7 @@
             </Button>
             <Circle fill="#0a3201" layoutX="470.0" layoutY="185.0" radius="87.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fill="#18d137" layoutX="470.0" layoutY="185.0" radius="75.0" stroke="BLACK" strokeType="INSIDE" />
-            <Button layoutX="444.0" layoutY="172.0" mnemonicParsing="false" text="STATS" />
+            <Button layoutX="419.0" layoutY="145.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="102.0" text="STATS" />
       </children>
     </AnchorPane>
   </children>
