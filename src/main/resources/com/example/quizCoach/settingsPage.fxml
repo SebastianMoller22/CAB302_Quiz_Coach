@@ -72,7 +72,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="422.0" layoutY="272.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="284.0" style="-fx-background-color: darkcyan;" text="REMINDERS">
+            <Button layoutX="423.0" layoutY="272.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="284.0" style="-fx-background-color: darkcyan;" text="REMINDERS">
                <font>
                   <Font size="32.0" />
                </font>
