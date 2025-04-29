@@ -79,7 +79,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="3.0" layoutY="124.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;" text="📔 NEW QUIZ">
+            <Button layoutX="-7.0" layoutY="158.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" style="-fx-background-color: TRANSPARENT;">
                <font>
                   <Font size="24.0" />
                </font>
