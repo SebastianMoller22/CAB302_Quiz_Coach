@@ -83,7 +83,11 @@
                </font>
             </Button>
             <Line endX="100.0" layoutX="214.0" layoutY="265.0" startX="-100.0" />
-            <Button layoutX="114.0" layoutY="286.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="443.0" text="START A NEW QUIZ" />
+            <Button layoutX="114.0" layoutY="286.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="443.0" text="START A NEW QUIZ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>
