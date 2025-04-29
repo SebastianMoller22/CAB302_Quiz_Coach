@@ -48,9 +48,9 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <Text layoutX="215.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🎓 IntelliTutor" textAlignment="CENTER" wrappingWidth="210.13671875">
+            <Text layoutX="187.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🎓 IntelliTutor" textAlignment="CENTER" wrappingWidth="265.56524658203125">
                <font>
-                  <Font name="Comic Sans MS" size="30.0" />
+                  <Font name="Comic Sans MS" size="36.0" />
                </font>
             </Text>
             <Button layoutX="23.0" layoutY="22.0" mnemonicParsing="false" style="-fx-background-color: lightblue;" text="☰" textAlignment="CENTER">
@@ -63,6 +63,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
+            <Button layoutX="79.0" layoutY="103.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="255.0" text="Button" />
       </children>
     </AnchorPane>
   </children>
