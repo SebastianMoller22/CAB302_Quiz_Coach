@@ -58,6 +58,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
+            <Button layoutX="564.0" layoutY="24.0" mnemonicParsing="false" text="Button" />
       </children>
     </AnchorPane>
   </children>
