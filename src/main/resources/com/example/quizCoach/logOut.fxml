@@ -57,7 +57,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <Text layoutX="96.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text layoutX="96.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?" />
             <Text layoutX="411.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
          </children>
     </AnchorPane>
