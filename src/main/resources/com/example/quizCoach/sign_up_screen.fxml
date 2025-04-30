@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.quizCoach.controller.SignUpController"
+            style="-fx-background-color: lightblue;" prefWidth="800.0" prefHeight="700.0">
+
+    <top>
+        <VBox alignment="CENTER" spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Text text="🎓" style="-fx-font-size: 100;" />
+            <Text text="WELCOME TO" style="-fx-font-family: Arial; -fx-font-size: 20; -fx-fill: black;" />
+            <Text text="IntelliTutor" style="-fx-font-family: 'Comic Sans MS'; -fx-font-size: 30; -fx-fill: teal;" />
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="15" style="-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 10; -fx-background-radius: 10;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Text text="SIGN UP" style="-fx-font-family: Arial; -fx-font-size: 24; -fx-fill: black;" />
+            <TextField fx:id="firstNameField" promptText="FIRST NAME" style="-fx-background-radius: 10; -fx-padding: 10;" />
+            <TextField fx:id="lastNameField" promptText="LAST NAME" style="-fx-background-radius: 10; -fx-padding: 10;" />
+            <TextField fx:id="usernameField" promptText="USERNAME (EMAIL)" style="-fx-background-radius: 10; -fx-padding: 10;" />
+            <PasswordField fx:id="passwordField" promptText="PASSWORD" style="-fx-background-radius: 10; -fx-padding: 10;" />
+            <Button fx:id="signUpButton" text="SIGN UP" style="-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;" />
+            <Hyperlink fx:id="existingAccountLink" text="ALREADY HAVE AN ACCOUNT?" />
+        </VBox>
+    </center>
+
+</BorderPane>

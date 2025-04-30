@@ -67,7 +67,7 @@ public class AuthenticationManager {
         if (!validateString(password, AuthenticationConstant.passwordRegex)) {
             throw new Exception("Invalid Password");
         }
-        User newuser = new User(username, email, password);
+        User newuser = new User(username, password, email);
         // Insert into db
         userDatabase.addUser(newuser);
     }

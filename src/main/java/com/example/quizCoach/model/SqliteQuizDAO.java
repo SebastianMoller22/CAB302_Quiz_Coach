@@ -1,143 +1,211 @@
 package com.example.quizCoach.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//FIXME Replace contact information with quiz information
 public class SqliteQuizDAO implements IQuizDAO {
     private Connection connection;
 
     public SqliteQuizDAO() {
         connection = SqliteConnection.getInstance();
-        createTable();
-        //// Used for testing, to be removed later
-        //insertSampleData();
+        enableForeignKeys();
+        createTables();
     }
 
-    private void insertSampleData() {
-        try {
-            // Clear before inserting
-            Statement clearStatement = connection.createStatement();
-            String clearQuery = "DELETE FROM quizzes";
-            clearStatement.execute(clearQuery);
-            Statement insertStatement = connection.createStatement();
-            String insertQuery = "INSERT INTO quizzes (firstName, lastName, phone, email) VALUES "
-                    + "('John', 'Doe', '0423423423', 'johndoe@example.com'),"
-                    + "('Jane', 'Doe', '0423423424', 'janedoe@example.com'),"
-                    + "('Jay', 'Doe', '0423423425', 'jaydoe@example.com')";
-            insertStatement.execute(insertQuery);
-        } catch (Exception e) {
+    private void enableForeignKeys() {
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute("PRAGMA foreign_keys = ON;");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void createTable() {
-        // Create a table if no tables exist
-        try {
-            Statement statement = connection.createStatement();
-            String query = "CREATE TABLE IF NOT EXISTS quizzes ("
+    private void createTables() {
+        try (Statement stmt = connection.createStatement()) {
+            // quizzes table
+            stmt.execute("CREATE TABLE IF NOT EXISTS quizzes ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + "firstName VARCHAR NOT NULL,"
-                    + "lastName VARCHAR NOT NULL,"
-                    + "phone VARCHAR NOT NULL,"
-                    + "email VARCHAR NOT NULL"
-                    + ")";
-            statement.execute(query);
-        } catch (Exception e) {
+                    + "difficulty REAL NOT NULL,"
+                    + "allocated_time INTEGER NOT NULL"
+                    + ");");
+            // questions table
+            stmt.execute("CREATE TABLE IF NOT EXISTS questions ("
+                    + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + "quiz_id INTEGER NOT NULL,"
+                    + "question_text TEXT NOT NULL,"
+                    + "FOREIGN KEY(quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE"
+                    + ");");
+            // options table
+            stmt.execute("CREATE TABLE IF NOT EXISTS options ("
+                    + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + "question_id INTEGER NOT NULL,"
+                    + "option_text TEXT NOT NULL,"
+                    + "is_correct INTEGER NOT NULL,"
+                    + "FOREIGN KEY(question_id) REFERENCES questions(id) ON DELETE CASCADE"
+                    + ");");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void addQuiz(Quiz quiz) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO quizzes (firstName, lastName, phone, email) VALUES (?, ?, ?, ?);");
-            statement.setString(1, quiz.getFirstName());
-            statement.setString(2, quiz.getLastName());
-            statement.setString(3, quiz.getPhone());
-            statement.setString(4, quiz.getEmail());
-            statement.executeUpdate();
-            // Set the id of the new quiz
-            ResultSet generaterdKeys = statement.getGeneratedKeys();
-            if (generaterdKeys.next()) {
-                quiz.setId(generaterdKeys.getInt(1));
+        String insertQuizSql = "INSERT INTO quizzes (difficulty, allocated_time) VALUES (?, ?);";
+        try (PreparedStatement psQuiz = connection.prepareStatement(insertQuizSql, Statement.RETURN_GENERATED_KEYS)) {
+            psQuiz.setFloat(1, quiz.GetDifficulty());
+            psQuiz.setInt(2, quiz.GetAllocatedTime());
+            psQuiz.executeUpdate();
+            try (ResultSet rs = psQuiz.getGeneratedKeys()) {
+                if (rs.next()) {
+                    quiz.SetQuizID(rs.getInt(1));
+                }
             }
-        } catch (Exception e) {
+            // insert questions and options
+            for (Question q : quiz.GetQuestions()) {
+                insertQuestion(quiz.GetQuizID(), q);
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void updateQuiz(Quiz quiz) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE quizzes SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE id = ?");
-            statement.setString(1, quiz.getFirstName());
-            statement.setString(2, quiz.getLastName());
-            statement.setString(3, quiz.getPhone());
-            statement.setString(4, quiz.getEmail());
-            statement.setInt(5, quiz.getId());
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void insertQuestion(int quizId, Question question) throws SQLException {
+        String insertQuestionSql = "INSERT INTO questions (quiz_id, question_text) VALUES (?, ?);";
+        try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql, Statement.RETURN_GENERATED_KEYS)) {
+            psQ.setInt(1, quizId);
+            psQ.setString(2, question.GetQuestionText());
+            psQ.executeUpdate();
+            try (ResultSet rsQ = psQ.getGeneratedKeys()) {
+                if (rsQ.next()) {
+                    int questionId = rsQ.getInt(1);
+                    for (Option opt : question.GetOptions()) {
+                        insertOption(questionId, opt);
+                    }
+                }
+            }
         }
     }
 
-    @Override
-    public void deleteQuiz(Quiz quiz) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM quizzes WHERE id = ?");
-            statement.setInt(1, quiz.getId());
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void insertOption(int questionId, Option option) throws SQLException {
+        String insertOptionSql = "INSERT INTO options (question_id, option_text, is_correct) VALUES (?, ?, ?);";
+        try (PreparedStatement psO = connection.prepareStatement(insertOptionSql)) {
+            psO.setInt(1, questionId);
+            psO.setString(2, option.GetOptionText());
+            psO.setInt(3, option.IsOptionCorrect() ? 1 : 0);
+            psO.executeUpdate();
         }
     }
 
     @Override
     public Quiz getQuiz(int id) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE id = ?");
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                String phone = resultSet.getString("phone");
-                String email = resultSet.getString("email");
-                Quiz quiz = new Quiz(firstName, lastName, phone, email);
-                quiz.setId(id);
-                return quiz;
+        Quiz quiz = null;
+        String selectQuizSql = "SELECT difficulty, allocated_time FROM quizzes WHERE id = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(selectQuizSql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    float difficulty = rs.getFloat("difficulty");
+                    int allocatedTime = rs.getInt("allocated_time");
+                    Question[] questions = loadQuestions(id);
+                    quiz = new Quiz(difficulty, questions, allocatedTime);
+                    quiz.SetQuizID(id);
+                }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return quiz;
+    }
+
+    private Question[] loadQuestions(int quizId) throws SQLException {
+        String selectQuestionsSql = "SELECT id, question_text FROM questions WHERE quiz_id = ?;";
+        List<Question> questions = new ArrayList<>();
+        try (PreparedStatement psQ = connection.prepareStatement(selectQuestionsSql)) {
+            psQ.setInt(1, quizId);
+            try (ResultSet rsQ = psQ.executeQuery()) {
+                while (rsQ.next()) {
+                    int questionId = rsQ.getInt("id");
+                    String text = rsQ.getString("question_text");
+                    Option[] options = loadOptions(questionId);
+                    questions.add(new Question(text, options));
+                }
+            }
+        }
+        return questions.toArray(new Question[0]);
+    }
+
+    private Option[] loadOptions(int questionId) throws SQLException {
+        String selectOptionsSql = "SELECT option_text, is_correct FROM options WHERE question_id = ?;";
+        List<Option> options = new ArrayList<>();
+        try (PreparedStatement psO = connection.prepareStatement(selectOptionsSql)) {
+            psO.setInt(1, questionId);
+            try (ResultSet rsO = psO.executeQuery()) {
+                while (rsO.next()) {
+                    String text = rsO.getString("option_text");
+                    boolean isCorrect = rsO.getInt("is_correct") == 1;
+                    options.add(new Option(text, isCorrect));
+                }
+            }
+        }
+        return options.toArray(new Option[0]);
     }
 
     @Override
     public List<Quiz> getAllQuizzes() {
         List<Quiz> quizzes = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            String query = "SELECT * FROM quizzes";
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                String phone = resultSet.getString("phone");
-                String email = resultSet.getString("email");
-                Quiz quiz = new Quiz(firstName, lastName, phone, email);
-                quiz.setId(id);
-                quizzes.add(quiz);
+        String selectAllSql = "SELECT id FROM quizzes;";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(selectAllSql)) {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                Quiz quiz = getQuiz(id);
+                if (quiz != null) quizzes.add(quiz);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return quizzes;
+    }
+
+    @Override
+    public void updateQuiz(Quiz quiz) {
+        String updateQuizSql = "UPDATE quizzes SET difficulty = ?, allocated_time = ? WHERE id = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(updateQuizSql)) {
+            ps.setFloat(1, quiz.GetDifficulty());
+            ps.setInt(2, quiz.GetAllocatedTime());
+            ps.setInt(3, quiz.GetQuizID());
+            ps.executeUpdate();
+            deleteQuestionsByQuizId(quiz.GetQuizID());
+            for (Question q : quiz.GetQuestions()) {
+                insertQuestion(quiz.GetQuizID(), q);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteQuestionsByQuizId(int quizId) throws SQLException {
+        String deleteOptionsSql = "DELETE FROM options WHERE question_id IN (SELECT id FROM questions WHERE quiz_id = ?);";
+        try (PreparedStatement psO = connection.prepareStatement(deleteOptionsSql)) {
+            psO.setInt(1, quizId);
+            psO.executeUpdate();
+        }
+        String deleteQuestionsSql = "DELETE FROM questions WHERE quiz_id = ?;";
+        try (PreparedStatement psQ = connection.prepareStatement(deleteQuestionsSql)) {
+            psQ.setInt(1, quizId);
+            psQ.executeUpdate();
+        }
+    }
+
+    @Override
+    public void deleteQuiz(Quiz quiz) {
+        String deleteQuizSql = "DELETE FROM quizzes WHERE id = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(deleteQuizSql)) {
+            ps.setInt(1, quiz.GetQuizID());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
