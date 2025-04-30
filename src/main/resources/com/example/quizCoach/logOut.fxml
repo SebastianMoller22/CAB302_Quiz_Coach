@@ -58,6 +58,7 @@
                </font>
             </Button>
             <Text layoutX="96.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text layoutX="411.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
          </children>
     </AnchorPane>
   </children>
