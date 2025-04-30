@@ -56,7 +56,7 @@ public class SqliteUserDAO implements IUserDAO {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO users (username, password, email) VALUES (?, ?, ?);");
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
-            statement.setString(4, user.getEmail());
+            statement.setString(3, user.getEmail());
             statement.executeUpdate();
             // Set the id of the new user
             ResultSet generaterdKeys = statement.getGeneratedKeys();
