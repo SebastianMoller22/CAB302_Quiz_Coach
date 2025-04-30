@@ -53,7 +53,7 @@
             </Text>
             <Text layoutX="354.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cultivating Minds Through Quizzes..." wrappingWidth="407.45367431640625">
                <font>
-                  <Font name="Cascadia Code Regular" size="17.0" />
+                  <Font name="Courier New Italic" size="17.0" />
                </font>
             </Text>
          </children>
