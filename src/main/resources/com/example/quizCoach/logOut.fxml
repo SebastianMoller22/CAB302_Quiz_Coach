@@ -47,9 +47,9 @@
                   <Font size="36.0" />
                </font>
             </Text>
-            <Button layoutX="96.0" layoutY="296.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="291.0" text="LOG IN">
+            <Button layoutX="96.0" layoutY="296.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="291.0" style="-fx-background-color: darkcyan;" text="LOG IN">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Button>
          </children>
