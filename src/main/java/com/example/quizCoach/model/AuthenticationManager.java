@@ -98,7 +98,7 @@ public class AuthenticationManager {
         if (!checkifUserExists(username)) {
             throw new Exception("No User with this username");
         }
-        return user.getPassword() == password;
+        return user.getPassword().equals(password);
     }
 
     /**
