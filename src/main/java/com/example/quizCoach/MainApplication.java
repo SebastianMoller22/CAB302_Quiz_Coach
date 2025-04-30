@@ -8,6 +8,7 @@ public class MainApplication {
 
 
     public static void main(String[] args) {
+
         Quiz_Maker Test = new Quiz_Maker("sharks", 100, 1, 0);
         System.out.println(Test.getMultipleChoiceArray().get(0).getQuestion());
         System.out.println(Test.getMultipleChoiceArray().get(0).getAnswer());
