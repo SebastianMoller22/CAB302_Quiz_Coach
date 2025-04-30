@@ -25,9 +25,8 @@
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
             <Text text="SIGN UP" style="-fx-font-family: Arial; -fx-font-size: 24; -fx-fill: black;" />
-            <TextField fx:id="firstNameField" promptText="FIRST NAME" style="-fx-background-radius: 10; -fx-padding: 10;" />
-            <TextField fx:id="lastNameField" promptText="LAST NAME" style="-fx-background-radius: 10; -fx-padding: 10;" />
-            <TextField fx:id="usernameField" promptText="USERNAME (EMAIL)" style="-fx-background-radius: 10; -fx-padding: 10;" />
+            <TextField fx:id="usernameField" promptText="USERNAME" style="-fx-background-radius: 10; -fx-padding: 10;" />
+            <TextField fx:id="emailField" promptText="EMAIL" style="-fx-background-radius: 10; -fx-padding: 10;" />
             <PasswordField fx:id="passwordField" promptText="PASSWORD" style="-fx-background-radius: 10; -fx-padding: 10;" />
             <Button fx:id="signUpButton" text="SIGN UP" style="-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;" />
             <Hyperlink fx:id="existingAccountLink" text="ALREADY HAVE AN ACCOUNT?" />

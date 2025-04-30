@@ -12,8 +12,7 @@ import java.io.IOException;
 
 public class SignUpController {
     @FXML private AuthenticationManager authentication = new AuthenticationManager();
-    @FXML private TextField firstNameField;
-    @FXML private TextField lastNameField;
+    @FXML private TextField emailField;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Button signUpButton;
@@ -22,8 +21,8 @@ public class SignUpController {
     @FXML
     public void initialize() {
         signUpButton.setOnAction(e -> {
-            String username = firstNameField.getText();
-            String email = usernameField.getText();
+            String username = usernameField.getText();
+            String email = emailField.getText();
             String password = passwordField.getText();
             try {
                 authentication.Signup(username, email, password);
