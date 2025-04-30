@@ -26,6 +26,10 @@ public class SignUpController {
             String password = passwordField.getText();
             try {
                 authentication.Signup(username, email, password);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) signUpButton.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 700));
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
