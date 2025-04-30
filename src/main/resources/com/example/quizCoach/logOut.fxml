@@ -47,7 +47,7 @@
                   <Font size="36.0" />
                </font>
             </Text>
-            <Button layoutX="96.0" layoutY="299.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="291.0" text="Button" />
+            <Button layoutX="96.0" layoutY="296.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="291.0" text="LOG IN" />
          </children>
     </AnchorPane>
   </children>
