@@ -119,7 +119,7 @@ public class SqliteUserDAO implements IUserDAO {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
+            if (resultSet.isBeforeFirst()) {
                 int id = resultSet.getInt("id");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
