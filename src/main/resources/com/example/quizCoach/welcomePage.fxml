@@ -46,7 +46,7 @@
                   <Font size="300.0" />
                </font>
             </Text>
-            <Text layoutX="512.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text layoutX="389.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IntelliTutor" wrappingWidth="357.71429443359375" />
          </children>
     </AnchorPane>
   </children>
