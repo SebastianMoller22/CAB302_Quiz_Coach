@@ -28,6 +28,9 @@ public class loginController {
             try {
                 if (authentication.LoginAsUser(username, password)) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/main-view.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                    stage.setScene(new Scene(root, 800, 700));
                 }
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
