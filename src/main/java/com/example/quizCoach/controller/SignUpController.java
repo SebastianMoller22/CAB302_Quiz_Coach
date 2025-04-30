@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.model.AuthenticationManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SignUpController {
-
+    @FXML private AuthenticationManager authentication = new AuthenticationManager();
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
     @FXML private TextField usernameField;
@@ -21,6 +22,14 @@ public class SignUpController {
     @FXML
     public void initialize() {
         signUpButton.setOnAction(e -> {
+            String username = firstNameField.getText();
+            String email = usernameField.getText();
+            String password = passwordField.getText();
+            try {
+                authentication.Signup(username, email, password);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
             System.out.println("Signed up as: " + usernameField.getText());
         });
 
