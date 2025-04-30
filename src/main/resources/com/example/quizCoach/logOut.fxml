@@ -59,7 +59,7 @@
             </Button>
             <Text layoutX="96.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?" />
             <Text layoutX="411.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creat a new account!" />
-            <Button layoutX="734.0" layoutY="661.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="758.0" layoutY="659.0" mnemonicParsing="false" text="❓" />
          </children>
     </AnchorPane>
   </children>
