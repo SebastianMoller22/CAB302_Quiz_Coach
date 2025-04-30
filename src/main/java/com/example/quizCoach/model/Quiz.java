@@ -6,8 +6,7 @@ public class Quiz {
     private Question[] questions;
     private int allocatedTime;
 
-    public Quiz(int quizID, float difficulty, Question[] questions, int allocatedTime) {
-        this.quizID = quizID;
+    public Quiz(float difficulty, Question[] questions, int allocatedTime) {
         this.difficulty = difficulty;
         this.questions = questions;
         this.allocatedTime = allocatedTime;
@@ -15,6 +14,10 @@ public class Quiz {
 
     public int GetQuizID() {
         return quizID;
+    }
+
+    public void SetQuizID(int quizID) {
+        this.quizID = quizID;
     }
 
     public float GetDifficulty() {
