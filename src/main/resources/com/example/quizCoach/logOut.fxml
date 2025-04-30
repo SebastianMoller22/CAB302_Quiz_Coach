@@ -41,7 +41,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="533.0" prefWidth="785.0" style="-fx-background-color: lightblue;" VBox.vgrow="ALWAYS">
          <children>
-            <Text layoutX="96.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have been successfully loged out." wrappingWidth="606.7081298828125">
+            <Text layoutX="96.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have been successfully loged out." wrappingWidth="606.7081298828125">
                <font>
                   <Font size="36.0" />
                </font>
