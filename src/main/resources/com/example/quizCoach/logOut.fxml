@@ -52,6 +52,11 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
+            <Button layoutX="106.0" layoutY="306.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="291.0" style="-fx-background-color: darkcyan;" text="LOG IN">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
          </children>
     </AnchorPane>
   </children>
