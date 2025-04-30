@@ -26,13 +26,11 @@ public class loginController {
             // TODO: Add your login validation logic
             try {
                 if (authentication.LoginAsUser(username, password)) {
-                    System.out.println("Logging in: " + username);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/welcomePage.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.setScene(new Scene(root, 800, 700));
                 } else {
-                    System.out.println("Not logged in");
                 }
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
