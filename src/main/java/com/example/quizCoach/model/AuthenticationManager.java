@@ -98,10 +98,7 @@ public class AuthenticationManager {
         if (!checkifUserExists(username)) {
             throw new Exception("No User with this username");
         }
-        if (user.getPassword() == password) {
-            return true;
-        }
-        return false;
+        return user.getPassword() == password;
     }
 
     /**
@@ -115,9 +112,8 @@ public class AuthenticationManager {
         if (matchPasswordandUsername(username, password)) {
             setActiveUser(getUser(username));
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
