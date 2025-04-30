@@ -24,6 +24,15 @@ public class loginController {
             String password = passwordField.getText();
             // TODO: Add your login validation logic
             System.out.println("Logging in: " + username);
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 700));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
 
         forgotPasswordLink.setOnAction(e -> {
