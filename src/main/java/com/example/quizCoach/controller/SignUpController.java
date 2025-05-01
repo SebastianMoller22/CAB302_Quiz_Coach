@@ -11,12 +11,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SignUpController {
-    @FXML private AuthenticationManager authentication = new AuthenticationManager();
+    @FXML private AuthenticationManager authentication;
     @FXML private TextField emailField;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Button signUpButton;
     @FXML private Hyperlink existingAccountLink;
+
+    public void setAuthManager(AuthenticationManager authentication) {
+        this.authentication = authentication;
+    }
 
     @FXML
     public void initialize() {

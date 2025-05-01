@@ -18,6 +18,10 @@ public class loginController {
     @FXML private Hyperlink forgotPasswordLink;
     @FXML private Hyperlink createAccountLink;
 
+    public void setAuthManager(AuthenticationManager authentication) {
+        this.authentication = authentication;
+    }
+
     @FXML
     public void initialize() {
         loginButton.setOnAction(e -> {
@@ -54,6 +58,8 @@ public class loginController {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/sign_up_screen.fxml"));
                 Parent root = loader.load();
+                SignUpController signUpController = loader.getController();
+                signUpController.setAuthManager(new AuthenticationManager());
                 Stage stage = (Stage) createAccountLink.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
             } catch (IOException ex) {
