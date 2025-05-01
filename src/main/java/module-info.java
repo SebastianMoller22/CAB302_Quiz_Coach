@@ -1,4 +1,5 @@
-module com.example.addressbook {
+module com.example.quizCoach {
+    requires javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
@@ -8,4 +9,9 @@ module com.example.addressbook {
     exports com.example.quizCoach.AI;
 
     opens com.example.quizCoach.ollama to com.google.gson;
+
+    opens com.example.quizCoach to javafx.graphics;
+    opens com.example.quizCoach.controller to javafx.fxml;
+    exports com.example.quizCoach;
+    exports com.example.quizCoach.controller;
 }
