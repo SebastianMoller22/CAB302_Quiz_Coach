@@ -2,14 +2,14 @@ package com.example.quizCoach.model;
 
 public class Quiz {
     private int quizID;
+    private String topic;
     private float difficulty;
     private Question[] questions;
-    private int allocatedTime;
 
-    public Quiz(float difficulty, Question[] questions, int allocatedTime) {
+    public Quiz(String topic, float difficulty, Question[] questions) {
+        this.topic = topic;
         this.difficulty = difficulty;
         this.questions = questions;
-        this.allocatedTime = allocatedTime;
     }
 
     public int GetQuizID() {
@@ -20,15 +20,13 @@ public class Quiz {
         this.quizID = quizID;
     }
 
+    public String GetTopic() {return topic;}
+
     public float GetDifficulty() {
         return difficulty;
     }
 
     public Question[] GetQuestions() {
         return questions;
-    }
-
-    public int GetAllocatedTime() {
-        return allocatedTime;
     }
 }
