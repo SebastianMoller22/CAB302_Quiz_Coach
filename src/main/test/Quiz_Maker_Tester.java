@@ -71,5 +71,29 @@ public class Quiz_Maker_Tester {
         assertEquals(OPTION3, TESTQUIZ.getMultipleChoiceArray().get(0).getOptions().get(2));
     }
 
+    @Test
+    public void testIndividualscore1(){
+        assertEquals(0, TESTQUIZ.getMultipleChoiceArray().get(0).getScore());
+    }
+
+    @Test
+    public void testIndividualscore2(){
+        TESTQUIZ.getMultipleChoiceArray().get(0).setScore(1);
+        assertEquals(1, TESTQUIZ.getMultipleChoiceArray().get(0).getScore());
+    }
+
+    @Test
+    public void testtotalscore1(){
+        assertEquals(0, TESTQUIZ.getTotalScore());
+    }
+
+    @Test
+    public void testtotalscore2(){
+        TESTQUIZ.setTotalScore(1);
+        assertEquals(1, TESTQUIZ.getTotalScore());
+    }
+
+
+
 
 }

@@ -45,4 +45,14 @@ public class Multiple_Choice_Maker_Tester {
         assertEquals(OPTION3, TESTQUESTION.getOptions().get(2));
     }
 
+    @Test
+    public void Testscore1() { assertEquals(0, TESTQUESTION.getScore());}
+
+
+    @Test
+    public void Testscore2() {
+        TESTQUESTION.setScore(1);
+        assertEquals(1, TESTQUESTION.getScore());
+    }
+
 }

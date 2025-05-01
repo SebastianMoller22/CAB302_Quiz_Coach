@@ -31,6 +31,7 @@ public class Quiz_Maker {
     private int Skill_level;
     private int NumMultipleChoice;
     private int NumShortResponse;
+    private int TotalScore = 0;
 
     private ArrayList <Multiple_Choice_Maker> MultipleChoiceArray = new ArrayList<>();
 
@@ -164,5 +165,19 @@ public class Quiz_Maker {
             e.printStackTrace();
         }
 
+    }
+
+    /*
+    set the total score of the quiz
+     */
+    public void setTotalScore(int score){
+        this.TotalScore = score;
+    }
+
+    /*
+    Get the toatl score of the quiz
+     */
+    public int getTotalScore() {
+        return TotalScore;
     }
 }

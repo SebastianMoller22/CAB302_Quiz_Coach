@@ -20,6 +20,7 @@ public class Multiple_Choice_Maker {
     private String Question;
     private String Answer;
     private ArrayList<String> Options = new ArrayList<>();
+    private int Score = 0;
 
     /*
     The following are Json related to the multiple choice question
@@ -161,5 +162,13 @@ public class Multiple_Choice_Maker {
      */
     public ArrayList<String> getOptions() {
         return Options;
+    }
+
+    public int getScore() {
+        return Score;
+    }
+
+    public void setScore(int score){
+        this.Score = score;
     }
 }
