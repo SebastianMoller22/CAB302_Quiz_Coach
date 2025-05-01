@@ -26,8 +26,8 @@ public class SqliteQuizDAO implements IQuizDAO {
             // quizzes table
             stmt.execute("CREATE TABLE IF NOT EXISTS quizzes ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + "topic VARCHAR NOT NULL"
-                    + "difficulty DOUBLE NOT NULL,"
+                    + "topic VARCHAR NOT NULL,"
+                    + "difficulty DOUBLE NOT NULL"
                     + ");");
             // questions table
             stmt.execute("CREATE TABLE IF NOT EXISTS questions ("
