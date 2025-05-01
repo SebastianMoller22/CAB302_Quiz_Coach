@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.model.AuthenticationManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,8 @@ import java.io.IOException;
 
 public class HomeController {
 
+    @FXML
+    private AuthenticationManager authentication;
     @FXML
     private Button logOutButton;
     @FXML
@@ -22,6 +25,10 @@ public class HomeController {
     private Button profileButton;
     @FXML
     private Button settingsButton;
+
+    public void setAuthManager(AuthenticationManager authentication) {
+        this.authentication = authentication;
+    }
 
     @FXML
     private void initialize() {

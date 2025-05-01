@@ -33,6 +33,8 @@ public class loginController {
                 if (authentication.LoginAsUser(username, password)) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
                     Parent root = loader.load();
+                    HomeController homeController = loader.getController();
+                    homeController.setAuthManager(authentication);
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.setScene(new Scene(root, 800, 700));
                 }
