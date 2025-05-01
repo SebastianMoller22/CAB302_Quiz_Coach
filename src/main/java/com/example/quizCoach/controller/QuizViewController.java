@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.model.QuizManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class QuizViewController {
+
+    @FXML
+    private QuizManager quizManager;
 
     @FXML
     private VBox quizContainer;
