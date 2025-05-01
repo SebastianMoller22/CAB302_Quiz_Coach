@@ -26,8 +26,8 @@ public class SqliteQuizDAO implements IQuizDAO {
             // quizzes table
             stmt.execute("CREATE TABLE IF NOT EXISTS quizzes ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + "topic VARCHAR NOT NULL"
                     + "difficulty REAL NOT NULL,"
-                    + "allocated_time INTEGER NOT NULL"
                     + ");");
             // questions table
             stmt.execute("CREATE TABLE IF NOT EXISTS questions ("
@@ -51,10 +51,10 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     @Override
     public void addQuiz(Quiz quiz) {
-        String insertQuizSql = "INSERT INTO quizzes (difficulty, allocated_time) VALUES (?, ?);";
+        String insertQuizSql = "INSERT INTO quizzes (topic, difficulty) VALUES (?, ?);";
         try (PreparedStatement psQuiz = connection.prepareStatement(insertQuizSql, Statement.RETURN_GENERATED_KEYS)) {
-            psQuiz.setFloat(1, quiz.GetDifficulty());
-            psQuiz.setInt(2, quiz.GetAllocatedTime());
+            psQuiz.setString(1, quiz.GetTopic());
+            psQuiz.setFloat(2, quiz.GetDifficulty());
             psQuiz.executeUpdate();
             try (ResultSet rs = psQuiz.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -100,15 +100,15 @@ public class SqliteQuizDAO implements IQuizDAO {
     @Override
     public Quiz getQuiz(int id) {
         Quiz quiz = null;
-        String selectQuizSql = "SELECT difficulty, allocated_time FROM quizzes WHERE id = ?;";
+        String selectQuizSql = "SELECT topic, difficulty FROM quizzes WHERE id = ?;";
         try (PreparedStatement ps = connection.prepareStatement(selectQuizSql)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+                    String topic = rs.getString("topic");
                     float difficulty = rs.getFloat("difficulty");
-                    int allocatedTime = rs.getInt("allocated_time");
                     Question[] questions = loadQuestions(id);
-                    quiz = new Quiz(difficulty, questions, allocatedTime);
+                    quiz = new Quiz(topic, difficulty, questions);
                     quiz.SetQuizID(id);
                 }
             }
@@ -170,10 +170,10 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     @Override
     public void updateQuiz(Quiz quiz) {
-        String updateQuizSql = "UPDATE quizzes SET difficulty = ?, allocated_time = ? WHERE id = ?;";
+        String updateQuizSql = "UPDATE quizzes SET topic = ?, difficulty = ? WHERE id = ?;";
         try (PreparedStatement ps = connection.prepareStatement(updateQuizSql)) {
-            ps.setFloat(1, quiz.GetDifficulty());
-            ps.setInt(2, quiz.GetAllocatedTime());
+            ps.setString(1, quiz.GetTopic());
+            ps.setFloat(2, quiz.GetDifficulty());
             ps.setInt(3, quiz.GetQuizID());
             ps.executeUpdate();
             deleteQuestionsByQuizId(quiz.GetQuizID());
