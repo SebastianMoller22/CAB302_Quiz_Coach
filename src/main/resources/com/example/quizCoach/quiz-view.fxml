@@ -10,16 +10,16 @@
             style="-fx-background-color: linear-gradient(to right, #0f3c63, #7bb1d1);">
 
     <center>
-        <VBox alignment="CENTER" spacing="20" maxWidth="600">
+        <VBox alignment="TOP_CENTER" spacing="20" maxWidth="700">
             <padding>
                 <Insets top="40"/>
             </padding>
 
-            <Label text="📝 Your Quiz" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" />
+            <Label text="📝 Your Quiz"
+                   style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" />
 
-            <!-- Display area (could be used for question output, summary, etc.) -->
-            <TextArea fx:id="quizDisplayArea" editable="false" wrapText="true" prefHeight="300" prefWidth="600"
-                      style="-fx-font-size: 14px; -fx-background-radius: 10;" />
+            <!-- Container where quiz questions will be added -->
+            <VBox fx:id="quizContainer" spacing="20" />
 
             <Button fx:id="seeResultsButton" text="See Results" onAction="#handleSeeResults"
                     style="-fx-background-color: white; -fx-font-size: 16px; -fx-background-radius: 12;" />

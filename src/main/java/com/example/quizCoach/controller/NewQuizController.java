@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 
 import java.io.IOException;
 
@@ -23,9 +25,21 @@ public class NewQuizController {
     private Button createQuizButton;
 
     @FXML
+    private Spinner<Integer> questionCountSpinner;
+
+    @FXML
+    public void initialize() {
+        // Set up spinner with values from 1 to 20
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 5);
+        questionCountSpinner.setValueFactory(valueFactory);
+    }
+
+    @FXML
     private void handleCreateQuiz() {
         String topic = topicField.getText();
         int difficulty = (int) difficultySlider.getValue();
+        int numQuestions = questionCountSpinner.getValue();
+        System.out.println("Number of questions: " + numQuestions);
 
         System.out.println("Creating quiz on topic: " + topic + " with difficulty: " + difficulty);
 
