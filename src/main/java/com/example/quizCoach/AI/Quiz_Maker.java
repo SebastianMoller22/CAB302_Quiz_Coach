@@ -1,6 +1,9 @@
 package com.example.quizCoach.AI;
 
 
+import com.example.quizCoach.model.Option;
+import com.example.quizCoach.model.Question;
+import com.example.quizCoach.model.Quiz;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -179,5 +182,21 @@ public class Quiz_Maker {
      */
     public int getTotalScore() {
         return TotalScore;
+    }
+
+    public Quiz get_quiz() {
+        Question[] questions = new Question[NumMultipleChoice];
+        for (int question = 0; question < NumMultipleChoice; question++) {
+            Option[] options = new Option[4];
+            Option answer = new Option(getMultipleChoiceArray().get(question).getAnswer(), true);
+            options[3] = answer;
+            for (int option = 0; option < 3; option++) {
+                Option other_option = new Option(getMultipleChoiceArray().get(question).getOptions().get(option), false);
+                options[option] = other_option;
+            }
+            Question the_question = new Question(getMultipleChoiceArray().get(question).getQuestion(),options);
+            questions[question] = the_question;
+        }
+        return new Quiz(Topic, Skill_level, questions);
     }
 }
