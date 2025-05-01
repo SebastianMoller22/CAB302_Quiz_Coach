@@ -1,6 +1,5 @@
 package com.example.quizCoach.controller;
 
-import com.example.quizCoach.model.AuthenticationManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +10,7 @@ import javafx.scene.control.*;
 
 
 public class loginController {
-    @FXML private AuthenticationManager authentication = new AuthenticationManager();
+
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Button loginButton;
@@ -24,16 +23,15 @@ public class loginController {
             String username = usernameField.getText();
             String password = passwordField.getText();
             // TODO: Add your login validation logic
+            System.out.println("Logging in: " + username);
+
             try {
-                if (authentication.LoginAsUser(username, password)) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
-                    Parent root = loader.load();
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    stage.setScene(new Scene(root, 800, 700));
-                } else {
-                }
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 700));
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         });
 

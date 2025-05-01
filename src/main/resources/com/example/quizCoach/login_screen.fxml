@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.quizCoach.controller.loginController"
-            fx:id="mainLayout" style="-fx-background-color: lightblue;" prefWidth="800.0" prefHeight="700.0">
+            fx:id="mainLayout" style="-fx-background-color: lightblue;" prefWidth="1000" prefHeight="600">
 
     <!-- Header Section -->
     <top>

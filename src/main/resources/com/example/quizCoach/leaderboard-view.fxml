@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:controller="com.example.quizCoach.controller.LeaderboardController"
-            prefHeight="400" prefWidth="640"
+            prefWidth="1000" prefHeight="600"
             style="-fx-background-color: linear-gradient(to right, #0d2647, #14375c, #165e8c, #6090ab, #a8c2d6);"
             xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
 
