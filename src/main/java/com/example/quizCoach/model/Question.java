@@ -16,4 +16,12 @@ public class Question {
     public Option[] GetOptions() {
         return this.options;
     }
+
+    public String[] GetOptionTexts() {
+        String[] optiontexts = new String[options.length];
+        for (int i = 0; i < options.length; i++) {
+            optiontexts[i] = options[i].GetOptionText();
+        }
+        return optiontexts;
+    }
 }
