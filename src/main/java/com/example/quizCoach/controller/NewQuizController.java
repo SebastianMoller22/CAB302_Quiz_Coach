@@ -49,6 +49,7 @@ public class NewQuizController {
         System.out.println("Creating quiz on topic: " + topic + " with difficulty: " + difficulty);
 
         try {
+            quizManager.MakeQuiz(topic, difficulty, numQuestions);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/quiz-view.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) createQuizButton.getScene().getWindow();
