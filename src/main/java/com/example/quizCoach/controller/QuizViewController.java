@@ -2,7 +2,9 @@ package com.example.quizCoach.controller;
 
 import com.example.quizCoach.model.Option;
 import com.example.quizCoach.model.Question;
+import com.example.quizCoach.model.Quiz;
 import com.example.quizCoach.model.QuizManager;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +21,7 @@ import java.io.IOException;
 public class QuizViewController {
 
     @FXML
-    private QuizManager quizManager;
+    private Quiz quiz;
 
     @FXML
     private VBox quizContainer;
@@ -27,16 +29,19 @@ public class QuizViewController {
     @FXML
     private Button seeResultsButton;
 
-    public void setQuizManager(QuizManager quizManager) {
-        this.quizManager = quizManager;
+    public void setQuizManager(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     @FXML
     public void initialize() {
         // Sample questions (could be AI-generated later)
-        for (Question question: quizManager.getActivequiz().GetQuestions()) {
-            addMultipleChoiceQuestion(question.GetQuestionText(), question.GetOptionTexts());
-        }
+        Platform.runLater(() -> {
+            for (Question question: quiz.GetQuestions()) {
+                addMultipleChoiceQuestion(question.GetQuestionText(), question.GetOptionTexts());
+            }
+        });
+
     }
 
     private void addMultipleChoiceQuestion(String questionText, String[] options) {

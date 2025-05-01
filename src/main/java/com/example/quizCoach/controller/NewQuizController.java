@@ -58,7 +58,7 @@ public class NewQuizController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/quiz-view.fxml"));
             Parent root = loader.load();
             QuizViewController quizViewController = loader.getController();
-            quizViewController.setQuizManager(quizManager);
+            quizViewController.setQuizManager(quizManager.getActivequiz());
             Stage stage = (Stage) createQuizButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException ex) {
