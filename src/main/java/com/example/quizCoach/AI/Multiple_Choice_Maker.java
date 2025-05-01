@@ -45,7 +45,7 @@ public class Multiple_Choice_Maker {
         The prompt give to the AI to create the multiple choice question in a consistent formate
         Takes in the topic, and skill level to change the question topic and difficulty
          */
-        String prompt = String.format("Write a multiple Choice question about %s, with 4 options. The question should be written in the format Q:A:O where 'Q' is the question, 'A' is the answer and 'O' are the other options, nothing else should be written. The question difficulty should be based on the number %d, with 1 being easy and 100 being extremely difficult.",topic, skill_level);
+        String prompt = String.format("Write a multiple Choice question about %s, with 4 options. The question should be written in the format Q:A:O where 'Q' is the question, 'A' is the answer and 'O' are the other options, nothing else should be written. The question difficulty should be based on the number %f, with 1 being easy and 100 being extremely difficult.",topic, skill_level);
 
         /*
         Collects AI answer
