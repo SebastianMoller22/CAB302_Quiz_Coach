@@ -38,7 +38,7 @@ public class SqliteUserDAO implements IUserDAO {
         // Create a table if no tables exist
         try {
             Statement statement = connection.createStatement();
-            String query = "CREATE TABLE IF NOT EXISTS user ("
+            String query = "CREATE TABLE IF NOT EXISTS users ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "username VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL,"
@@ -53,10 +53,10 @@ public class SqliteUserDAO implements IUserDAO {
     @Override
     public void addUser(User user) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (firstName, password, email) VALUES (?, ?, ?);");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (username, password, email) VALUES (?, ?, ?);");
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
-            statement.setString(4, user.getEmail());
+            statement.setString(3, user.getEmail());
             statement.executeUpdate();
             // Set the id of the new user
             ResultSet generaterdKeys = statement.getGeneratedKeys();
@@ -74,8 +74,8 @@ public class SqliteUserDAO implements IUserDAO {
             PreparedStatement statement = connection.prepareStatement("UPDATE users SET username = ?, password = ?, email = ? WHERE id = ?");
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
-            statement.setString(4, user.getEmail());
-            statement.setInt(5, user.getId());
+            statement.setString(3, user.getEmail());
+            statement.setInt(4, user.getId());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
