@@ -1,23 +1,20 @@
 package com.example.quizCoach;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import com.example.quizCoach.AI.Multiple_Choice_Maker;
+import com.example.quizCoach.AI.Quiz_Maker;
 
-import java.util.Objects;
 
-public class MainApplication extends Application {
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/quizCoach/login_screen.fxml")));
-        primaryStage.setTitle("Login Screen");
-        primaryStage.setScene(new Scene(root, 800, 700));
-        primaryStage.show();
-    }
+public class MainApplication {
+
 
     public static void main(String[] args) {
-        launch(args);
+
+        Quiz_Maker Test = new Quiz_Maker("sharks", 100, 2, 0);
+        System.out.println(Test.getMultipleChoiceArray().get(0).getQuestion());
+        System.out.println(Test.getMultipleChoiceArray().get(0).getAnswer());
+        System.out.println(Test.getMultipleChoiceArray().get(0).getOptions().get(0));
+        Test.UploadJSON();
     }
+
+
 }
