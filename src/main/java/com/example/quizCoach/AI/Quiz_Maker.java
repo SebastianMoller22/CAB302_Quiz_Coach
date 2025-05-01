@@ -31,7 +31,7 @@ public class Quiz_Maker {
     MultipleChoiceArray: A created list of multiple chose question that can be easily accessed
      */
     private String Topic;
-    private int Skill_level;
+    private double Skill_level;
     private int NumMultipleChoice;
     private int NumShortResponse;
     private int TotalScore = 0;
@@ -53,7 +53,7 @@ public class Quiz_Maker {
     private ArrayNode ShortResponse = objectMapper.createArrayNode();
 
 
-    public Quiz_Maker(String topic, int skill_level, int numMultipleChoice, int numShortResponse){
+    public Quiz_Maker(String topic, double skill_level, int numMultipleChoice, int numShortResponse){
         /*
         Store all inputs into their respective variables
          */
@@ -100,7 +100,7 @@ public class Quiz_Maker {
 
     }
 
-    private ArrayNode MakeMutipleChoice(String topic, int skill_level, int numMultipleChoice){
+    private ArrayNode MakeMutipleChoice(String topic, double skill_level, int numMultipleChoice){
 
         if (Testvar == true) {
             /*
@@ -131,7 +131,7 @@ public class Quiz_Maker {
     }
 
 
-    private ArrayNode MakeShortResponse(String topic, int skill_level, int numShortResponse){
+    private ArrayNode MakeShortResponse(String topic, double skill_level, int numShortResponse){
         /*
         (yet to be made)
          */
@@ -143,7 +143,7 @@ public class Quiz_Maker {
      */
     public String getTopic(){return Topic;}
 
-    public int getSkill_level(){return Skill_level;}
+    public double getSkill_level(){return Skill_level;}
 
     public int getNumMultipleChoice(){return NumMultipleChoice;}
 

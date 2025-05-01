@@ -3,10 +3,10 @@ package com.example.quizCoach.model;
 public class Quiz {
     private int quizID;
     private String topic;
-    private float difficulty;
+    private double difficulty;
     private Question[] questions;
 
-    public Quiz(String topic, float difficulty, Question[] questions) {
+    public Quiz(String topic, double difficulty, Question[] questions) {
         this.topic = topic;
         this.difficulty = difficulty;
         this.questions = questions;
@@ -22,7 +22,7 @@ public class Quiz {
 
     public String GetTopic() {return topic;}
 
-    public float GetDifficulty() {
+    public double GetDifficulty() {
         return difficulty;
     }
 
