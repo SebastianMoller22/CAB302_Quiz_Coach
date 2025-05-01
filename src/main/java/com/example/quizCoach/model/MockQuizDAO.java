@@ -26,7 +26,7 @@ public class MockQuizDAO implements IQuizDAO {
                         new Option("6", false)
                 }
         );
-        Quiz algebraQuiz = new Quiz("Basic Algebra", 1.0f, new Question[]{q1, q2});
+        Quiz algebraQuiz = new Quiz("Basic Algebra", 1, new Question[]{q1, q2});
         addQuiz(algebraQuiz);
 
         // Sample Quiz 2: Multiplication Tables
@@ -44,7 +44,7 @@ public class MockQuizDAO implements IQuizDAO {
                         new Option("40", false)
                 }
         );
-        Quiz multiplicationQuiz = new Quiz("Multiplication Tables", 1.2f, new Question[]{q3, q4});
+        Quiz multiplicationQuiz = new Quiz("Multiplication Tables", 0.5, new Question[]{q3, q4});
         addQuiz(multiplicationQuiz);
     }
 
