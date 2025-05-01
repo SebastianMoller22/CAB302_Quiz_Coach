@@ -1,5 +1,7 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.model.Option;
+import com.example.quizCoach.model.Question;
 import com.example.quizCoach.model.QuizManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,31 +27,16 @@ public class QuizViewController {
     @FXML
     private Button seeResultsButton;
 
-    public void setAuthManager(QuizManager quizManager) {
+    public void setQuizManager(QuizManager quizManager) {
         this.quizManager = quizManager;
     }
 
     @FXML
     public void initialize() {
         // Sample questions (could be AI-generated later)
-        addMultipleChoiceQuestion("What is the capital of France?",
-                new String[]{"Berlin", "Madrid", "Paris", "London"});
-
-        addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
-                new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
-
-        addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
-                new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
-
-        addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
-                new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
-
-        addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
-                new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
-
-        addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
-                new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
-
+        for (Question question: quizManager.getActivequiz().GetQuestions()) {
+            addMultipleChoiceQuestion(question.GetQuestionText(), question.GetOptionTexts());
+        }
     }
 
     private void addMultipleChoiceQuestion(String questionText, String[] options) {
