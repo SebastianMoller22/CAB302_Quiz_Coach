@@ -1,8 +1,17 @@
 package com.example.quizCoach.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class QuizViewController {
 
@@ -20,6 +29,19 @@ public class QuizViewController {
 
         addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
                 new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
+
+        addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
+                new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
+
+        addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
+                new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
+
+        addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
+                new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
+
+        addMultipleChoiceQuestion("Which planet is known as the Red Planet?",
+                new String[]{"Earth", "Mars", "Jupiter", "Saturn"});
+
     }
 
     private void addMultipleChoiceQuestion(String questionText, String[] options) {
@@ -42,7 +64,18 @@ public class QuizViewController {
 
     @FXML
     private void handleSeeResults() {
-        System.out.println("See Results button clicked.");
-        // TODO: Evaluate selections or navigate to results page
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/results-view.fxml"));
+            Parent root = loader.load();
+
+            // Pass the results string to the results page
+            ResultsController controller = loader.getController();
+            controller.setResultsText("✅ You got 2/2 correct!\nExcellent performance.");
+
+            Stage stage = (Stage) seeResultsButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

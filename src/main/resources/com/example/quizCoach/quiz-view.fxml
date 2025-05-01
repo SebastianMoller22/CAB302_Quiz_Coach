@@ -18,8 +18,16 @@
             <Label text="📝 Your Quiz"
                    style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" />
 
-            <!-- Container where quiz questions will be added -->
-            <VBox fx:id="quizContainer" spacing="20" />
+            <!-- Scrollable container for quiz questions -->
+            <ScrollPane fitToWidth="true" prefHeight="400" style="-fx-background: transparent;">
+                <content>
+                    <VBox fx:id="quizContainer" spacing="20">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                    </VBox>
+                </content>
+            </ScrollPane>
 
             <Button fx:id="seeResultsButton" text="See Results" onAction="#handleSeeResults"
                     style="-fx-background-color: white; -fx-font-size: 16px; -fx-background-radius: 12;" />
