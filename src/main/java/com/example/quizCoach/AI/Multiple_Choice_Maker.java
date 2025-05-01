@@ -34,7 +34,7 @@ public class Multiple_Choice_Maker {
     private ArrayNode Array = objectMapper.createArrayNode();
 
 
-    public Multiple_Choice_Maker(String topic, int skill_level){
+    public Multiple_Choice_Maker(String topic, double skill_level){
 
         /*
         Variables required to connect to the AI
