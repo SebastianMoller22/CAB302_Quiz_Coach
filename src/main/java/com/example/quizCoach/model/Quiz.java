@@ -2,6 +2,7 @@ package com.example.quizCoach.model;
 
 public class Quiz {
     private int quizID;
+    private String topic;
     private float difficulty;
     private Question[] questions;
     private int allocatedTime;
