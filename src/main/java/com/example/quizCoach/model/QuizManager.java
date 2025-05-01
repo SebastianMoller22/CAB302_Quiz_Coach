@@ -17,8 +17,9 @@ public class QuizManager {
         activequiz = quizMaker.get_quiz();
     }
 
-    private void shuffleQuestion(Option[] options)
+    public Option[] shuffleQuestion(Option[] options)
     {
+        Option[] new_option = options;
         Random rnd = new Random();
         for (int i = options.length - 1; i > 0; i--)
         {
@@ -28,5 +29,8 @@ public class QuizManager {
             options[index] = options[i];
             options[i] = a;
         }
+        return new_option;
     }
+
+    public Quiz getActivequiz() {return activequiz;}
 }
