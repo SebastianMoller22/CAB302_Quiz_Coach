@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:controller="com.example.quizCoach.controller.LeaderboardController"
+            prefHeight="400" prefWidth="640"
+            style="-fx-background-color: linear-gradient(to right, #0d2647, #14375c, #165e8c, #6090ab, #a8c2d6);"
+            xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+
+    <!-- Top bar with title and icon buttons -->
+    <top>
+        <AnchorPane prefHeight="60.0">
+            <Label layoutX="20.0" layoutY="10.0"
+                   style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"
+                   text="🎓 IntelliTutor" />
+
+            <HBox spacing="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                <Button fx:id="backButton" text="⬅️"
+                        onAction="#handleBackButton"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px;" />
+                <Button text="👤"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px;" />
+                <Button text="⚙️"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px;" />
+            </HBox>
+        </AnchorPane>
+    </top>
+
+    <!-- Center content -->
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-padding: 30;">
+            <Label text="Top Scores"
+                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+
+            <!-- Leaderboard list -->
+            <ListView fx:id="leaderboardListView" prefWidth="400" prefHeight="120"
+                      style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-font-size: 14px;" />
+
+            <!-- Performance graph -->
+            <BarChart fx:id="performanceChart" prefHeight="200" prefWidth="500"
+                      title="Performance Overview" legendVisible="false"
+                      style="-fx-background-color: transparent;">
+                <xAxis>
+                    <CategoryAxis label="User" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Score" />
+                </yAxis>
+            </BarChart>
+        </VBox>
+    </center>
+
+</BorderPane>

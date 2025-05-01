@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.quizCoach.HomePage"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.quizCoach.controller.HomeController"
+            prefWidth="1000" prefHeight="600" style="-fx-background-color: linear-gradient(to right, #0f3c63, #7bb1d1);">
 
-</AnchorPane>
+    <!-- Top Header -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <!-- Left Side: Logo -->
+            <Label text="🎓 IntelliTutor" style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;" />
+
+            <Pane HBox.hgrow="ALWAYS" />
+
+            <!-- Right Side: Icons -->
+            <HBox spacing="15" alignment="CENTER_RIGHT">
+                <Label text="👤" style="-fx-font-size: 20;" />
+                <Label text="⚙" style="-fx-font-size: 20;" />
+                <Label text="📱" style="-fx-font-size: 20;" />
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- Center Buttons -->
+    <center>
+        <VBox alignment="CENTER" spacing="25">
+            <Button fx:id="startQuizButton" text="Start New Quiz" prefWidth="250"
+                    style="-fx-background-color: white; -fx-font-size: 18; -fx-background-radius: 25;" />
+            <Button fx:id="leaderboardButton" text="Leaderboard" onAction="#handleLeaderboard" prefWidth="250"
+                    style="-fx-background-color: white; -fx-font-size: 18; -fx-background-radius: 25;" />
+            <Button fx:id="pastQuizzesButton" text="Past Quizzes" prefWidth="250"
+                    style="-fx-background-color: white; -fx-font-size: 18; -fx-background-radius: 25;" />
+            <Button fx:id="logOutButton" text="Log Out" onAction="#handleLeaderboard" prefWidth="250"
+                    style="-fx-background-color: white; -fx-font-size: 18; -fx-background-radius: 25;" />
+        </VBox>
+    </center>
+</BorderPane>
