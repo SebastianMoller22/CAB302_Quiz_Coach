@@ -32,11 +32,15 @@
     <!-- Center Buttons -->
     <center>
         <VBox alignment="CENTER" spacing="25">
-            <Button fx:id="startQuizButton" text="Start New Quiz" prefWidth="250"
+            <Button fx:id="startNewQuizButton" text="Start New Quiz"
+                    onAction="#handleStartNewQuiz"
+                    prefWidth="250"
                     style="-fx-background-color: white; -fx-font-size: 18; -fx-background-radius: 25;" />
             <Button fx:id="leaderboardButton" text="Leaderboard" onAction="#handleLeaderboard" prefWidth="250"
                     style="-fx-background-color: white; -fx-font-size: 18; -fx-background-radius: 25;" />
             <Button fx:id="pastQuizzesButton" text="Past Quizzes" prefWidth="250"
+                    style="-fx-background-color: white; -fx-font-size: 18; -fx-background-radius: 25;" />
+            <Button fx:id="logOutButton" text="Log Out" onAction="#handleLogOut" prefWidth="250"
                     style="-fx-background-color: white; -fx-font-size: 18; -fx-background-radius: 25;" />
         </VBox>
     </center>

@@ -1,16 +1,17 @@
 package com.example.quizCoach.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+
 
 import java.io.IOException;
 
@@ -34,6 +35,7 @@ public class LeaderboardController {
                 "Diana - 85 pts"
         );
 
+        // Set up data
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.getData().add(new XYChart.Data<>("Test 1", 95));
         series.getData().add(new XYChart.Data<>("Test 2", 90));
@@ -41,6 +43,21 @@ public class LeaderboardController {
         series.getData().add(new XYChart.Data<>("Test 4", 85));
 
         performanceChart.getData().add(series);
+
+        // Set bar fill color (optional)
+        for (XYChart.Data<String, Number> data : series.getData()) {
+            data.getNode().setStyle("-fx-bar-fill: white;");
+        }
+
+        // Set axis label color to white (your main goal)
+        CategoryAxis xAxis = (CategoryAxis) performanceChart.getXAxis();
+        NumberAxis yAxis = (NumberAxis) performanceChart.getYAxis();
+
+        xAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
+        yAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
+
+        performanceChart.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent;");
+
     }
 
     @FXML
