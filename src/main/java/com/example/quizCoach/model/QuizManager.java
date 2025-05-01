@@ -17,20 +17,5 @@ public class QuizManager {
         activequiz = quizMaker.get_quiz();
     }
 
-    public Option[] shuffleQuestion(Option[] options)
-    {
-        Option[] new_option = options;
-        Random rnd = new Random();
-        for (int i = options.length - 1; i > 0; i--)
-        {
-            int index = rnd.nextInt(i + 1);
-            // Simple swap
-            Option a = options[index];
-            options[index] = options[i];
-            options[i] = a;
-        }
-        return new_option;
-    }
-
     public Quiz getActivequiz() {return activequiz;}
 }
