@@ -31,6 +31,11 @@ public class NewQuizController {
     @FXML
     private Spinner<Integer> questionCountSpinner;
 
+    public void setAuthManager(QuizManager quizManager) {
+        this.quizManager = quizManager;
+    }
+
+
     @FXML
     public void initialize() {
         // Set up spinner with values from 1 to 20
@@ -52,6 +57,8 @@ public class NewQuizController {
             quizManager.MakeQuiz(topic, difficulty, numQuestions);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/quiz-view.fxml"));
             Parent root = loader.load();
+            QuizViewController quizViewController = loader.getController();
+            quizViewController.setAuthManager(quizManager);
             Stage stage = (Stage) createQuizButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException ex) {

@@ -25,6 +25,10 @@ public class QuizViewController {
     @FXML
     private Button seeResultsButton;
 
+    public void setAuthManager(QuizManager quizManager) {
+        this.quizManager = quizManager;
+    }
+
     @FXML
     public void initialize() {
         // Sample questions (could be AI-generated later)
