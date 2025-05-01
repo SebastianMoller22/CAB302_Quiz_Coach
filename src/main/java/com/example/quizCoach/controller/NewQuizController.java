@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.model.QuizManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,9 @@ import javafx.scene.control.SpinnerValueFactory;
 import java.io.IOException;
 
 public class NewQuizController {
+
+    @FXML
+    private QuizManager quizManager;
 
     @FXML
     private TextField topicField;
@@ -32,6 +36,7 @@ public class NewQuizController {
         // Set up spinner with values from 1 to 20
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 5);
         questionCountSpinner.setValueFactory(valueFactory);
+        quizManager = new QuizManager();
     }
 
     @FXML
@@ -52,4 +57,6 @@ public class NewQuizController {
             ex.printStackTrace();
         }
     }
+
+    public QuizManager getQuizManager() {return quizManager;}
 }
