@@ -1,4 +1,4 @@
-package com.example.quizCoach.model;
+package com.example.quizCoach.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

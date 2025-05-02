@@ -1,4 +1,7 @@
-package com.example.quizCoach.model;
+package com.example.quizCoach.authentication;
+
+import com.example.quizCoach.database.SqliteUserDAO;
+import com.example.quizCoach.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

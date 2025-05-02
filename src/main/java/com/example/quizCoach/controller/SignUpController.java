@@ -1,6 +1,6 @@
 package com.example.quizCoach.controller;
 
-import com.example.quizCoach.model.AuthenticationManager;
+import com.example.quizCoach.authentication.AuthenticationManager;
 import com.example.quizCoach.util.ValidationUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

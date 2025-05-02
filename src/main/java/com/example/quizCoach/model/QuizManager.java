@@ -1,6 +1,7 @@
 package com.example.quizCoach.model;
 
 import com.example.quizCoach.AI.Quiz_Maker;
+import com.example.quizCoach.database.SqliteQuizDAO;
 
 import java.util.Random;
 

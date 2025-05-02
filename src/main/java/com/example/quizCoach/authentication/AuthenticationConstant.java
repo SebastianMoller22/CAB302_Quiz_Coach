@@ -1,4 +1,4 @@
-package com.example.quizCoach.model;
+package com.example.quizCoach.authentication;
 
 /**
  * Constants for AuthenticationManager class

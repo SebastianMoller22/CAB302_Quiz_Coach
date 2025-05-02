@@ -1,4 +1,6 @@
-package com.example.quizCoach.model;
+package com.example.quizCoach.database;
+
+import com.example.quizCoach.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
