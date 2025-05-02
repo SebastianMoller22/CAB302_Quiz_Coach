@@ -4,7 +4,6 @@ package com.example.quizCoach.AI;
 import com.example.quizCoach.model.Option;
 import com.example.quizCoach.model.Question;
 import com.example.quizCoach.model.Quiz;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -19,13 +18,13 @@ public class Quiz_Maker {
     /*
     test variable, when true will go through a predetermined scenario to allow for testing
      */
-    private boolean Testvar = false;
+    private boolean TestVar = false;
 
     /*
     The following are variables related to the quiz
     --------------------------------------------------------------------------------------------------------------------
     Topic: Is the inputted 'topic' that the AI will create the question about
-    Skill_level: Is the inputted 'skill level' that teh question the AI creates will scale the difficulty too
+    Skill_level: Is the inputted 'skill level' that the question the AI creates will scale the difficulty too
     NumMultipleChoice: The inputted number of multiple choice questions to be created
     NumShortResponse: The inputted number of short response questions to be created
     MultipleChoiceArray: A created list of multiple chose question that can be easily accessed
@@ -42,7 +41,7 @@ public class Quiz_Maker {
     The following is the Json related variables
     --------------------------------------------------------------------------------------------------------------------
     objectMapper: Object mapper that helps create all the following variables
-    JsonNode: The Json file node that will be used to store and create all the Json file with all the previous varables
+    JsonNode: The Json file node that will be used to store and create all the Json file with all the previous variables
     MultipleChoiceList: An array node of the multiple choice questions, the same as MultipleChoiceArray
     ShortResponse: An array node of the short response questions, the same as (yet to be made)
      */
@@ -68,7 +67,7 @@ public class Quiz_Maker {
          */
         this.JsonNode.put("Topic", Topic);
         JsonNode.put("Number of MultipleChoice", NumMultipleChoice);
-        JsonNode.put("Multiple Choice Questions", MakeMutipleChoice(Topic, Skill_level, NumMultipleChoice));
+        JsonNode.put("Multiple Choice Questions", MakeMultipleChoice(Topic, Skill_level, NumMultipleChoice));
         JsonNode.put("Number of Short Response", NumShortResponse);
         JsonNode.put("Short Response Questions", MakeShortResponse(Topic, Skill_level, NumShortResponse));
 
@@ -77,9 +76,9 @@ public class Quiz_Maker {
     public Quiz_Maker(boolean TestVar){
 
         /*
-        Set Testvar to true no matter what the input is.
+        Set TestVar to true no matter what the input is.
          */
-        this.Testvar = true;
+        this.TestVar = true;
         /*
         Store all inputs into their respective variables
          */
@@ -94,15 +93,15 @@ public class Quiz_Maker {
          */
         this.JsonNode.put("Topic", Topic);
         JsonNode.put("Number of MultipleChoice", NumMultipleChoice);
-        JsonNode.put("Multiple Choice Questions", MakeMutipleChoice(Topic, Skill_level, NumMultipleChoice));
+        JsonNode.put("Multiple Choice Questions", MakeMultipleChoice(Topic, Skill_level, NumMultipleChoice));
         JsonNode.put("Number of Short Response", NumShortResponse);
         JsonNode.put("Short Response Questions", MakeShortResponse(Topic, Skill_level, NumShortResponse));
 
     }
 
-    private ArrayNode MakeMutipleChoice(String topic, int skill_level, int numMultipleChoice){
+    private ArrayNode MakeMultipleChoice(String topic, int skill_level, int numMultipleChoice){
 
-        if (Testvar == true) {
+        if (TestVar) {
             /*
             IF in test mode run through predetermined prompt
              */
@@ -178,7 +177,7 @@ public class Quiz_Maker {
     }
 
     /*
-    Get the toatl score of the quiz
+    Get the total score of the quiz
      */
     public int getTotalScore() {
         return TotalScore;
