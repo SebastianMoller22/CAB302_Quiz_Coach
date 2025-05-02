@@ -20,7 +20,8 @@ import java.io.IOException;
 
 public class QuizViewController {
 
-    @FXML
+    private int mark;
+
     private Quiz quiz;
 
     @FXML
