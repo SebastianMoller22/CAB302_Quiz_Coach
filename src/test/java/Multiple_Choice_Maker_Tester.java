@@ -1,5 +1,3 @@
-package Java;
-
 import com.example.quizCoach.AI.Multiple_Choice_Maker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
