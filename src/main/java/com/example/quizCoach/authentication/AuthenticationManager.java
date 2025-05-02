@@ -38,7 +38,7 @@ public class AuthenticationManager {
      * set the active user to an user
      * @param user the user you want to set
      */
-    public void setActiveUser(User user) {this.activeUser = user;}
+    private void setActiveUser(User user) {this.activeUser = user;}
 
     /**
      * for validating users' inputs
