@@ -28,7 +28,12 @@
             <TextField fx:id="usernameField" promptText="USERNAME" style="-fx-background-radius: 10; -fx-padding: 10;" />
             <TextField fx:id="emailField" promptText="EMAIL" style="-fx-background-radius: 10; -fx-padding: 10;" />
             <PasswordField fx:id="passwordField" promptText="PASSWORD" style="-fx-background-radius: 10; -fx-padding: 10;" />
-            <Button fx:id="signUpButton" text="SIGN UP" style="-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;" />
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="signUpButton" text="SIGN UP" style="-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;" />
+                <Label fx:id="errorMessage" text="" textFill="red" visible="false" wrapText="true" maxWidth="300" />
+            </HBox>
+
             <Hyperlink fx:id="existingAccountLink" text="ALREADY HAVE AN ACCOUNT?" />
         </VBox>
     </center>
