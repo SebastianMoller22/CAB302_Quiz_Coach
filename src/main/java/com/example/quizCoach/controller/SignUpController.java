@@ -36,6 +36,14 @@ public class SignUpController {
             String email = emailField.getText();
             String password = passwordField.getText();
 
+            // Validate username format
+            if (!ValidationUtils.isValidUsername(username)) {
+                errorMessage.setText("🚫 Username must start with a letter, be 3–20 characters long, "
+                        + "and contain only letters, digits, or underscores.");
+                errorMessage.setVisible(true);
+                return;
+            }
+
             // Validate email format
             if (!ValidationUtils.isValidEmail(email)) {
                 errorMessage.setText("🚫 Please enter a valid email address.");
@@ -46,7 +54,8 @@ public class SignUpController {
             // Validate password strength
             if (!ValidationUtils.isValidPassword(password)) {
                 errorMessage.setText(
-                        "🚫 Password must be at least 8 characters long and include uppercase, lowercase, number & special character."
+                        "🚫 Password must be at least 8 characters long and include uppercase, lowercase, "
+                        + "number & special character."
                 );
                 errorMessage.setVisible(true);
                 return;
@@ -55,7 +64,8 @@ public class SignUpController {
             // Attempt signup
             try {
                 authentication.Signup(username, email, password);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                        "/com/example/quizCoach/login_screen.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) signUpButton.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
@@ -67,7 +77,8 @@ public class SignUpController {
 
         existingAccountLink.setOnAction(e -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                        "/com/example/quizCoach/login_screen.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) existingAccountLink.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
