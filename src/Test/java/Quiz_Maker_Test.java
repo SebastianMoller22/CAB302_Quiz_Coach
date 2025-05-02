@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Quiz_Maker_Tester {
+public class Quiz_Maker_Test {
 
     private static final String TOPIC = "Sharks";
     private static final int SKILL_LEVEL = 1;

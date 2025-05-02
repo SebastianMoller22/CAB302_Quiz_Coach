@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class Multiple_Choice_Maker_Tester {
+public class Multiple_Choice_Maker_Test {
 
     private static final String QUESTION = "Which of the following is a primary reason sharks are considered apex predators in most marine ecosystems?";
     private static final String ANSWER = "They have few natural predators themselves.";
