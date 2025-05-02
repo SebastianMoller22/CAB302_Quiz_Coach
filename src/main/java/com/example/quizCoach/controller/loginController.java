@@ -61,7 +61,7 @@ public class loginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/sign_up_screen.fxml"));
                 Parent root = loader.load();
                 SignUpController signUpController = loader.getController();
-                signUpController.setAuthManager(new AuthenticationManager());
+                signUpController.setAuthManager(authentication);
                 Stage stage = (Stage) createAccountLink.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
             } catch (IOException ex) {
