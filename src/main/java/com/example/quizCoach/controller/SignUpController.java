@@ -32,26 +32,22 @@ public class SignUpController {
                 authentication.Signup(username, email, password);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
                 Parent root = loader.load();
+                loginController LoginController = loader.getController();
+                LoginController.setAuthManager(authentication);
                 Stage stage = (Stage) signUpButton.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
             System.out.println("Signed up as: " + usernameField.getText());
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) signUpButton.getScene().getWindow();
-                stage.setScene(new Scene(root, 800, 700));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
         });
 
         existingAccountLink.setOnAction(e -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
                 Parent root = loader.load();
+                loginController LoginController = loader.getController();
+                LoginController.setAuthManager(authentication);
                 Stage stage = (Stage) existingAccountLink.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
             } catch (IOException ex) {
