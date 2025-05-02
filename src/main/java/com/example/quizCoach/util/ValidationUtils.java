@@ -3,11 +3,14 @@ package com.example.quizCoach.util;
 import java.util.regex.Pattern;
 
 /**
- * Utility class for validating email addresses and password strength.
+ * Utility class for validating usernames, email addresses and password strength.
  */
 public class ValidationUtils {
-    // Basic email pattern: letters, digits, plus, underscore, dot, hyphen before '@';
-    // domain part allows letters, digits, hyphens, and dots.
+    // USERNAME: must start with a letter, 3–20 chars total, letters/digits/underscores only
+    private static final String USERNAME_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{2,19}$";
+    private static final Pattern USERNAME_PATTERN = Pattern.compile(USERNAME_REGEX);
+
+    // Basic email pattern
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
@@ -16,6 +19,15 @@ public class ValidationUtils {
     private static final String PASSWORD_REGEX =
             "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$";
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
+
+    /** Returns true if username matches the required pattern.
+     *
+     * @param username the username to validate
+     * @return true if username is non-null and matches pattern, false otherwise
+     * */
+    public static boolean isValidUsername(String username) {
+        return username != null && USERNAME_PATTERN.matcher(username).matches();
+    }
 
     /**
      * Validates whether the given email string matches a basic email pattern.
