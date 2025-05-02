@@ -11,6 +11,15 @@ public class Question {
         this.options = options;
     }
 
+    public  String GetCorrectOptionText() {
+        for (Option option : options) {
+            if (option.IsOptionCorrect()) {
+                return option.GetOptionText();
+            }
+        }
+        return "";
+    }
+
     public String GetQuestionText() {
         return this.questionText;
     }
