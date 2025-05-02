@@ -64,6 +64,8 @@ public class HomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
             Parent root = loader.load();
+            loginController LoginController = loader.getController();
+            LoginController.setAuthManager(authentication);
             Stage stage = (Stage) logOutButton.getScene().getWindow();
             stage.setScene(new Scene(root, 800, 700));
         } catch (IOException ex) {
