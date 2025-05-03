@@ -17,6 +17,7 @@ public class loginController {
     @FXML private Button loginButton;
     @FXML private Hyperlink forgotPasswordLink;
     @FXML private Hyperlink createAccountLink;
+    @FXML private Label errorMessage;
 
     public void setAuthManager(AuthenticationManager authentication) {
         this.authentication = authentication;
@@ -27,21 +28,21 @@ public class loginController {
         loginButton.setOnAction(e -> {
             String username = usernameField.getText();
             String password = passwordField.getText();
+            errorMessage.setText("");
+            errorMessage.setVisible(false);
             // TODO: Add your login validation logic
 
             try {
-                if (authentication.LoginAsUser(username, password)) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
-                    Parent root = loader.load();
-                    HomeController homeController = loader.getController();
-                    homeController.setAuthManager(authentication);
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    stage.setScene(new Scene(root, 800, 700));
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
+                authentication.LoginAsUser(username, password);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
+                Parent root = loader.load();
+                HomeController homeController = loader.getController();
+                homeController.setAuthManager(authentication);
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 700));
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                errorMessage.setText("⚠️ Login failed: " + ex.getMessage());
+                errorMessage.setVisible(true);
             }
         });
 

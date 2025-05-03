@@ -30,7 +30,10 @@
             <Text text="LOG IN" style="-fx-font-family: Arial; -fx-font-size: 24; -fx-fill: black;" />
             <TextField fx:id="usernameField" promptText="USERNAME" style="-fx-background-radius: 10; -fx-padding: 10;" />
             <PasswordField fx:id="passwordField" promptText="PASSWORD" style="-fx-background-radius: 10; -fx-padding: 10;" />
-            <Button fx:id="loginButton" text="LOG IN" style="-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;" />
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="loginButton" text="LOG IN" style="-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;" />
+                <Label fx:id="errorMessage" text="" textFill="red" visible="false" wrapText="true" maxWidth="300" />
+            </HBox>
             <Hyperlink fx:id="forgotPasswordLink" text="FORGOT PASSWORD?" />
             <Hyperlink fx:id="createAccountLink" text="CREATE A NEW ACCOUNT?" />
         </VBox>
