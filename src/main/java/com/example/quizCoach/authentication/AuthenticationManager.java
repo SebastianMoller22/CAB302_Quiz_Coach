@@ -16,8 +16,14 @@ import java.util.List;
  * For Signup/Login/Logout and add/modify users' database
  */
 public class AuthenticationManager {
+    // Number of iterations for the PBKDF2 algorithm (more iterations = more secure but slower)
+    // 65536 is a reasonable balance between security and performance
     private static final int ITERATIONS = 65536;
+
+    // Desired key length (in bits) for the derived hash output
+    // 256 bits = 32 bytes, providing strong cryptographic security
     private static final int KEY_LENGTH = 256;
+
     /**
      * the user using the session
      */
