@@ -37,7 +37,7 @@ public class SignUpController {
 
             // Validate username format
             if (!ValidationUtils.isValidUsername(username)) {
-                errorMessage.setText("🚫 Username must start with a letter, be 3–20 characters long, "
+                errorMessage.setText("Username must start with a letter, be 3–20 characters long, "
                         + "and contain only letters, digits, or underscores.");
                 errorMessage.setVisible(true);
                 return;
@@ -45,7 +45,7 @@ public class SignUpController {
 
             // Validate email format
             if (!ValidationUtils.isValidEmail(email)) {
-                errorMessage.setText("🚫 Please enter a valid email address.");
+                errorMessage.setText("Please enter a valid email address.");
                 errorMessage.setVisible(true);
                 return;
             }
@@ -53,7 +53,7 @@ public class SignUpController {
             // Validate password strength
             if (!ValidationUtils.isValidPassword(password)) {
                 errorMessage.setText(
-                        "🚫 Password must be at least 8 characters long and include uppercase, lowercase, "
+                        "Password must be at least 8 characters long and include uppercase, lowercase, "
                         + "number & special character."
                 );
                 errorMessage.setVisible(true);
@@ -71,7 +71,7 @@ public class SignUpController {
                 Stage stage = (Stage) signUpButton.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
             } catch (Exception ex) {
-                errorMessage.setText("⚠️ Signup failed: " + ex.getMessage());
+                errorMessage.setText("Signup failed: " + ex.getMessage());
                 errorMessage.setVisible(true);
             }
         });

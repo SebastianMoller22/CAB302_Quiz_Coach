@@ -41,7 +41,7 @@ public class loginController {
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
             } catch (Exception ex) {
-                errorMessage.setText("⚠️ Login failed: " + ex.getMessage());
+                errorMessage.setText("Login failed: " + ex.getMessage());
                 errorMessage.setVisible(true);
             }
         });
