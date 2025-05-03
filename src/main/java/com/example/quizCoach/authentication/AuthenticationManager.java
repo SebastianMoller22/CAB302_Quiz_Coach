@@ -1,6 +1,6 @@
 package com.example.quizCoach.authentication;
 
-import com.example.quizCoach.database.SqliteUserDAO;
+import com.example.quizCoach.database.MockUserDAO;
 import com.example.quizCoach.model.User;
 
 import javax.crypto.SecretKeyFactory;
@@ -26,13 +26,13 @@ public class AuthenticationManager {
     /**
      * the users' database
      */
-    private SqliteUserDAO userDatabase;
+    private MockUserDAO userDatabase;
 
     /**
      * the default constructor of the class
      */
     public AuthenticationManager() {
-        userDatabase = new SqliteUserDAO();
+        userDatabase = new MockUserDAO();
         activeUser = null;
     }
 
