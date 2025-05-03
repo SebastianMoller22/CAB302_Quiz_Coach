@@ -118,15 +118,13 @@ public class AuthenticationManager {
      * Used by the users to login to their accounts
      * @param username the user's username
      * @param password the user's password
-     * @return if the login complete
      * @throws Exception if username and password do not match
      */
-    public Boolean LoginAsUser(String username, String password) throws Exception {
-        if (matchPasswordandUsername(username, password)) {
-            setActiveUser(getUser(username));
-            return true;
+    public void LoginAsUser(String username, String password) throws Exception {
+        if (!matchPasswordandUsername(username, password)) {
+            throw new Exception("Incorrect Username or Password");
         }
-        return false;
+        setActiveUser(getUser(username));
     }
 
     /**
