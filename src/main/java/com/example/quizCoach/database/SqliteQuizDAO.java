@@ -30,8 +30,8 @@ public class SqliteQuizDAO implements IQuizDAO {
             // quizzes table
             stmt.execute("CREATE TABLE IF NOT EXISTS quizzes ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + "topic VARCHAR NOT NULL"
-                    + "difficulty REAL NOT NULL,"
+                    + "topic VARCHAR NOT NULL,"
+                    + "difficulty DOUBLE NOT NULL"
                     + ");");
             // questions table
             stmt.execute("CREATE TABLE IF NOT EXISTS questions ("
@@ -58,7 +58,7 @@ public class SqliteQuizDAO implements IQuizDAO {
         String insertQuizSql = "INSERT INTO quizzes (topic, difficulty) VALUES (?, ?);";
         try (PreparedStatement psQuiz = connection.prepareStatement(insertQuizSql, Statement.RETURN_GENERATED_KEYS)) {
             psQuiz.setString(1, quiz.GetTopic());
-            psQuiz.setFloat(2, quiz.GetDifficulty());
+            psQuiz.setDouble(2, quiz.GetDifficulty());
             psQuiz.executeUpdate();
             try (ResultSet rs = psQuiz.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -110,7 +110,7 @@ public class SqliteQuizDAO implements IQuizDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     String topic = rs.getString("topic");
-                    float difficulty = rs.getFloat("difficulty");
+                    double difficulty = rs.getFloat("difficulty");
                     Question[] questions = loadQuestions(id);
                     quiz = new Quiz(topic, difficulty, questions);
                     quiz.SetQuizID(id);
@@ -177,7 +177,7 @@ public class SqliteQuizDAO implements IQuizDAO {
         String updateQuizSql = "UPDATE quizzes SET topic = ?, difficulty = ? WHERE id = ?;";
         try (PreparedStatement ps = connection.prepareStatement(updateQuizSql)) {
             ps.setString(1, quiz.GetTopic());
-            ps.setFloat(2, quiz.GetDifficulty());
+            ps.setDouble(2, quiz.GetDifficulty());
             ps.setInt(3, quiz.GetQuizID());
             ps.executeUpdate();
             deleteQuestionsByQuizId(quiz.GetQuizID());

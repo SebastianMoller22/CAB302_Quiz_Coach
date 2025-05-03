@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SignUpController {
-    @FXML private AuthenticationManager authentication = new AuthenticationManager();
+    @FXML private AuthenticationManager authentication;
     @FXML private TextField emailField;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
@@ -20,13 +20,12 @@ public class SignUpController {
     @FXML private Hyperlink existingAccountLink;
     @FXML private Label errorMessage;
 
+    public void setAuthManager(AuthenticationManager authentication) {
+        this.authentication = authentication;
+    }
+
     @FXML
     public void initialize() {
-        // Ensure AuthenticationManager is initialized
-        if (authentication == null) {
-            authentication = new AuthenticationManager();
-        }
-
         signUpButton.setOnAction(e -> {
             // Clear any previous error
             errorMessage.setText("");
@@ -67,6 +66,8 @@ public class SignUpController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(
                         "/com/example/quizCoach/login_screen.fxml"));
                 Parent root = loader.load();
+                loginController LoginController = loader.getController();
+                LoginController.setAuthManager(authentication);
                 Stage stage = (Stage) signUpButton.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
             } catch (Exception ex) {
@@ -80,6 +81,8 @@ public class SignUpController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(
                         "/com/example/quizCoach/login_screen.fxml"));
                 Parent root = loader.load();
+                loginController LoginController = loader.getController();
+                LoginController.setAuthManager(authentication);
                 Stage stage = (Stage) existingAccountLink.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
             } catch (IOException ex) {

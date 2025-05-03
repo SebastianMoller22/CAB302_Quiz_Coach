@@ -3,13 +3,21 @@ package com.example.quizCoach.authentication;
 import com.example.quizCoach.database.SqliteUserDAO;
 import com.example.quizCoach.model.User;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 /**
  * For Signup/Login/Logout and add/modify users' database
  */
 public class AuthenticationManager {
+    private static final int ITERATIONS = 65536;
+    private static final int KEY_LENGTH = 256;
     /**
      * the user using the session
      */
@@ -68,10 +76,11 @@ public class AuthenticationManager {
             throw new Exception("Invalid Email");
         }
         if (!validateString(password, AuthenticationConstant.passwordRegex)) {
-            throw new Exception("Invalid Password");
+            throw new Exception("Password must be at least 8 characters and include uppercase, lowercase, digit, and special character.");
         }
-        User newuser = new User(username, password, email);
-        // Insert into db
+        byte[] salt = generateSalt();
+        String hashedPassword = hashPassword(password, salt);
+        User newuser = new User(username, hashedPassword, email);
         userDatabase.addUser(newuser);
     }
 
@@ -82,11 +91,12 @@ public class AuthenticationManager {
      */
     public Boolean checkifUserExists(String username) {
         List<User> users = userDatabase.getAllUsers();
-        List<String> usernames = new ArrayList<>();
-        for (User user : users){
-            usernames.add(user.getUsername());
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
         }
-        return usernames.contains(username);
+        return false;
     }
 
     /**
@@ -97,11 +107,11 @@ public class AuthenticationManager {
      * @throws Exception if they do not match
      */
     public Boolean matchPasswordandUsername(String username, String password) throws Exception {
-        User user = userDatabase.getUser(username);
         if (!checkifUserExists(username)) {
             throw new Exception("No User with this username");
         }
-        return user.getPassword().equals(password);
+        User user = userDatabase.getUser(username);
+        return verifyPassword(password, user.getPassword());
     }
 
     /**
@@ -134,5 +144,28 @@ public class AuthenticationManager {
     public User getUser(String username) {
         // Return the user with that username
         return new User("Johnny", "aaBB1212@#@#", "hello@example.com");
+    }
+
+    private byte[] generateSalt() {
+        byte[] salt = new byte[16];
+        new SecureRandom().nextBytes(salt);
+        return salt;
+    }
+
+    private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, ITERATIONS, KEY_LENGTH);
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        byte[] hash = factory.generateSecret(spec).getEncoded();
+        return Base64.getEncoder().encodeToString(salt) + ":" + Base64.getEncoder().encodeToString(hash);
+    }
+
+    private boolean verifyPassword(String inputPassword, String storedHash) throws Exception {
+        String[] parts = storedHash.split(":");
+        if (parts.length != 2) {
+            throw new IllegalStateException("Invalid stored password hash.");
+        }
+        byte[] salt = Base64.getDecoder().decode(parts[0]);
+        String hashOfInput = hashPassword(inputPassword, salt);
+        return hashOfInput.equals(storedHash);
     }
 }

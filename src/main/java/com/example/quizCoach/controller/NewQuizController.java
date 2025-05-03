@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.authentication.AuthenticationManager;
 import com.example.quizCoach.model.QuizManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ import java.io.IOException;
 
 public class NewQuizController {
 
+    private AuthenticationManager authentication;
+
     @FXML
     private QuizManager quizManager;
 
@@ -30,6 +33,11 @@ public class NewQuizController {
 
     @FXML
     private Spinner<Integer> questionCountSpinner;
+
+    public void setAuthManager(AuthenticationManager authentication) {
+        this.authentication = authentication;
+    }
+
 
     @FXML
     public void initialize() {
@@ -52,12 +60,13 @@ public class NewQuizController {
             quizManager.MakeQuiz(topic, difficulty, numQuestions);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/quiz-view.fxml"));
             Parent root = loader.load();
+            QuizViewController quizViewController = loader.getController();
+            quizViewController.setQuizManager(quizManager.getActivequiz());
+            quizViewController.setAuthManager(authentication);
             Stage stage = (Stage) createQuizButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
-
-    public QuizManager getQuizManager() {return quizManager;}
 }

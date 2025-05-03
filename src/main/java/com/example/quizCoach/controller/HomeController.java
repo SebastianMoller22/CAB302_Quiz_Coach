@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.authentication.AuthenticationManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,8 @@ import java.io.IOException;
 
 public class HomeController {
 
+    @FXML
+    private AuthenticationManager authentication;
     @FXML
     private Button logOutButton;
     @FXML
@@ -22,6 +25,10 @@ public class HomeController {
     private Button profileButton;
     @FXML
     private Button settingsButton;
+
+    public void setAuthManager(AuthenticationManager authentication) {
+        this.authentication = authentication;
+    }
 
     @FXML
     private void initialize() {
@@ -45,6 +52,8 @@ public class HomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/new-quiz-view.fxml"));
             Parent root = loader.load();
+            NewQuizController newQuizController = loader.getController();
+            newQuizController.setAuthManager(authentication);
             Stage stage = (Stage) startNewQuizButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException ex) {
@@ -57,6 +66,8 @@ public class HomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
             Parent root = loader.load();
+            loginController LoginController = loader.getController();
+            LoginController.setAuthManager(authentication);
             Stage stage = (Stage) logOutButton.getScene().getWindow();
             stage.setScene(new Scene(root, 800, 700));
         } catch (IOException ex) {
