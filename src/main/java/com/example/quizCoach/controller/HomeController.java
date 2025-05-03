@@ -64,6 +64,7 @@ public class HomeController {
     @FXML
     private void handleLogOut() {
         try {
+            authentication.Logout();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
             Parent root = loader.load();
             loginController LoginController = loader.getController();
