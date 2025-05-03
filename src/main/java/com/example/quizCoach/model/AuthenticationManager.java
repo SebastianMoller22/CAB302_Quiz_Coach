@@ -73,7 +73,7 @@ public class AuthenticationManager {
             throw new Exception("Invalid Email");
         }
         if (!validateString(password, AuthenticationConstant.passwordRegex)) {
-            throw new Exception("Invalid Password");
+            throw new Exception("Password must be at least 8 characters and include uppercase, lowercase, digit, and special character.");
         }
         byte[] salt = generateSalt();
         String hashedPassword = hashPassword(password, salt);
@@ -104,11 +104,11 @@ public class AuthenticationManager {
      * @throws Exception if they do not match
      */
     public Boolean matchPasswordandUsername(String username, String password) throws Exception {
-        User user = userDatabase.getUser(username);
         if (!checkifUserExists(username)) {
             throw new Exception("No User with this username");
         }
-        return user.getPassword().equals(password);
+        User user = userDatabase.getUser(username);
+        return verifyPassword(password, user.getPassword());
     }
 
     /**
