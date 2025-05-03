@@ -13,11 +13,6 @@ public class MockUserDAO implements IUserDAO {
     private static int autoIncrementedId = 0;
 
     public MockUserDAO() {
-        // Add some initial users to the mock database
-        addUser(new User("JBells1", "Password1!", "johndoe@example.com"));
-        addUser(new User("JSmith4", "Password1!", "janedoe@example.com"));
-        addUser(new User("JThom74", "Password1!", "jaydoe@example.com"));
-
     }
 
     @Override
