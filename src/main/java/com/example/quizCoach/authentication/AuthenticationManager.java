@@ -144,12 +144,26 @@ public class AuthenticationManager {
         return new User("Johnny", "aaBB1212@#@#", "hello@example.com");
     }
 
+    /**
+     * Generates a cryptographically secure random salt.
+     *
+     * @return a 16-byte salt to be used for password hashing
+     */
     private byte[] generateSalt() {
         byte[] salt = new byte[16];
         new SecureRandom().nextBytes(salt);
         return salt;
     }
 
+    /**
+     * Hashes the given password using PBKDF2 with HMAC-SHA256 and the provided salt.
+     *
+     * @param password the raw password to hash
+     * @param salt the salt to use in the hashing process
+     * @return the hashed password in the format "salt:hash", both Base64 encoded
+     * @throws NoSuchAlgorithmException if the PBKDF2 algorithm is not available
+     * @throws InvalidKeySpecException if the key specification is invalid
+     */
     private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, ITERATIONS, KEY_LENGTH);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
@@ -157,6 +171,14 @@ public class AuthenticationManager {
         return Base64.getEncoder().encodeToString(salt) + ":" + Base64.getEncoder().encodeToString(hash);
     }
 
+    /**
+     * Verifies whether the given password matches the stored hash.
+     *
+     * @param inputPassword the password input to verify
+     * @param storedHash the stored password hash in the format "salt:hash"
+     * @return true if the input password matches the stored hash; false otherwise
+     * @throws Exception if the hash format is invalid or hashing fails
+     */
     private boolean verifyPassword(String inputPassword, String storedHash) throws Exception {
         String[] parts = storedHash.split(":");
         if (parts.length != 2) {
