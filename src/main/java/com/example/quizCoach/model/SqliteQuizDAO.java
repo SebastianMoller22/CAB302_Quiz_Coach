@@ -28,6 +28,8 @@ public class SqliteQuizDAO implements IQuizDAO {
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "topic VARCHAR NOT NULL,"
                     + "difficulty DOUBLE NOT NULL"
+                    + "user_id INTEGER NOT NULL,"
+                    + "FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE"
                     + ");");
             // questions table
             stmt.execute("CREATE TABLE IF NOT EXISTS questions ("
