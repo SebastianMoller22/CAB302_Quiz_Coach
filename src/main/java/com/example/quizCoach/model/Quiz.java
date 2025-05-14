@@ -5,6 +5,7 @@ public class Quiz {
     private String topic;
     private double difficulty;
     private Question[] questions;
+    private int createdByUserId;
 
     public Quiz(String topic, double difficulty, Question[] questions) {
         this.topic = topic;
