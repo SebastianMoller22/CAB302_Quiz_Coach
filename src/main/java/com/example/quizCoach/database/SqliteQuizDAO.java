@@ -78,10 +78,11 @@ public class SqliteQuizDAO implements IQuizDAO {
      */
     @Override
     public void addQuiz(Quiz quiz) {
-        String insertQuizSql = "INSERT INTO quizzes (topic, difficulty) VALUES (?, ?);";
+        String insertQuizSql = "INSERT INTO quizzes (topic, difficulty, user_id) VALUES (?, ?, ?);";
         try (PreparedStatement psQuiz = connection.prepareStatement(insertQuizSql, Statement.RETURN_GENERATED_KEYS)) {
             psQuiz.setString(1, quiz.GetTopic());
             psQuiz.setDouble(2, quiz.GetDifficulty());
+            psQuiz.setInt(3, quiz.getCreatedByUserId());
             psQuiz.executeUpdate();
             try (ResultSet rs = psQuiz.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -148,16 +149,18 @@ public class SqliteQuizDAO implements IQuizDAO {
     @Override
     public Quiz getQuiz(int id) {
         Quiz quiz = null;
-        String selectQuizSql = "SELECT topic, difficulty FROM quizzes WHERE id = ?;";
+        String selectQuizSql = "SELECT topic, difficulty, user_id FROM quizzes WHERE id = ?;";
         try (PreparedStatement ps = connection.prepareStatement(selectQuizSql)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     String topic = rs.getString("topic");
                     double difficulty = rs.getFloat("difficulty");
+                    int userId = rs.getInt("user_id");
                     Question[] questions = loadQuestions(id);
                     quiz = new Quiz(topic, difficulty, questions);
                     quiz.SetQuizID(id);
+                    quiz.setCreatedByUserId(userId);
                 }
             }
         } catch (SQLException e) {
