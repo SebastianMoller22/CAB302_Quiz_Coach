@@ -29,4 +29,12 @@ public class Quiz {
     public Question[] GetQuestions() {
         return questions;
     }
+
+    public int getCreatedByUserId() {
+        return createdByUserId;
+    }
+
+    public void setCreatedByUserId(int createdByUserId) {
+        this.createdByUserId = createdByUserId;
+    }
 }
