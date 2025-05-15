@@ -35,6 +35,7 @@ public class Quiz_Maker {
     private int NumMultipleChoice;
     private int NumShortResponse;
     private int TotalScore = 0;
+    private ArrayList<String> Subtopics = new ArrayList<>();
 
     private ArrayList <Multiple_Choice_Maker> MultipleChoiceArray = new ArrayList<>();
 

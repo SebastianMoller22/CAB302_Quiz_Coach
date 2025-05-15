@@ -1,0 +1,212 @@
+771d2ad was Sebastian, 2 days ago, message: Adding testing, doesn't wor with github yet
+9e9b2cb was Le Quang Bui, 3 days ago, message: Implement displaying the quizzes
+3c28e50 was Le Quang Bui, 3 days ago, message: Modify QuizView and NewQuiz Controller
+8751e54 was Le Quang Bui, 3 days ago, message: add shuffleQuestion method for Question
+7b79a8a was Le Quang Bui, 3 days ago, message: remove shuffleQuestion method for QuizManager
+0446874 was Le Quang Bui, 3 days ago, message: add method for Question class
+407f422 was Le Quang Bui, 3 days ago, message: Fix shuffleQuestion method QuizManager
+1903c00 was Le Quang Bui, 3 days ago, message: Implement parsing quizmanager to QuizViewController
+a7ae374 was Le Quang Bui, 3 days ago, message: Implement parsing authentication to HomeController
+45d6848 was Le Quang Bui, 3 days ago, message: Merge remote-tracking branch 'origin/main_program' into main_program
+5f468ad was Le Quang Bui, 3 days ago, message: Implement parsing authentication to different controller
+b92bd43 was Torsten Reibelt, 3 days ago, message: Changed skill_level from int to double in Multiple_Choice_Maker
+1e8e618 was Le Quang Bui, 3 days ago, message: Complete loginButton in loginController
+bf80907 was Torsten Reibelt, 3 days ago, message: Fixed SQL Error in SqliteQuizDAO
+67af182 was Torsten Reibelt, 3 days ago, message: Changed skill_level from int to double in MockQuizDAO
+3af2297 was Torsten Reibelt, 3 days ago, message: Changed skill_level from int to double in SqliteQuizDAO
+044cb1c was Torsten Reibelt, 3 days ago, message: Changed skill_level from int to double in Quiz
+3396340 was Torsten Reibelt, 3 days ago, message: Changed skill_level from int to double in Quiz_Maker
+ad7b1d5 was Torsten Reibelt, 3 days ago, message: Changed skill_level from int to double in Multiple_choice_Maker
+1eeadd5 was Le Quang Bui, 3 days ago, message: Add field in QuizViewController
+610f288 was Le Quang Bui, 3 days ago, message: Complete handleCreateQuiz method in NewQuizController
+0670fe2 was Le Quang Bui, 3 days ago, message: Add field for NewQuizController
+6d41cac was Le Quang Bui, 3 days ago, message: Merge branch 'quiz'
+f79ee33 was conradbahadur, 3 days ago, message: added the home page
+8443917 was conradbahadur, 3 days ago, message: added the home page back to main from gui
+0ee219b was conradbahadur, 3 days ago, message: bug fixes
+ef00544 was conradbahadur, 3 days ago, message: merged the gui with the main
+4d0383e was conradbahadur, 3 days ago, message: added the results page and altered the quiz view page
+0accf62 was Le Quang Bui, 3 days ago, message: Add Fields, MakeQuiz and shuffleQuestion method
+6005d29 was conradbahadur, 3 days ago, message: added a number of questions option
+435aa17 was conradbahadur, 3 days ago, message: created the quiz-view.fxml and controller too
+e9b1f14 was conradbahadur, 3 days ago, message: created the create a quiz page
+f5c94f3 was Le Quang Bui, 3 days ago, message: add QuizManager class
+f8fc89c was Le Quang Bui, 3 days ago, message: add get_quiz method for Quiz_Maker class
+1465dba was Le Quang Bui, 3 days ago, message: Fix SqliteQuizDAO according to changes to Quiz Class
+3693c16 was Le Quang Bui, 3 days ago, message: Fix MockQuizDAO according to changes to Quiz Class
+2b39f94 was Le Quang Bui, 3 days ago, message: Remove allocated time Quiz Class
+bffed00 was Le Quang Bui, 3 days ago, message: Add topic field to Quiz class
+433841b was Le Quang Bui, 3 days ago, message: Merge remote-tracking branch 'origin/main'
+7d1e609 was Torsten Reibelt, 3 days ago, message: Updated module-info.java to include reflections for javafx
+1468c8c was Torsten Reibelt, 3 days ago, message: Reverted MainApplication back to load FXML
+36e3de9 was Torsten Reibelt, 3 days ago, message: Added MockQuizDAO with some sample quizzes
+374a3f1 was Le Quang Bui, 3 days ago, message: Merge branch 'authentication'
+b14b9d2 was Torsten Reibelt, 3 days ago, message: Added Quiz, SqliteConnection, SqliteQuizDAO, and IQuizDAO back after they were removed during merge
+99c6054 was Torsten Reibelt, 3 days ago, message: Merge remote-tracking branch 'origin/main'
+60cf43b was Torsten Reibelt, 3 days ago, message: Fixed vcs.xml
+3d7eb58 was Sebastian, 3 days ago, message: Merge remote-tracking branch 'origin/main'
+20b2781 was conradbahadur, 3 days ago, message: added leaderboard-view.fxml and LeaderboardController
+748a90a was conradbahadur, 3 days ago, message: Added log out feature to home page
+a194731 was Sebastian, 3 days ago, message: Merge branch 'AI_test_branch'
+1432a45 was conradbahadur, 3 days ago, message: removed unnecessary features
+4ef0edf was conradbahadur, 3 days ago, message: altered home page controller
+b0aff4b was Sebastian, 3 days ago, message: Added scores to individat question and a total score to quiz
+f2e7706 was conradbahadur, 3 days ago, message: altered home page
+b78f62f was conradbahadur, 3 days ago, message: altered home page and leaderboard
+f9244c6 was Le Quang Bui, 4 days ago, message: Fix loginButton in loginController
+64c899d was Le Quang Bui, 4 days ago, message: Fix getUser method in SqliteUserDAO
+b4bca06 was Le Quang Bui, 4 days ago, message: Fix matchPasswordandUsername method in AuthenticationManager
+1e0466b was Le Quang Bui, 4 days ago, message: Fix matchPasswordandUsername and LoginAsUser method in AuthenticationManager
+f87ba74 was Le Quang Bui, 4 days ago, message: Fix getUser method for SqliteUserDAO
+26424f5 was Le Quang Bui, 4 days ago, message: Fix updateUser method for SqliteUserDAO
+e0599a4 was Le Quang Bui, 4 days ago, message: Merge main into authentication
+1541b39 was Le Quang Bui, 4 days ago, message: Merge master onto main
+e5f38ad was Le Quang Bui, 4 days ago, message: Fix vcs.xml
+7e20b51 was Le Quang Bui, 4 days ago, message: Fix loginController
+ad38dbf was Le Quang Bui, 4 days ago, message: Fix vcs.xml
+02729c4 was Le Quang Bui, 4 days ago, message: Fix loginButton in loginController
+bc49116 was Le Quang Bui, 4 days ago, message: Fix signUpButton in SignUpController
+0904806 was Le Quang Bui, 4 days ago, message: Fix error in SqliteUserDAO - addUser method
+4952d69 was Le Quang Bui, 4 days ago, message: Fix error in SqliteUserDAO
+7816b59 was Le Quang Bui, 4 days ago, message: Fix sign_up_screen and SignUpController
+de089ac was Le Quang Bui, 4 days ago, message: Implement SignUpController.java
+e959d7b was Le Quang Bui, 4 days ago, message: Fix AuthenticationConstant Class
+252d437 was Le Quang Bui, 4 days ago, message: Implement loginController.java
+8bd7420 was Le Quang Bui, 4 days ago, message: Merge main into authentication
+c528bd1 was mehak, 4 days ago, message: Changed default screen to login screen
+a1d1bf9 was Torsten Reibelt, 4 days ago, message: Modified SqliteQuizDAO to utilize the Quiz class instead of the old contact stuff
+a32ca80 was Torsten Reibelt, 4 days ago, message: Added SetQuizID() and removed quizID from the Quiz constructor
+a711100 was Torsten Reibelt, 4 days ago, message: Modified Quiz class to include quiz information such as quizID and an array of questions
+9521368 was Torsten Reibelt, 4 days ago, message: Added Question class
+c527028 was Torsten Reibelt, 4 days ago, message: Added Option class
+e301dc7 was Sebastian, 4 days ago, message: Fixed AI prompt
+0554ba8 was mehak, 4 days ago, message: Finalized push for log out page
+52c0b1c was mehak, 4 days ago, message: Finalized push for log out page
+d3604b5 was mehak, 4 days ago, message: changed color for icon on the help button
+385712c was mehak, 4 days ago, message: customised icon on the help button
+a8e05c8 was mehak, 4 days ago, message: Added icon on the help button
+96e715f was mehak, 4 days ago, message: Added help button on logout page
+bae4dbf was mehak, 4 days ago, message: added text over signup button
+b4b0557 was mehak, 4 days ago, message: added text over login button
+a37a23f was mehak, 4 days ago, message: Got text bar over signup button
+1af8e6a was mehak, 4 days ago, message: Got text bar over login button
+24b7a1e was mehak, 4 days ago, message: changed text sytle in button for SignUp on logout page
+823aea9 was mehak, 4 days ago, message: customised text in button for SignUp on logout page
+cf11f74 was mehak, 4 days ago, message: added text in button for SignUp on logout page
+c7a0605 was mehak, 4 days ago, message: customised button for SignUp on logout page
+7dd6d70 was mehak, 4 days ago, message: re-located button for SignUp on logout page
+6881609 was mehak, 4 days ago, message: resized button for SignUp on logout page
+36c8df5 was mehak, 4 days ago, message: Created button for SignUp on logout page
+086b8c2 was mehak, 4 days ago, message: customised button for login on log out page
+987494c was mehak, 4 days ago, message: customised text in button for login on log out page
+965254c was mehak, 4 days ago, message: added text in button for login on log out page
+7d81982 was mehak, 4 days ago, message: re-located button for login on log out page
+f0cdc93 was mehak, 4 days ago, message: resized button for login on log out page
+6207369 was mehak, 4 days ago, message: Got button for login on log out page
+fae52ae was mehak, 4 days ago, message: relocated text space on the log out page
+e942a1b was mehak, 4 days ago, message: Entered text in text space on the log out page
+564f4e0 was mehak, 4 days ago, message: resized the text space on the log out page
+96e60c0 was mehak, 4 days ago, message: Got the text space on the log out page
+5adae6f was mehak, 4 days ago, message: Changed canvas (VBox) size for the log out page
+7adc843 was mehak, 4 days ago, message: Change the background color for the log out page
+2da76f4 was mehak, 4 days ago, message: Created a log out page
+46cf926 was mehak, 4 days ago, message: Finalised welcome page push
+5776ec6 was mehak, 4 days ago, message: Changed font style for tag line
+4467017 was mehak, 4 days ago, message: Changed font for tag line
+06e477d was mehak, 4 days ago, message: Changed size for tag line
+1614096 was mehak, 4 days ago, message: Changed dimentions for tag line
+94b09b9 was mehak, 4 days ago, message: Changed size for tag line
+d7244e6 was mehak, 4 days ago, message: Typed tag line
+0cbef85 was mehak, 4 days ago, message: got text bar for tag line
+8fb7239 was mehak, 4 days ago, message: customised the text bar on welcome page
+b3afd4e was mehak, 4 days ago, message: changed font name in the text bar on welcome page
+2d7f703 was mehak, 4 days ago, message: got name in the text bar on welcome page
+90a08a8 was mehak, 4 days ago, message: got name text bar on welcome page
+0b88caf was mehak, 4 days ago, message: Customised the icon at welcome page
+63a079e was mehak, 4 days ago, message: Got text bar in welcome page
+e2ac315 was mehak, 4 days ago, message: Changed the canvas (VBox) size
+4bdef77 was mehak, 4 days ago, message: Changed color for welcome page
+d0689c6 was mehak, 4 days ago, message: Created Welcome Page File
+2b3bb42 was mehak, 5 days ago, message: Finalized settings page
+90dd50b was mehak, 5 days ago, message: Customised button color for logout
+0251670 was mehak, 5 days ago, message: Customised button logout
+a16023e was mehak, 5 days ago, message: Customised button color for reminders
+7c083d2 was mehak, 5 days ago, message: Customised button for reminders
+780f0cf was mehak, 5 days ago, message: Customised button for BG MUSIC COLOR
+981dd26 was mehak, 5 days ago, message: Customised button for BG MUSIC
+1378ba1 was mehak, 5 days ago, message: Customised button for NOTIFICATIONS
+a70eb51 was mehak, 5 days ago, message: Customised button for NOTIFICATIONS
+e87fd7b was mehak, 5 days ago, message: Customised button for NOTIFICATIONS
+21afc5b was mehak, 5 days ago, message: Customised button for THEME
+3d91416 was mehak, 5 days ago, message: Customised button for THEME
+6d05cb6 was mehak, 5 days ago, message: Created button for log out
+5cb3422 was mehak, 5 days ago, message: Created button for reminders
+fa8aed3 was mehak, 5 days ago, message: Created button for notifications
+579aad2 was mehak, 5 days ago, message: Created button for background music
+ab5c73a was mehak, 5 days ago, message: Created button for theme
+6741821 was mehak, 5 days ago, message: Name and logo for app on page
+b282d0d was mehak, 5 days ago, message: customised Profile icon
+671c493 was mehak, 5 days ago, message: Added Profile icon
+72afe1d was mehak, 5 days ago, message: Customised hamburger icon
+d912f7b was mehak, 5 days ago, message: Added hamburger icon
+157a023 was mehak, 5 days ago, message: Changed background color
+2c8d6d4 was mehak, 5 days ago, message: Created settings page
+fd83244 was mehak, 5 days ago, message: Menu Page Finalised
+0553707 was mehak, 5 days ago, message: Menu Page Finalised
+4799764 was mehak, 5 days ago, message: Help button customised
+66a678b was mehak, 5 days ago, message: Help button created
+c442942 was mehak, 5 days ago, message: Add Study Material button customised
+bc9e369 was mehak, 5 days ago, message: Add Study Material button created
+374e96c was mehak, 5 days ago, message: Customised settings button
+4d6abfe was mehak, 5 days ago, message: Created settions button
+1cd537b was mehak, 5 days ago, message: Customised profile button
+526ed80 was mehak, 5 days ago, message: Created profile button
+0393915 was mehak, 5 days ago, message: Customised the home button
+82ebd86 was mehak, 5 days ago, message: Added new button for Home
+023a22e was mehak, 5 days ago, message: Gave gradient shade to rectangle
+7c6e941 was mehak, 5 days ago, message: Created menu rectangle
+5d11746 was mehak, 5 days ago, message: Alligned the icon/name
+e435c3e was mehak, 5 days ago, message: Added the app icon/name
+566df30 was mehak, 5 days ago, message: Rotated hamburger icon
+9c1e3ec was mehak, 5 days ago, message: Created hamburger icon
+094ce4d was mehak, 5 days ago, message: Created menu option FXML file
+f35b8a9 was mehak, 5 days ago, message: Changed the home page layout to 800x700Px
+8c380bd was mehak, 5 days ago, message: Customising starts button
+85d630b was mehak, 5 days ago, message: Customising starts button
+b378692 was mehak, 5 days ago, message: Customising starts button
+b3f24ee was mehak, 5 days ago, message: Customising starts button
+610b0a4 was mehak, 5 days ago, message: Customising starts button
+a2fa869 was mehak, 5 days ago, message: Customising starts button
+5ea643b was mehak, 5 days ago, message: Customising starts button
+097f190 was mehak, 5 days ago, message: Customising starts button
+7651b39 was mehak, 5 days ago, message: Customising starts button
+ffb5b74 was mehak, 5 days ago, message: Customising starts button
+2e0e6ee was mehak, 5 days ago, message: Customising starts button
+b0c29af was mehak, 5 days ago, message: Customising starts button
+17a6985 was mehak, 5 days ago, message: Customising starts button
+29910b5 was mehak, 5 days ago, message: Customising starts button
+f408308 was mehak, 5 days ago, message: Customising starts button
+f7db65e was mehak, 5 days ago, message: Customised start a new quiz button
+b4cf3d6 was mehak, 5 days ago, message: Customised start a new quiz button
+b8d5761 was mehak, 5 days ago, message: Customised start a new quiz button
+5a23ef2 was mehak, 5 days ago, message: Customised start a new quiz button
+8343cdd was mehak, 5 days ago, message: Customised start a new quiz button
+dea3cce was mehak, 5 days ago, message: Customised start a new quiz button
+5433df7 was mehak, 5 days ago, message: Added start a new quiz button
+a24aae9 was mehak, 5 days ago, message: Customised buttons
+3cb4883 was mehak, 5 days ago, message: Customised buttons
+3232214 was mehak, 5 days ago, message: Customised past quiz button
+8d0c0a4 was mehak, 5 days ago, message: Customised past quiz button
+8cf6006 was mehak, 5 days ago, message: Customised past quiz button
+99aaac5 was mehak, 5 days ago, message: Added past quiz button
+416d12e was mehak, 5 days ago, message: Added divider line
+4050655 was mehak, 5 days ago, message: Added divider line
+537ff5a was mehak, 5 days ago, message: Customised next quiz button
+bd4862c was mehak, 5 days ago, message: Customised next quiz button
+a26f2a3 was mehak, 5 days ago, message: Customised next quiz button
+bf4383e was mehak, 5 days ago, message: Customised next quiz button
+d64bad0 was mehak, 5 days ago, message: Added next quiz button
+2b929c6 was mehak, 5 days ago, message: Added divider line
+74e7f0b was mehak, 5 days ago, message: Added divider line
+c8e0a39 was mehak, 5 days ago, message: Customised past score button
+ecfe1d3 was mehak, 5 days ago, message: Customised past score button
