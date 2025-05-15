@@ -190,10 +190,13 @@ public class Quiz_Maker extends Thread{
         return MultipleChoiceArray;
     }
 
+    public ArrayList<Short_respons_maker> getShortReposnArray() {
+        return ShortReposnArray;
+    }
 
     /*
-    create a Json file from the Json node and store it into the JSON folder for it to be uploaded
-     */
+        create a Json file from the Json node and store it into the JSON folder for it to be uploaded
+         */
     public void UploadJSON(){
         try{
             objectMapper.writeValue(new File("src/main/java/com/example/quizCoach/JSON/Quiz.json"), JsonNode);

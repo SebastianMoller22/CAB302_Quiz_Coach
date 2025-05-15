@@ -5,7 +5,7 @@ import com.example.quizCoach.ollama.OllamaResponseFetcher;
 
 import java.util.ArrayList;
 
-public class Get_Sub_topics{
+public class Get_Sub_topics extends Thread{
 
     private ArrayList<String> Subtopics = new ArrayList<>();
     private String topic;
@@ -24,7 +24,7 @@ public class Get_Sub_topics{
         The prompt give to the AI to create the multiple choice question in a consistent formate
         Takes in the topic, and skill level to change the question topic and difficulty
          */
-        String prompt = String.format("Make %f subtopics about %s, subtopics should be written in the formate \"T:...\" where the '...' is the subtopic, nothing else should be written..",NumOfSubtopics, topic);
+        String prompt = String.format("Make %f subtopics about %s, subtopics should be written in the formate \"T:...\" where the '...' is the subtopic, nothing else should be written.",NumOfSubtopics, topic);
 
         /*
         Collects AI answer
