@@ -24,7 +24,7 @@ public class Get_Sub_topics extends Thread{
         The prompt give to the AI to create the multiple choice question in a consistent formate
         Takes in the topic, and skill level to change the question topic and difficulty
          */
-        String prompt = String.format("Make %f subtopics about %s, subtopics should be written in the formate \"T:...\" where the '...' is the subtopic, nothing else should be written.",NumOfSubtopics, topic);
+        String prompt = String.format("Make %f subtopics about %s, subtopics should be written in the formate T:... where the '...' is the subtopic, nothing else should be written.",NumOfSubtopics, topic);
 
         /*
         Collects AI answer

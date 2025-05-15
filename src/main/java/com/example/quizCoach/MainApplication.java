@@ -20,6 +20,9 @@ public class MainApplication{
 
     public static void main(String[] args) throws InterruptedException {
 
+
+
+
 //        Get_Sub_topics test = new Get_Sub_topics("sharks", 5);
 //
 //        System.out.println(test.getSubtopics().get(0));
