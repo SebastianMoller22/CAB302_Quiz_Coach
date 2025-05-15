@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.example.quizCoach","l":"com.example.quizCoach"},{"m":"com.example.quizCoach","l":"com.example.quizCoach.AI"},{"m":"com.example.quizCoach","l":"com.example.quizCoach.controller"}];updateSearchResults();
