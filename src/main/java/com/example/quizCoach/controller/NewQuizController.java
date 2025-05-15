@@ -34,6 +34,8 @@ public class NewQuizController {
     @FXML
     private Spinner<Integer> questionCountSpinner;
 
+
+
     public void setAuthManager(AuthenticationManager authentication) {
         this.authentication = authentication;
     }
@@ -67,6 +69,18 @@ public class NewQuizController {
             stage.setScene(new Scene(root));
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleBack() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) createQuizButton.getScene().getWindow(); // Get stage from an existing node
+            stage.setScene(new Scene(root, 1000, 600));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
