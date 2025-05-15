@@ -21,8 +21,6 @@ public class MainApplication{
     public static void main(String[] args) throws InterruptedException {
 
 
-
-
 //        Get_Sub_topics test = new Get_Sub_topics("sharks", 5);
 //
 //        System.out.println(test.getSubtopics().get(0));
@@ -38,6 +36,18 @@ public class MainApplication{
 
 //        Short_respons_maker test = new Short_respons_maker("Sharks", "evolution", 10);
 //        System.out.println(test.getQuestion());
+
+        Quiz_Maker test = new Quiz_Maker("shark", 10, 1, 1);
+        test.start();
+
+        while (test.isAlive()){
+            System.out.println("waiting");
+            Thread.sleep(500);
+        }
+
+        System.out.println(test.getShortReposnArray().get(0).getQuestion());
+        System.out.println(test.getMultipleChoiceArray().get(0).getQuestion());
+
 
 
     }

@@ -4,18 +4,15 @@ import com.example.quizCoach.ollama.OllamaResponse;
 import com.example.quizCoach.ollama.OllamaResponseFetcher;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Get_Sub_topics extends Thread{
+public class Get_Sub_topics{
 
     private ArrayList<String> Subtopics = new ArrayList<>();
-    private String topic;
-    private double NumOfSubtopics;
 
     public Get_Sub_topics(String topic, int numOfSubtopics){
-        this.topic = topic;
-        this.NumOfSubtopics = numOfSubtopics;
 
-        /*
+       /*
         Variables required to connect to the AI
          */
         String apiURL = "http://127.0.0.1:11434/api/generate/";
@@ -24,7 +21,7 @@ public class Get_Sub_topics extends Thread{
         The prompt give to the AI to create the multiple choice question in a consistent formate
         Takes in the topic, and skill level to change the question topic and difficulty
          */
-        String prompt = String.format("Make %f subtopics about %s, subtopics should be written in the formate T:... where the '...' is the subtopic, nothing else should be written.",NumOfSubtopics, topic);
+        String prompt = String.format("Make %d subtopics about %s, subtopics should be written in the formate T:... where the '...' is the subtopic, nothing else should be written.",numOfSubtopics, topic);
 
         /*
         Collects AI answer
@@ -44,9 +41,7 @@ public class Get_Sub_topics extends Thread{
             Quetion[i] = Quetion[i].substring(3);
         }
 
-        for (int i = 0; i < Quetion.length; i++) {
-            this.Subtopics.add(Quetion[i]);
-        }
+        this.Subtopics.addAll(Arrays.asList(Quetion));
 
 
     }
