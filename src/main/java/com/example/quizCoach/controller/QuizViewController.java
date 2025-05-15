@@ -65,8 +65,8 @@ public class QuizViewController {
 
         for (String option : question.GetOptionTexts()) {
             RadioButton rb = new RadioButton(option);
+            rb.setStyle("-fx-text-fill: white; -fx-background-color: transparent;");
             rb.setToggleGroup(group);
-            rb.setStyle("-fx-text-fill: white;");
             questionBox.getChildren().add(rb);
         }
 
