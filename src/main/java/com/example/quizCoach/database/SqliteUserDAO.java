@@ -2,10 +2,7 @@ package com.example.quizCoach.database;
 
 import com.example.quizCoach.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +10,12 @@ public class SqliteUserDAO implements IUserDAO {
     private Connection connection;
 
     public SqliteUserDAO() {
-        connection = SqliteConnection.getInstance();
-        createTable();
-        //// Used for testing, to be removed later
-        //insertSampleData();
+        try {
+            connection = SqliteConnection.getInstance();
+            createTable();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void insertSampleData() {
