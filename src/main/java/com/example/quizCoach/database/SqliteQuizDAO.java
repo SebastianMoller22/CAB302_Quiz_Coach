@@ -12,9 +12,14 @@ public class SqliteQuizDAO implements IQuizDAO {
     private Connection connection;
 
     public SqliteQuizDAO() {
-        connection = SqliteConnection.getInstance();
-        enableForeignKeys();
-        createTables();
+        try {
+            connection = SqliteConnection.getInstance();
+            enableForeignKeys();
+            createTables();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void enableForeignKeys() {
