@@ -30,20 +30,22 @@ public class MainApplication{
 //        System.out.println(test.getSubtopics().get(4));
 
 
-//        Multiple_Choice_Maker test = new Multiple_Choice_Maker("Sharks", "evolution", 10);
+//        Multiple_Choice_Maker test = new Multiple_Choice_Maker(true);
 //
 //        System.out.println(test.getAnswer());
 
 //        Short_respons_maker test = new Short_respons_maker("Sharks", "evolution", 10);
 //        System.out.println(test.getQuestion());
 
-        Quiz_Maker test = new Quiz_Maker("shark", 10, 1, 1);
-        test.start();
+//        Quiz_Maker test = new Quiz_Maker("shark", 10, 1, 1);
+//        test.start();
+//
+//        while (test.isAlive()){
+//            System.out.println("waiting");
+//            Thread.sleep(500);
+//        }
 
-        while (test.isAlive()){
-            System.out.println("waiting");
-            Thread.sleep(500);
-        }
+        Quiz_Maker test = new Quiz_Maker(true);
 
         System.out.println(test.getShortReposnArray().get(0).getQuestion());
         System.out.println(test.getMultipleChoiceArray().get(0).getQuestion());

@@ -80,7 +80,7 @@ public class Quiz_Maker extends Thread{
         this.Topic = "Sharks";
         this.Skill_level = 1;
         this.NumMultipleChoice = 1;
-        this.NumShortResponse = 0;
+        this.NumShortResponse = 1;
 
         /*
         Store the updated variables into the JsonNode
@@ -119,7 +119,9 @@ public class Quiz_Maker extends Thread{
             IF in test mode run through predetermined prompt
              */
             for (int j = 0; j < numMultipleChoice; j++) {
-
+                Multiple_Choice_Maker Question = new Multiple_Choice_Maker(true);
+                MultipleChoiceArray.add(Question);
+                MultipleChoiceList.add(Question.getJsonNode());
 
             }
         }
@@ -148,7 +150,9 @@ public class Quiz_Maker extends Thread{
             IF in test mode run through predetermined prompt
              */
             for (int j = 0; j < numShortResponse; j++) {
-
+                Short_respons_maker Question = new Short_respons_maker(true);
+                ShortReposnArray.add(Question);
+                ShortResponse.add(Question.getJsonNode());
 
             }
         }

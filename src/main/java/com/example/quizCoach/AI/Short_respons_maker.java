@@ -76,7 +76,18 @@ public class Short_respons_maker {
      */
     public Short_respons_maker(boolean Testvar){
 
+        String Quetion = "Q: Briefly describe one significant evolutionary adaptation that allowed early sharks (like *Dolichopterygius*) to thrive in the ancient oceans, and explain what environmental conditions might have favored its development.";
 
+        /*
+        Removes the first 3 characters form each line
+         */
+        Quetion = Quetion.substring(3);
+
+        /*
+        Stores the Question and answer into the variables and jons node
+         */
+        jsonNode.put("Question", Quetion);
+        this.Question = Quetion;
     }
 
     /*
