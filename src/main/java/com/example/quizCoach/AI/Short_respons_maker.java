@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.util.ArrayList;
 
-public class Multiple_Choice_Maker {
+public class Short_respons_maker {
 
     /*
     The following are variables related to the multiple choice question
@@ -18,8 +18,6 @@ public class Multiple_Choice_Maker {
     Options: list of Alternative WRONG options to the Question
      */
     private String Question;
-    private String Answer;
-    private ArrayList<String> Options = new ArrayList<>();
     private int Score = 0;
 
     /*
@@ -34,7 +32,7 @@ public class Multiple_Choice_Maker {
     private ArrayNode Array = objectMapper.createArrayNode();
 
 
-    public Multiple_Choice_Maker(String topic, String Subtopic, double skill_level){
+    public Short_respons_maker(String topic, String Subtopic, double skill_level){
 
         /*
         Variables required to connect to the AI
@@ -45,7 +43,7 @@ public class Multiple_Choice_Maker {
         The prompt give to the AI to create the multiple choice question in a consistent formate
         Takes in the topic, and skill level to change the question topic and difficulty
          */
-        String prompt = String.format("Write a multiple Choice question about %s, with the subtopic being %s, with 4 options. The question should be written in the format Q:A:O where 'Q' is the question, 'A' is the answer and 'O' are the other options, nothing else should be written. The question difficulty should be based on the number %f, with 1 being easy and 10 being extremely difficult.",topic,Subtopic ,skill_level);
+        String prompt = String.format("Write a short response question about %s, with the subtopic being %s. The question should be written in the format Q:... where '...' is the question, nothing else should be written. The question difficulty should be based on the number %f, with 1 being easy and 10 being extremely difficult.",topic,Subtopic ,skill_level);
 
         /*
         Collects AI answer
@@ -56,34 +54,19 @@ public class Multiple_Choice_Maker {
         /*
         Serrated the AI answer by the end of line
          */
-        String[] Quetion = response.getResponse().split("\n");
+        String Quetion = response.getResponse();
 
         /*
         Removes the first 3 characters form each line
          */
-        for (int i = 0; i < Quetion.length; i++) {
-            Quetion[i] = Quetion[i].substring(3);
-        }
+        Quetion = Quetion.substring(3);
 
         /*
         Stores the Question and answer into the variables and jons node
          */
-        jsonNode.put("Question", Quetion[0]);
-        this.Question = Quetion[0];
-        jsonNode.put("Answer", Quetion[1]);
-        this.Answer = Quetion[1];
+        jsonNode.put("Question", Quetion);
+        this.Question = Quetion;
 
-        /*
-        Stores the Alterative WORDING options into Options and array node
-         */
-        for (int i = 2; i < Quetion.length; i++) {
-            Array.add(Quetion[i]);
-            this.Options.add(Quetion[i]);
-        }
-        /*
-        Added the Array node to the json node
-         */
-        jsonNode.put("Other_Options", Array);
 
     }
 
@@ -91,49 +74,20 @@ public class Multiple_Choice_Maker {
     THIS IS A TEST CONSTRUCTOR
     ONLY TO BE CALLED DURING TESTING
      */
-    public Multiple_Choice_Maker(boolean Testvar){
+    public Short_respons_maker(boolean Testvar){
 
-        /*
-        Make an AI prompt to be used for testing
-         */
-
-        String TestAI = "Q: Which of the following is a primary reason sharks are considered apex predators in most marine ecosystems?\n" +
-                "A: They have few natural predators themselves.\n" +
-                "O: They primarily feed on algae and seaweed.\n" +
-                "O: They are typically smaller than most fish species.\n" +
-                "O: They rely on symbiotic relationships with other marine animals for survival.";
-
-        /*
-        Serrated the AI answer by the end of line
-         */
-        String[] Quetion = TestAI.split("\n");
+        String Quetion = "Q: Briefly describe one significant evolutionary adaptation that allowed early sharks (like *Dolichopterygius*) to thrive in the ancient oceans, and explain what environmental conditions might have favored its development.";
 
         /*
         Removes the first 3 characters form each line
          */
-        for (int i = 0; i < Quetion.length; i++) {
-            Quetion[i] = Quetion[i].substring(3);
-        }
+        Quetion = Quetion.substring(3);
 
         /*
         Stores the Question and answer into the variables and jons node
          */
-        jsonNode.put("Question", Quetion[0]);
-        this.Question = Quetion[0];
-        jsonNode.put("Answer", Quetion[1]);
-        this.Answer = Quetion[1];
-
-        /*
-        Stores the Alterative WORDING options into Options and array node
-         */
-        for (int i = 2; i < Quetion.length; i++) {
-            Array.add(Quetion[i]);
-            this.Options.add(Quetion[i]);
-        }
-        /*
-        Added the Array node to the json node
-         */
-        jsonNode.put("Other_Options", Array);
+        jsonNode.put("Question", Quetion);
+        this.Question = Quetion;
     }
 
     /*
@@ -144,24 +98,10 @@ public class Multiple_Choice_Maker {
     }
 
     /*
-    When prompted gets the Answer
-     */
-    public String getAnswer() {
-        return Answer;
-    }
-
-    /*
     When prompted gets the Question
      */
     public String getQuestion() {
         return Question;
-    }
-
-    /*
-    When prompted gets the Options list
-     */
-    public ArrayList<String> getOptions() {
-        return Options;
     }
 
     public int getScore() {

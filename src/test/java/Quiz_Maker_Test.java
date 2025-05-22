@@ -9,7 +9,7 @@ public class Quiz_Maker_Test {
     private static final String TOPIC = "Sharks";
     private static final int SKILL_LEVEL = 1;
     private static final int NUM_MC = 1;
-    private static final int NUM_SR = 0;
+    private static final int NUM_SR = 1;
 
 
 
@@ -19,11 +19,14 @@ public class Quiz_Maker_Test {
     private static final String OPTION2 = "They are typically smaller than most fish species.";
     private static final String OPTION3 = "They rely on symbiotic relationships with other marine animals for survival.";
 
+    private static final String ShortQuestion = "Briefly describe one significant evolutionary adaptation that allowed early sharks (like *Dolichopterygius*) to thrive in the ancient oceans, and explain what environmental conditions might have favored its development.";
+
     private Quiz_Maker TESTQUIZ;
 
     @BeforeEach
     public void setUp(){
         TESTQUIZ = new Quiz_Maker(true);
+
     }
 
     @Test
@@ -49,6 +52,12 @@ public class Quiz_Maker_Test {
     @Test
     public void testquestion(){
         assertEquals(QUESTION, TESTQUIZ.getMultipleChoiceArray().get(0).getQuestion());
+    }
+
+    @Test
+
+    public void testShortResponsQuestion(){
+        assertEquals(ShortQuestion, TESTQUIZ.getShortReposnArray().get(0).getQuestion());
     }
 
     @Test

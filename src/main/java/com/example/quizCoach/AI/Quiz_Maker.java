@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class Quiz_Maker {
+public class Quiz_Maker extends Thread{
 
     /*
     test variable, when true will go through a predetermined scenario to allow for testing
@@ -35,8 +35,11 @@ public class Quiz_Maker {
     private int NumMultipleChoice;
     private int NumShortResponse;
     private int TotalScore = 0;
+    private ArrayList<String> Subtopics = new ArrayList<>();
 
     private ArrayList <Multiple_Choice_Maker> MultipleChoiceArray = new ArrayList<>();
+
+    private ArrayList <Short_respons_maker> ShortReposnArray = new ArrayList<>();
 
     /*
     The following is the Json related variables
@@ -53,7 +56,7 @@ public class Quiz_Maker {
     private ArrayNode ShortResponse = objectMapper.createArrayNode();
 
 
-    public Quiz_Maker(String topic, double skill_level, int numMultipleChoice, int numShortResponse){
+    public Quiz_Maker(String topic, double skill_level, int numMultipleChoice, int numShortResponse)  {
         /*
         Store all inputs into their respective variables
          */
@@ -62,15 +65,6 @@ public class Quiz_Maker {
         this.NumMultipleChoice = numMultipleChoice;
         this.NumShortResponse = numShortResponse;
 
-        /*
-        Store the updated variables into the JsonNode
-        And create the questions and store them in Json node
-         */
-        this.JsonNode.put("Topic", Topic);
-        JsonNode.put("Number of MultipleChoice", NumMultipleChoice);
-        JsonNode.put("Multiple Choice Questions", MakeMutipleChoice(Topic, Skill_level, NumMultipleChoice));
-        JsonNode.put("Number of Short Response", NumShortResponse);
-        JsonNode.put("Short Response Questions", MakeShortResponse(Topic, Skill_level, NumShortResponse));
 
     }
 
@@ -86,7 +80,7 @@ public class Quiz_Maker {
         this.Topic = "Sharks";
         this.Skill_level = 1;
         this.NumMultipleChoice = 1;
-        this.NumShortResponse = 0;
+        this.NumShortResponse = 1;
 
         /*
         Store the updated variables into the JsonNode
@@ -100,6 +94,24 @@ public class Quiz_Maker {
 
     }
 
+    @Override
+    public void run(){
+
+
+        Get_Sub_topics Temp = new Get_Sub_topics(Topic, (NumMultipleChoice+NumShortResponse));
+        this.Subtopics = Temp.getSubtopics();
+
+        /*
+        Store the updated variables into the JsonNode
+        And create the questions and store them in Json node
+         */
+        this.JsonNode.put("Topic", Topic);
+        JsonNode.put("Number of MultipleChoice", NumMultipleChoice);
+        JsonNode.put("Multiple Choice Questions", MakeMutipleChoice(Topic, Skill_level, NumMultipleChoice));
+        JsonNode.put("Number of Short Response", NumShortResponse);
+        JsonNode.put("Short Response Questions", MakeShortResponse(Topic, Skill_level, NumShortResponse));
+    }
+
     private ArrayNode MakeMutipleChoice(String topic, double skill_level, int numMultipleChoice){
 
         if (Testvar == true) {
@@ -107,10 +119,10 @@ public class Quiz_Maker {
             IF in test mode run through predetermined prompt
              */
             for (int j = 0; j < numMultipleChoice; j++) {
-
                 Multiple_Choice_Maker Question = new Multiple_Choice_Maker(true);
                 MultipleChoiceArray.add(Question);
                 MultipleChoiceList.add(Question.getJsonNode());
+
             }
         }
         else {
@@ -121,7 +133,7 @@ public class Quiz_Maker {
              */
             for (int j = 0; j < numMultipleChoice; j++) {
 
-                Multiple_Choice_Maker Question = new Multiple_Choice_Maker(Topic, Skill_level);
+                Multiple_Choice_Maker Question = new Multiple_Choice_Maker(Topic, Subtopics.get(j),Skill_level);
                 MultipleChoiceArray.add(Question);
                 MultipleChoiceList.add(Question.getJsonNode());
             }
@@ -132,9 +144,34 @@ public class Quiz_Maker {
 
 
     private ArrayNode MakeShortResponse(String topic, double skill_level, int numShortResponse){
-        /*
-        (yet to be made)
-         */
+
+        if (Testvar == true) {
+            /*
+            IF in test mode run through predetermined prompt
+             */
+            for (int j = 0; j < numShortResponse; j++) {
+                Short_respons_maker Question = new Short_respons_maker(true);
+                ShortReposnArray.add(Question);
+                ShortResponse.add(Question.getJsonNode());
+
+            }
+        }
+        else {
+            /*
+            Prompted the AI to crete a set number of multiple choice questions and store
+            them in MultipleChoiceArray and MultipleChoiceList.
+            Return MultipleChoiceList
+             */
+            for (int j = 0; j < numShortResponse; j++) {
+
+                Short_respons_maker Question = new Short_respons_maker(Topic, Subtopics.get(j+NumMultipleChoice),Skill_level);
+                ShortReposnArray.add(Question);
+                ShortResponse.add(Question.getJsonNode());
+            }
+        }
+
+
+
         return ShortResponse;
     }
 
@@ -157,10 +194,13 @@ public class Quiz_Maker {
         return MultipleChoiceArray;
     }
 
+    public ArrayList<Short_respons_maker> getShortReposnArray() {
+        return ShortReposnArray;
+    }
 
     /*
-    create a Json file from the Json node and store it into the JSON folder for it to be uploaded
-     */
+        create a Json file from the Json node and store it into the JSON folder for it to be uploaded
+         */
     public void UploadJSON(){
         try{
             objectMapper.writeValue(new File("src/main/java/com/example/quizCoach/JSON/Quiz.json"), JsonNode);

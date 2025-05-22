@@ -15,6 +15,7 @@ public class QuizManager {
 
     public void MakeQuiz(String topic, int difficulty, int numMCQs) {
         Quiz_Maker quizMaker = new Quiz_Maker(topic, difficulty, numMCQs, 0);
+        quizMaker.run();
         activequiz = quizMaker.get_quiz();
         quizDatabase.addQuiz(activequiz);
     }
