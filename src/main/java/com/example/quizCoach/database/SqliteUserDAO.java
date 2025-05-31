@@ -5,10 +5,15 @@ import com.example.quizCoach.model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * SQLite implementation of IUserDAO. Manages CRUD operations for User objects using an SQLite database.
+ */
 public class SqliteUserDAO implements IUserDAO {
     private Connection connection;
-
+    /**
+     * Constructs a SqliteUserDAO, initializes the database connection, and creates the user table if it does not exist.
+     * @throws RuntimeException if a SQLException occurs during initialization.
+     */
     public SqliteUserDAO() {
         try {
             connection = SqliteConnection.getInstance();
@@ -34,7 +39,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Creates the users table in the SQLite database if it does not already exist.
+     * @throws SQLException If a database access error occurs.
+     */
     private void createTable() {
         // Create a table if no tables exist
         try {
@@ -50,7 +58,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Adds a new User to the SQLite database. After insertion, the User's ID is set.
+     * @param user The User to add.
+     */
     @Override
     public void addUser(User user) {
         try {
@@ -68,7 +79,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Updates an existing User in the SQLite database. Finds the User by its ID and updates its fields.
+     * @param user The User with updated information.
+     */
     @Override
     public void updateUser(User user) {
         try {
@@ -82,7 +96,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Deletes an existing User from the SQLite database.
+     * @param user The User to delete.
+     */
     @Override
     public void deleteUser(User user) {
         try {
@@ -93,7 +110,11 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Retrieves a User from the SQLite database by its integer ID.
+     * @param id The ID of the User to retrieve.
+     * @return The User with the given ID, or null if not found.
+     */
     @Override
     public User getUser(int id) {
         try {
@@ -113,7 +134,11 @@ public class SqliteUserDAO implements IUserDAO {
         }
         return null;
     }
-
+    /**
+     * Retrieves a User from the SQLite database by its username.
+     * @param username The username of the User to retrieve.
+     * @return The User with the given username, or null if not found.
+     */
     @Override
     public User getUser(String username) {
         try {
@@ -133,7 +158,10 @@ public class SqliteUserDAO implements IUserDAO {
         }
         return null;
     }
-
+    /**
+     * Retrieves all Users from the SQLite database.
+     * @return A list of all Users in the database.
+     */
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
