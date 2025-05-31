@@ -1,4 +1,4 @@
-import com.example.quizCoach.authentication.AuthenticationManager;
+import com.example.quizCoach.authentication.AuthenticationManager_Test;
 import com.example.quizCoach.authentication.AuthenticationConstant;
 import com.example.quizCoach.database.MockUserDAO;
 import com.example.quizCoach.model.User;
@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Authentication_Test {
 
-    private AuthenticationManager manager;
+    private AuthenticationManager_Test manager;
 
     @BeforeEach
     public void setup() {
         MockUserDAO.USERS.clear(); // Reset DB
-        manager = new AuthenticationManager();
+        manager = new AuthenticationManager_Test();
     }
 
     // --------- validateString Tests ---------
@@ -198,10 +198,10 @@ public class Authentication_Test {
         String password = "TestPass1@";
 
         // Use reflection to access hashPassword
-        Method hashPasswordMethod = AuthenticationManager.class.getDeclaredMethod("hashPassword", String.class, byte[].class);
+        Method hashPasswordMethod = AuthenticationManager_Test.class.getDeclaredMethod("hashPassword", String.class, byte[].class);
         hashPasswordMethod.setAccessible(true);
 
-        Method verifyPasswordMethod = AuthenticationManager.class.getDeclaredMethod("verifyPassword", String.class, String.class);
+        Method verifyPasswordMethod = AuthenticationManager_Test.class.getDeclaredMethod("verifyPassword", String.class, String.class);
         verifyPasswordMethod.setAccessible(true);
 
         byte[] salt = new byte[16];
@@ -218,11 +218,11 @@ public class Authentication_Test {
         byte[] salt = new byte[16];
         new SecureRandom().nextBytes(salt);
 
-        Method hashPasswordMethod = AuthenticationManager.class.getDeclaredMethod("hashPassword", String.class, byte[].class);
+        Method hashPasswordMethod = AuthenticationManager_Test.class.getDeclaredMethod("hashPassword", String.class, byte[].class);
         hashPasswordMethod.setAccessible(true);
         String hash = (String) hashPasswordMethod.invoke(manager, password, salt);
 
-        Method verifyPasswordMethod = AuthenticationManager.class.getDeclaredMethod("verifyPassword", String.class, String.class);
+        Method verifyPasswordMethod = AuthenticationManager_Test.class.getDeclaredMethod("verifyPassword", String.class, String.class);
         verifyPasswordMethod.setAccessible(true);
         boolean result = (boolean) verifyPasswordMethod.invoke(manager, "WrongPass1@", hash);
         assertFalse(result);
@@ -230,7 +230,7 @@ public class Authentication_Test {
 
     @Test
     public void testVerifyPasswordThrowsOnMalformedHash() throws Exception {
-        Method verifyPasswordMethod = AuthenticationManager.class.getDeclaredMethod("verifyPassword", String.class, String.class);
+        Method verifyPasswordMethod = AuthenticationManager_Test.class.getDeclaredMethod("verifyPassword", String.class, String.class);
         verifyPasswordMethod.setAccessible(true);
         Exception ex = assertThrows(Exception.class, () ->
                 verifyPasswordMethod.invoke(manager, "Password1@", "not_a_valid_hash")
@@ -240,7 +240,7 @@ public class Authentication_Test {
 
     @Test
     public void testGeneratedSaltIs16Bytes() throws Exception {
-        Method generateSaltMethod = AuthenticationManager.class.getDeclaredMethod("generateSalt");
+        Method generateSaltMethod = AuthenticationManager_Test.class.getDeclaredMethod("generateSalt");
         generateSaltMethod.setAccessible(true);
         byte[] salt = (byte[]) generateSaltMethod.invoke(manager);
         assertEquals(16, salt.length);
@@ -252,7 +252,7 @@ public class Authentication_Test {
         byte[] salt = new byte[16];
         new SecureRandom().nextBytes(salt);
 
-        Method hashPasswordMethod = AuthenticationManager.class.getDeclaredMethod("hashPassword", String.class, byte[].class);
+        Method hashPasswordMethod = AuthenticationManager_Test.class.getDeclaredMethod("hashPassword", String.class, byte[].class);
         hashPasswordMethod.setAccessible(true);
 
         String hash1 = (String) hashPasswordMethod.invoke(manager, password, salt);
@@ -265,7 +265,7 @@ public class Authentication_Test {
     public void testHashPasswordGeneratesDifferentHashesForDifferentSalts() throws Exception {
         String password = "MyPassword1@";
 
-        Method hashPasswordMethod = AuthenticationManager.class.getDeclaredMethod("hashPassword", String.class, byte[].class);
+        Method hashPasswordMethod = AuthenticationManager_Test.class.getDeclaredMethod("hashPassword", String.class, byte[].class);
         hashPasswordMethod.setAccessible(true);
 
         byte[] salt1 = new byte[16];
