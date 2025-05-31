@@ -5,10 +5,17 @@ import java.util.Random;
 public class Question {
     private String questionText;
     private Option[] options;
+    private String shortResponse;
 
     public Question(String questionText, Option[] options) {
         this.questionText = questionText;
         this.options = options;
+    }
+
+    // Short Response Question
+    public Question(String questionText, String shortResponse) {
+        this.questionText = questionText;
+        this.shortResponse = shortResponse;
     }
 
     public  String GetCorrectOptionText() {
@@ -26,6 +33,10 @@ public class Question {
 
     public Option[] GetOptions() {
         return this.options;
+    }
+
+    public String GetShortResponse() {
+        return this.shortResponse;
     }
 
     private void shuffleQuestion()
