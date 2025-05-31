@@ -1,4 +1,7 @@
 module:com.example.quizCoach
 com.example.quizCoach
 com.example.quizCoach.AI
+com.example.quizCoach.authentication
 com.example.quizCoach.controller
+com.example.quizCoach.database
+com.example.quizCoach.model
