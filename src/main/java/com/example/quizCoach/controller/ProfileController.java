@@ -29,6 +29,7 @@ public class ProfileController {
         String newUsername = usernameField.getText();
         String newEmail = emailField.getText();
         String newPassword = passwordField.getText();
+        boolean passwordupdated = false;
 
         // TODO: Add your update logic here (e.g., update database or model)
         if (sessionManager.getAuthenticationManager().validateString(newUsername, AuthenticationConstant.usernameRegex)) {
@@ -36,11 +37,12 @@ public class ProfileController {
         }
         if (sessionManager.getAuthenticationManager().validateString(newEmail, AuthenticationConstant.emailRegex)) {
             sessionManager.getAuthenticationManager().getActiveUser().setEmail(newEmail);
+            passwordupdated = true;
         }
         if (sessionManager.getAuthenticationManager().validateString(newPassword, AuthenticationConstant.passwordRegex)) {
             sessionManager.getAuthenticationManager().getActiveUser().setUsername(newPassword);
         }
-        sessionManager.getAuthenticationManager().updateActiveUser();
+        sessionManager.getAuthenticationManager().updateActiveUser(passwordupdated);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Profile Updated");
