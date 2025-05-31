@@ -24,7 +24,7 @@ public class MockQuizDAO implements IQuizDAO {
      */
     @Override
     public void addQuiz(Quiz quiz) {
-        quiz.setQuizID(autoIncrementedId++);
+//        quiz.setQuizID(autoIncrementedId++);
         QUIZZES.add(quiz);
     }
 
