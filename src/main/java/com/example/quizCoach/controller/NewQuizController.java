@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.Session.SessionManager;
 import com.example.quizCoach.authentication.AuthenticationManager;
 import com.example.quizCoach.model.QuizManager;
 import javafx.animation.Animation;
@@ -23,10 +24,7 @@ import java.io.IOException;
 
 public class NewQuizController {
 
-    private AuthenticationManager authentication;
-
-    @FXML
-    private QuizManager quizManager;
+    private SessionManager sessionManager;
 
     @FXML
     private TextField topicField;
@@ -42,8 +40,8 @@ public class NewQuizController {
 
 
 
-    public void setAuthManager(AuthenticationManager authentication) {
-        this.authentication = authentication;
+    public void setSessionManager(SessionManager session) {
+        this.sessionManager = session;
     }
     boolean quiz_start = false;
     private Timeline timeleine;
@@ -53,7 +51,6 @@ public class NewQuizController {
         // Set up spinner with values from 1 to 20
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 5);
         questionCountSpinner.setValueFactory(valueFactory);
-        quizManager = new QuizManager();
 
         /*
         make a loop that checks if a quiz is being made aver sec nd and if it is done before changeing to the next scene
@@ -68,7 +65,7 @@ public class NewQuizController {
      */
     private void handleKeyframe(ActionEvent event){
         if (quiz_start){
-            if(quizManager.isAlive()){
+            if(sessionManager.getQuizManager().isAlive()){
 
             }
             else{
@@ -82,8 +79,7 @@ public class NewQuizController {
                 }
 
                 QuizViewController quizViewController = loader.getController();
-                quizViewController.setQuizManager(quizManager.getActivequiz());
-                quizViewController.setAuthManager(authentication);
+                quizViewController.setSessionManager(sessionManager);
                 Stage stage = (Stage) createQuizButton.getScene().getWindow();
                 stage.setScene(new Scene(root));
                 timeleine.stop();
@@ -101,8 +97,8 @@ public class NewQuizController {
 
             System.out.println("Creating quiz on topic: " + topic + " with difficulty: " + difficulty);
 
-            quizManager.MakeQuiz(topic, difficulty, numQuestions);
-            quizManager.start();
+            sessionManager.getQuizManager().MakeQuiz(topic, difficulty, numQuestions);
+            sessionManager.getQuizManager().start();
             quiz_start = true;
         }
 

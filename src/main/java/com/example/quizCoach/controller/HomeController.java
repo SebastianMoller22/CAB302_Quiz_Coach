@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.Session.SessionManager;
 import com.example.quizCoach.authentication.AuthenticationManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,7 @@ import java.io.IOException;
 public class HomeController {
 
     @FXML
-    private AuthenticationManager authentication;
+    private SessionManager sessionManager;
     @FXML
     private Button logOutButton;
     @FXML
@@ -26,8 +27,8 @@ public class HomeController {
     @FXML
     private Button settingsButton;
 
-    public void setAuthManager(AuthenticationManager authentication) {
-        this.authentication = authentication;
+    public void setSessionManager(SessionManager session) {
+        this.sessionManager = session;
     }
 
     @FXML
@@ -53,7 +54,7 @@ public class HomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/new-quiz-view.fxml"));
             Parent root = loader.load();
             NewQuizController newQuizController = loader.getController();
-            newQuizController.setAuthManager(authentication);
+            newQuizController.setSessionManager(sessionManager);
             Stage stage = (Stage) startNewQuizButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException ex) {
@@ -64,11 +65,11 @@ public class HomeController {
     @FXML
     private void handleLogOut() {
         try {
-            authentication.Logout();
+            sessionManager.getAuthenticationManager().Logout();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
             Parent root = loader.load();
             loginController LoginController = loader.getController();
-            LoginController.setAuthManager(authentication);
+            LoginController.setAuthManager(sessionManager.getAuthenticationManager());
             Stage stage = (Stage) logOutButton.getScene().getWindow();
             stage.setScene(new Scene(root, 800, 700));
         } catch (IOException ex) {

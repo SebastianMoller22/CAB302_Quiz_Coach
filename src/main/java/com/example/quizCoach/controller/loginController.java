@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.Session.SessionManager;
 import com.example.quizCoach.authentication.AuthenticationManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,7 +38,9 @@ public class loginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
                 Parent root = loader.load();
                 HomeController homeController = loader.getController();
-                homeController.setAuthManager(authentication);
+                SessionManager session = new SessionManager();
+                session.setAuthenticationManager(authentication);
+                homeController.setSessionManager(session);
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));
             } catch (Exception ex) {

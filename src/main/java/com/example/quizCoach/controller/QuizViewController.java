@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.Session.SessionManager;
 import com.example.quizCoach.authentication.AuthenticationManager;
 import com.example.quizCoach.model.Option;
 import com.example.quizCoach.model.Question;
@@ -24,7 +25,7 @@ import java.util.Map;
 
 public class QuizViewController {
 
-    private AuthenticationManager authentication;
+    private SessionManager sessionManager;
 
     private final Map<Question, String> userAnswers = new HashMap<>();
 
@@ -36,12 +37,9 @@ public class QuizViewController {
     @FXML
     private Button seeResultsButton;
 
-    public void setQuizManager(Quiz quiz) {
-        this.quiz = quiz;
-    }
-
-    public void setAuthManager(AuthenticationManager authentication) {
-        this.authentication = authentication;
+    public void setSessionManager(SessionManager session) {
+        this.sessionManager = session;
+        this.quiz = sessionManager.getQuizManager().getActivequiz();
     }
 
     @FXML
@@ -103,7 +101,7 @@ public class QuizViewController {
                     questions.length,
                     feedbackMessage(correctCount, questions.length));
             controller.setResultsText(resultsText);
-            controller.setAuthManager(authentication);
+            controller.setSessionManager(sessionManager);
 
             Stage stage = (Stage) seeResultsButton.getScene().getWindow();
             stage.setScene(new Scene(root));

@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.Session.SessionManager;
 import com.example.quizCoach.authentication.AuthenticationManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -12,7 +13,7 @@ import java.io.IOException;
 
 public class ResultsController {
 
-    private AuthenticationManager authentication;
+    private SessionManager sessionManager;
 
     @FXML
     private TextArea resultsTextArea;
@@ -21,8 +22,8 @@ public class ResultsController {
         resultsTextArea.setText(text);
     }
 
-    public void setAuthManager(AuthenticationManager authentication) {
-        this.authentication = authentication;
+    public void setSessionManager(SessionManager session) {
+        this.sessionManager = session;
     }
 
     @FXML
@@ -31,7 +32,7 @@ public class ResultsController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
             Parent root = loader.load();
             HomeController homeController = loader.getController();
-            homeController.setAuthManager(authentication);
+            homeController.setSessionManager(sessionManager);
             Stage stage = (Stage) resultsTextArea.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
