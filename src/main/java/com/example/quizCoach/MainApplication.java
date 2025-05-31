@@ -22,6 +22,7 @@ public class MainApplication extends Application {
         LoginController.setAuthManager(new AuthenticationManager());
         primaryStage.setScene(new Scene(root, 800, 700));
         primaryStage.show();
+        //hi
     }
 
     public static void main(String[] args) {
