@@ -7,6 +7,10 @@ import com.example.quizCoach.model.Quiz;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mock implementation of IQuizDAO that stores quizzes in memory for testing purposes.
+ * This class maintains an in-memory list of Quiz objects and simulates auto-incremented IDs.
+ */
 public class MockQuizDAO implements IQuizDAO {
     /**
      * In-memory “table” of quizzes
@@ -14,51 +18,20 @@ public class MockQuizDAO implements IQuizDAO {
     private static final List<Quiz> QUIZZES = new ArrayList<>();
     private static int autoIncrementedId = 1;
 
-    public MockQuizDAO() {
-        // Sample Quiz 1: Basic Algebra
-        Question q1 = new Question(
-                "What is 2 + 2?",
-                new Option[]{
-                        new Option("3", false),
-                        new Option("4", true)
-                }
-        );
-        Question q2 = new Question(
-                "Solve for x: 5x = 25. What is x?",
-                new Option[]{
-                        new Option("5", true),
-                        new Option("6", false)
-                }
-        );
-        Quiz algebraQuiz = new Quiz("Basic Algebra", 1, new Question[]{q1, q2});
-        addQuiz(algebraQuiz);
-
-        // Sample Quiz 2: Multiplication Tables
-        Question q3 = new Question(
-                "What is 3 * 3?",
-                new Option[]{
-                        new Option("6", false),
-                        new Option("9", true)
-                }
-        );
-        Question q4 = new Question(
-                "What is 7 * 5?",
-                new Option[]{
-                        new Option("35", true),
-                        new Option("40", false)
-                }
-        );
-        Quiz multiplicationQuiz = new Quiz("Multiplication Tables", 0.5, new Question[]{q3, q4});
-        addQuiz(multiplicationQuiz);
-    }
-
+    /**
+     * Adds a new Quiz to the in-memory list. Assigns an auto-incremented ID to the Quiz.
+     * @param quiz The Quiz to add.
+     */
     @Override
     public void addQuiz(Quiz quiz) {
-        // assign a new ID and store
-        quiz.SetQuizID(autoIncrementedId++);
+        quiz.setQuizID(autoIncrementedId++);
         QUIZZES.add(quiz);
     }
 
+    /**
+     * Updates an existing Quiz in the in-memory list. Finds the Quiz by its ID and replaces its data.
+     * @param quiz The Quiz with updated information.
+     */
     @Override
     public void updateQuiz(Quiz quiz) {
         for (int i = 0; i < QUIZZES.size(); i++) {
@@ -69,11 +42,20 @@ public class MockQuizDAO implements IQuizDAO {
         }
     }
 
+    /**
+     * Deletes an existing Quiz from the in-memory list.
+     * @param quiz The Quiz to delete.
+     */
     @Override
     public void deleteQuiz(Quiz quiz) {
         QUIZZES.removeIf(q -> q.GetQuizID() == quiz.GetQuizID());
     }
 
+    /**
+     * Retrieves a Quiz from the in-memory list by ID.
+     * @param id The ID of the Quiz to retrieve.
+     * @return The Quiz with the given ID, or null if not found.
+     */
     @Override
     public Quiz getQuiz(int id) {
         for (Quiz quiz : QUIZZES) {
@@ -84,6 +66,10 @@ public class MockQuizDAO implements IQuizDAO {
         return null;
     }
 
+    /**
+     * Retrieves all quizzes from the in-memory list.
+     * @return A list of all quizzes.
+     */
     @Override
     public List<Quiz> getAllQuizzes() {
         return new ArrayList<>(QUIZZES);
