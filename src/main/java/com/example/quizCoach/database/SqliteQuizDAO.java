@@ -43,7 +43,7 @@ public class SqliteQuizDAO implements IQuizDAO {
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "quiz_id INTEGER NOT NULL,"
                     + "question_text TEXT NOT NULL,"
-                    + "short_resopnse TEXT"
+                    + "short_response TEXT,"
                     + "FOREIGN KEY(quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE"
                     + ");");
             // options table
