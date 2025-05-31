@@ -38,6 +38,7 @@ public class SqliteQuizDAO implements IQuizDAO {
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "quiz_id INTEGER NOT NULL,"
                     + "question_text TEXT NOT NULL,"
+                    + "short_resopnse TEXT"
                     + "FOREIGN KEY(quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE"
                     + ");");
             // options table
@@ -75,18 +76,35 @@ public class SqliteQuizDAO implements IQuizDAO {
     }
 
     private void insertQuestion(int quizId, Question question) throws SQLException {
-        String insertQuestionSql = "INSERT INTO questions (quiz_id, question_text) VALUES (?, ?);";
-        try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql, Statement.RETURN_GENERATED_KEYS)) {
-            psQ.setInt(1, quizId);
-            psQ.setString(2, question.GetQuestionText());
-            psQ.executeUpdate();
-            try (ResultSet rsQ = psQ.getGeneratedKeys()) {
-                if (rsQ.next()) {
-                    int questionId = rsQ.getInt(1);
-                    for (Option opt : question.GetOptions()) {
-                        insertOption(questionId, opt);
+        String[] mcOptions = null;
+        String shortAns = question.GetShortResponse();
+
+        if (question.GetOptions() != null && question.GetOptions().length > 0) {
+            // Multiple choice
+            String insertQuestionSql =
+                    "INSERT INTO questions (quiz_id, question_text) VALUES (?, ?);";
+            try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql, Statement.RETURN_GENERATED_KEYS)) {
+                psQ.setInt(1, quizId);
+                psQ.setString(2, question.GetQuestionText());
+                psQ.executeUpdate();
+                try (ResultSet rsQ = psQ.getGeneratedKeys()) {
+                    if (rsQ.next()) {
+                        int questionId = rsQ.getInt(1);
+                        for (Option opt : question.GetOptions()) {
+                            insertOption(questionId, opt);
+                        }
                     }
                 }
+            }
+        } else {
+            // Short response
+            String insertQuestionSql =
+                    "INSERT INTO questions (quiz_id, question_text, short_response) VALUES (?, ?, ?);";
+            try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql, Statement.RETURN_GENERATED_KEYS)) {
+                psQ.setInt(1, quizId);
+                psQ.setString(2, question.GetQuestionText());
+                psQ.setString(3, shortAns);
+                psQ.executeUpdate();
             }
         }
     }
@@ -123,21 +141,33 @@ public class SqliteQuizDAO implements IQuizDAO {
     }
 
     private Question[] loadQuestions(int quizId) throws SQLException {
-        String selectQuestionsSql = "SELECT id, question_text FROM questions WHERE quiz_id = ?;";
+        String selectQuestionsSql =
+                "SELECT id, question_text, short_response FROM questions WHERE quiz_id = ?;";
         List<Question> questions = new ArrayList<>();
         try (PreparedStatement psQ = connection.prepareStatement(selectQuestionsSql)) {
             psQ.setInt(1, quizId);
             try (ResultSet rsQ = psQ.executeQuery()) {
                 while (rsQ.next()) {
-                    int questionId = rsQ.getInt("id");
-                    String text = rsQ.getString("question_text");
-                    Option[] options = loadOptions(questionId);
-                    questions.add(new Question(text, options));
+                    int questionId    = rsQ.getInt("id");
+                    String text       = rsQ.getString("question_text");
+                    String shortAns   = rsQ.getString("short_response");
+
+                    if (shortAns != null && !shortAns.isEmpty()) {
+                        // Short response
+                        Question q = new Question(text, shortAns);
+                        questions.add(q);
+                    } else {
+                        // Multiple Choice
+                        Option[] options = loadOptions(questionId);
+                        Question q = new Question(text, options);
+                        questions.add(q);
+                    }
                 }
             }
         }
         return questions.toArray(new Question[0]);
     }
+
 
     private Option[] loadOptions(int questionId) throws SQLException {
         String selectOptionsSql = "SELECT option_text, is_correct FROM options WHERE question_id = ?;";
