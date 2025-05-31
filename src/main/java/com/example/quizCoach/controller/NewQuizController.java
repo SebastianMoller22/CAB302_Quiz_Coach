@@ -93,16 +93,18 @@ public class NewQuizController {
 
     @FXML
     private void handleCreateQuiz() {
-        String topic = topicField.getText();
-        int difficulty = (int) difficultySlider.getValue();
-        int numQuestions = questionCountSpinner.getValue();
-        System.out.println("Number of questions: " + numQuestions);
+        if (quiz_start == false) {
+            String topic = topicField.getText();
+            int difficulty = (int) difficultySlider.getValue();
+            int numQuestions = questionCountSpinner.getValue();
+            System.out.println("Number of questions: " + numQuestions);
 
-        System.out.println("Creating quiz on topic: " + topic + " with difficulty: " + difficulty);
+            System.out.println("Creating quiz on topic: " + topic + " with difficulty: " + difficulty);
 
-        quizManager.MakeQuiz(topic, difficulty, numQuestions);
-        quizManager.start();
-        quiz_start = true;
+            quizManager.MakeQuiz(topic, difficulty, numQuestions);
+            quizManager.start();
+            quiz_start = true;
+        }
 
     }
 
