@@ -10,6 +10,7 @@ public class QuizManager extends Thread{
     private Quiz activequiz;
     private SqliteQuizDAO quizDatabase;
     Quiz_Maker quizMaker;
+    private Quiz[] pastquizzes;
 
     public QuizManager() {
         quizDatabase = new SqliteQuizDAO();
@@ -37,4 +38,8 @@ public class QuizManager extends Thread{
     }
 
     public Quiz getActivequiz() {return activequiz;}
+
+    public void setPastquizzes(User user) {}
+
+    public Quiz[] getPastquiz() { return pastquizzes; }
 }
