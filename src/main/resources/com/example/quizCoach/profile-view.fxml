@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.quizCoach.controller.ProfileController"
+            prefWidth="1000" prefHeight="600"
+            style="-fx-background-color: linear-gradient(to right, #0f3c63, #7bb1d1);">
+
+    <center>
+        <VBox alignment="CENTER" spacing="20" maxWidth="400">
+            <padding>
+                <Insets top="40"/>
+            </padding>
+
+            <Label text="👤 Profile Settings"
+                   style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;" />
+
+            <TextField fx:id="usernameField" promptText="Change Username"
+                       style="-fx-background-radius: 10; -fx-font-size: 14px;" prefWidth="280" />
+
+            <TextField fx:id="emailField" promptText="Change Email"
+                       style="-fx-background-radius: 10; -fx-font-size: 14px;" prefWidth="280" />
+
+            <PasswordField fx:id="passwordField" promptText="Change Password"
+                           style="-fx-background-radius: 10; -fx-font-size: 14px;" prefWidth="280" />
+
+            <Button text="Save Changes" onAction="#handleSave"
+                    style="-fx-background-color: white; -fx-font-size: 16px; -fx-background-radius: 12;" prefWidth="200"/>
+
+            <Button text="⬅ Back to Home" onAction="#handleBack"
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px;" prefWidth="200"/>
+        </VBox>
+    </center>
+</BorderPane>

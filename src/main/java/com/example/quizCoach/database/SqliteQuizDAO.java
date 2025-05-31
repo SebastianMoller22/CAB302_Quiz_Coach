@@ -7,16 +7,30 @@ import com.example.quizCoach.model.Quiz;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * SQLite implementation of IQuizDAO. Manages CRUD operations for Quiz objects using an SQLite database.
+ */
 public class SqliteQuizDAO implements IQuizDAO {
     private Connection connection;
-
+    /**
+     * Constructs a SqliteQuizDAO, initializes the database connection, enables foreign keys,
+     * and creates the necessary tables if they do not already exist.
+     * @throws RuntimeException if a SQLException occurs during initialization.
+     */
     public SqliteQuizDAO() {
-        connection = SqliteConnection.getInstance();
-        enableForeignKeys();
-        createTables();
-    }
+        try {
+            connection = SqliteConnection.getInstance();
+            enableForeignKeys();
+            createTables();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
+    }
+    /**
+     * Enables foreign key enforcement for the SQLite connection.
+     * @throws SQLException If a database access error occurs.
+     */
     private void enableForeignKeys() {
         try (Statement stmt = connection.createStatement()) {
             stmt.execute("PRAGMA foreign_keys = ON;");
@@ -24,7 +38,10 @@ public class SqliteQuizDAO implements IQuizDAO {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Creates the necessary database tables (quizzes, questions, options) if they do not exist.
+     * @throws SQLException If a database access error occurs.
+     */
     private void createTables() {
         try (Statement stmt = connection.createStatement()) {
             // quizzes table
@@ -38,6 +55,7 @@ public class SqliteQuizDAO implements IQuizDAO {
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "quiz_id INTEGER NOT NULL,"
                     + "question_text TEXT NOT NULL,"
+                    + "short_response TEXT,"
                     + "FOREIGN KEY(quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE"
                     + ");");
             // options table
@@ -52,7 +70,10 @@ public class SqliteQuizDAO implements IQuizDAO {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Adds a new Quiz (including its Questions and Options) to the SQLite database.
+     * @param quiz The Quiz object to add. After insertion, the Quiz's ID is set.
+     */
     @Override
     public void addQuiz(Quiz quiz) {
         String insertQuizSql = "INSERT INTO quizzes (topic, difficulty) VALUES (?, ?);";
@@ -75,18 +96,35 @@ public class SqliteQuizDAO implements IQuizDAO {
     }
 
     private void insertQuestion(int quizId, Question question) throws SQLException {
-        String insertQuestionSql = "INSERT INTO questions (quiz_id, question_text) VALUES (?, ?);";
-        try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql, Statement.RETURN_GENERATED_KEYS)) {
-            psQ.setInt(1, quizId);
-            psQ.setString(2, question.GetQuestionText());
-            psQ.executeUpdate();
-            try (ResultSet rsQ = psQ.getGeneratedKeys()) {
-                if (rsQ.next()) {
-                    int questionId = rsQ.getInt(1);
-                    for (Option opt : question.GetOptions()) {
-                        insertOption(questionId, opt);
+        String[] mcOptions = null;
+        String shortAns = question.GetShortResponse();
+
+        if (question.GetOptions() != null && question.GetOptions().length > 0) {
+            // Multiple choice
+            String insertQuestionSql =
+                    "INSERT INTO questions (quiz_id, question_text) VALUES (?, ?);";
+            try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql, Statement.RETURN_GENERATED_KEYS)) {
+                psQ.setInt(1, quizId);
+                psQ.setString(2, question.GetQuestionText());
+                psQ.executeUpdate();
+                try (ResultSet rsQ = psQ.getGeneratedKeys()) {
+                    if (rsQ.next()) {
+                        int questionId = rsQ.getInt(1);
+                        for (Option opt : question.GetOptions()) {
+                            insertOption(questionId, opt);
+                        }
                     }
                 }
+            }
+        } else {
+            // Short response
+            String insertQuestionSql =
+                    "INSERT INTO questions (quiz_id, question_text, short_response) VALUES (?, ?, ?);";
+            try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql, Statement.RETURN_GENERATED_KEYS)) {
+                psQ.setInt(1, quizId);
+                psQ.setString(2, question.GetQuestionText());
+                psQ.setString(3, shortAns);
+                psQ.executeUpdate();
             }
         }
     }
@@ -100,7 +138,11 @@ public class SqliteQuizDAO implements IQuizDAO {
             psO.executeUpdate();
         }
     }
-
+    /**
+     * Retrieves a Quiz (and its associated Questions and Options) from the SQLite database by ID.
+     * @param id The ID of the Quiz to retrieve.
+     * @return The Quiz with the given ID, or null if not found.
+     */
     @Override
     public Quiz getQuiz(int id) {
         Quiz quiz = null;
@@ -123,21 +165,33 @@ public class SqliteQuizDAO implements IQuizDAO {
     }
 
     private Question[] loadQuestions(int quizId) throws SQLException {
-        String selectQuestionsSql = "SELECT id, question_text FROM questions WHERE quiz_id = ?;";
+        String selectQuestionsSql =
+                "SELECT id, question_text, short_response FROM questions WHERE quiz_id = ?;";
         List<Question> questions = new ArrayList<>();
         try (PreparedStatement psQ = connection.prepareStatement(selectQuestionsSql)) {
             psQ.setInt(1, quizId);
             try (ResultSet rsQ = psQ.executeQuery()) {
                 while (rsQ.next()) {
-                    int questionId = rsQ.getInt("id");
-                    String text = rsQ.getString("question_text");
-                    Option[] options = loadOptions(questionId);
-                    questions.add(new Question(text, options));
+                    int questionId    = rsQ.getInt("id");
+                    String text       = rsQ.getString("question_text");
+                    String shortAns   = rsQ.getString("short_response");
+
+                    if (shortAns != null && !shortAns.isEmpty()) {
+                        // Short response
+                        Question q = new Question(text, shortAns);
+                        questions.add(q);
+                    } else {
+                        // Multiple Choice
+                        Option[] options = loadOptions(questionId);
+                        Question q = new Question(text, options);
+                        questions.add(q);
+                    }
                 }
             }
         }
         return questions.toArray(new Question[0]);
     }
+
 
     private Option[] loadOptions(int questionId) throws SQLException {
         String selectOptionsSql = "SELECT option_text, is_correct FROM options WHERE question_id = ?;";
@@ -154,7 +208,10 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
         return options.toArray(new Option[0]);
     }
-
+    /**
+     * Retrieves all quizzes (including their Questions and Options) from the SQLite database.
+     * @return A list of all quizzes in the database.
+     */
     @Override
     public List<Quiz> getAllQuizzes() {
         List<Quiz> quizzes = new ArrayList<>();
@@ -171,7 +228,11 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
         return quizzes;
     }
-
+    /**
+     * Updates an existing Quiz (including its Questions and Options) in the SQLite database.
+     * All previous Questions and Options for that Quiz are deleted and replaced.
+     * @param quiz The Quiz object with updated information.
+     */
     @Override
     public void updateQuiz(Quiz quiz) {
         String updateQuizSql = "UPDATE quizzes SET topic = ?, difficulty = ? WHERE id = ?;";
@@ -201,7 +262,10 @@ public class SqliteQuizDAO implements IQuizDAO {
             psQ.executeUpdate();
         }
     }
-
+    /**
+     * Deletes an existing Quiz (and its associated Questions and Options) from the SQLite database.
+     * @param quiz The Quiz to delete.
+     */
     @Override
     public void deleteQuiz(Quiz quiz) {
         String deleteQuizSql = "DELETE FROM quizzes WHERE id = ?;";

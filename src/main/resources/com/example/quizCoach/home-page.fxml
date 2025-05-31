@@ -22,7 +22,8 @@
 
             <!-- Right Side: Icons -->
             <HBox spacing="15" alignment="CENTER_RIGHT">
-                <Label text="👤" style="-fx-font-size: 20;" />
+                <Button fx:id="profileButton" text="👤" onAction="#handleProfile"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 20;" />
                 <Label text="⚙" style="-fx-font-size: 20;" />
                 <Label text="📱" style="-fx-font-size: 20;" />
             </HBox>

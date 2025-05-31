@@ -64,6 +64,7 @@ public class HomeController {
     @FXML
     private void handleLogOut() {
         try {
+            authentication.Logout();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/login_screen.fxml"));
             Parent root = loader.load();
             loginController LoginController = loader.getController();
@@ -72,6 +73,19 @@ public class HomeController {
             stage.setScene(new Scene(root, 800, 700));
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    private void handleProfile() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/profile-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) profileButton.getScene().getWindow(); // Use a defined node
+            stage.setScene(new Scene(root, 1000, 600));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
