@@ -18,8 +18,7 @@ public class Get_Sub_topics{
         String apiURL = "http://127.0.0.1:11434/api/generate/";
         String model = "gemma3:12b";
         /*
-        The prompt give to the AI to create the multiple choice question in a consistent formate
-        Takes in the topic, and skill level to change the question topic and difficulty
+        The prompt give to the AI to create the multiple subtopic based on the topic input and number of questions
          */
         String prompt = String.format("Make %d subtopics about %s, subtopics should be written in the formate T:... where the '...' is the subtopic, nothing else should be written.",numOfSubtopics, topic);
 

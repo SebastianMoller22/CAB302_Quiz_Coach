@@ -40,8 +40,7 @@ public class Short_respons_maker {
         String apiURL = "http://127.0.0.1:11434/api/generate/";
         String model = "gemma3:12b";
         /*
-        The prompt give to the AI to create the multiple choice question in a consistent formate
-        Takes in the topic, and skill level to change the question topic and difficulty
+        The prompt give to the AI to create a short respsont question based on topic subtopic and skilllevel
          */
         String prompt = String.format("Write a short response question about %s, with the subtopic being %s. The question should be written in the format Q:... where '...' is the question, nothing else should be written. The question difficulty should be based on the number %f, with 1 being easy and 10 being extremely difficult.",topic,Subtopic ,skill_level);
 

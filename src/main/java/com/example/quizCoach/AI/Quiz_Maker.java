@@ -224,6 +224,9 @@ public class Quiz_Maker extends Thread{
         return TotalScore;
     }
 
+    /*
+    export all data into quiz formate
+     */
     public Quiz get_quiz() {
         Question[] questions = new Question[NumMultipleChoice];
         for (int question = 0; question < NumMultipleChoice; question++) {
