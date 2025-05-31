@@ -83,6 +83,8 @@ public class HomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/profile-view.fxml"));
             Parent root = loader.load();
+            ProfileController profile = loader.getController();
+            profile.setSessionManager(sessionManager);
             Stage stage = (Stage) profileButton.getScene().getWindow(); // Use a defined node
             stage.setScene(new Scene(root, 1000, 600));
         } catch (IOException e) {
