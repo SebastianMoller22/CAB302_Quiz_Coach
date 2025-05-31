@@ -151,6 +151,16 @@ public class AuthenticationManager {
     }
 
     /**
+     * update the data of the active user to the database
+     */
+    public void updateActiveUser() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        byte[] salt = generateSalt();
+        String hashedPassword = hashPassword(activeUser.getPassword(), salt);
+        activeUser.setPassword(hashedPassword);
+        userDatabase.updateUser(activeUser);
+    }
+
+    /**
      * Generates a cryptographically secure random salt.
      *
      * @return a 16-byte salt to be used for password hashing
