@@ -3,6 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!--
+    Leaderboard.fxml
+    This file defines the layout for the Leaderboard screen in IntelliTutor.
+    The screen displays a list of top quiz scores using a TableView.
+    Includes a back button and stylized header, using a BorderPane layout.
+-->
+
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.quizCoach.controller.LeaderboardController"
@@ -11,18 +18,25 @@
 
     <!-- ==================== Top Header (Back Button + Title) ==================== -->
     <top>
+        <!--
+            Header section with back button and title.
+            Uses HBox layout aligned to the left with spacing and padding.
+        -->
         <HBox alignment="CENTER_LEFT" spacing="10">
             <padding>
                 <Insets top="20" left="20" bottom="20" right="20"/>
             </padding>
 
-            <!-- Back Button -->
+            <!--
+                Back Button: Returns the user to the home screen.
+                Triggered via handleBackButton() method in the controller.
+            -->
             <Button fx:id="backButton"
                     text="← Back"
                     onAction="#handleBackButton"
                     style="-fx-background-color: white; -fx-font-size: 16; -fx-background-radius: 20;"/>
 
-            <!-- Page Title -->
+            <!-- Title Text for the page -->
             <Label text="Leaderboard"
                    style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;"/>
         </HBox>
@@ -30,30 +44,37 @@
 
     <!-- ==================== Center TableView of Leaderboard ==================== -->
     <center>
+        <!--
+            Center section with a VBox containing a TableView of leaderboard entries.
+            Shows top quiz attempts with quiz ID, topic, difficulty, score, and username.
+        -->
         <VBox alignment="CENTER" spacing="15" maxWidth="750">
             <TableView fx:id="leaderboardTable"
                        prefWidth="750"
                        prefHeight="450"
                        style="-fx-background-color: rgba(255,255,255,0.9);">
                 <columns>
-                    <!-- Topic Column -->
+                    <!-- Column for the Quiz ID -->
                     <TableColumn fx:id="idColumn"
                                  text="Quiz ID"
                                  prefWidth="150" />
-                    <!-- Topic Column -->
+
+                    <!-- Column for Topic Name -->
                     <TableColumn fx:id="topicColumn"
                                  text="Topic"
                                  prefWidth="150" />
-                    <!-- Difficulty Column -->
+
+                    <!-- Column for Difficulty Level -->
                     <TableColumn fx:id="difficultyColumn"
                                  text="Difficulty"
                                  prefWidth="150" />
 
-                    <!-- Score Column -->
+                    <!-- Column for Quiz Score -->
                     <TableColumn fx:id="scoreColumn"
                                  text="Score"
                                  prefWidth="150" />
-                    <!-- Score Column -->
+
+                    <!-- Column for Username -->
                     <TableColumn fx:id="userColumn"
                                  text="Username"
                                  prefWidth="150" />

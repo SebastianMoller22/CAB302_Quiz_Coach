@@ -4,21 +4,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!--
+    QuizView.fxml
+    Defines the layout for the quiz-taking screen in IntelliTutor.
+    Dynamically displays quiz questions inside a scrollable container.
+    Controlled by QuizViewController.java.
+-->
+
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.quizCoach.controller.QuizViewController"
             prefWidth="1000" prefHeight="600"
             style="-fx-background-color: linear-gradient(to right, #0f3c63, #7bb1d1);">
 
+    <!-- ==================== Center Section: Quiz Content ==================== -->
     <center>
+        <!--
+            Main VBox layout that includes the quiz title, a scrollable quiz container,
+            and a button to submit and view results.
+        -->
         <VBox alignment="TOP_CENTER" spacing="20" maxWidth="700">
             <padding>
                 <Insets top="40"/>
             </padding>
 
+            <!-- Title label for the quiz screen -->
             <Label text="📝 Your Quiz"
                    style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" />
 
-            <!-- Scrollable container for quiz questions -->
+            <!--
+                Scrollable container for dynamic quiz questions.
+                Questions are injected at runtime into quizContainer VBox.
+            -->
             <ScrollPane fitToWidth="true" prefHeight="400" style="-fx-background: transparent;">
                 <content>
                     <VBox fx:id="quizContainer" spacing="20">
@@ -29,6 +45,7 @@
                 </content>
             </ScrollPane>
 
+            <!-- Button to trigger result evaluation and transition -->
             <Button fx:id="seeResultsButton" text="See Results" onAction="#handleSeeResults"
                     style="-fx-background-color: white; -fx-font-size: 16px; -fx-background-radius: 12;" />
         </VBox>

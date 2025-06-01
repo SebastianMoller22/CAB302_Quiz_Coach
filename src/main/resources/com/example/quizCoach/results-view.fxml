@@ -4,26 +4,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!--
+    Results.fxml
+    Defines the layout for the Quiz Results screen in IntelliTutor.
+    Displays quiz results and feedback in a read-only TextArea.
+    Controlled by ResultsController.java.
+-->
+
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.quizCoach.controller.ResultsController"
             prefWidth="1000" prefHeight="600"
             style="-fx-background-color: linear-gradient(to right, #0f3c63, #7bb1d1);">
 
+    <!-- ==================== Center Section: Results Display ==================== -->
     <center>
+        <!--
+            VBox layout containing a quiz results title, a read-only TextArea for feedback,
+            and a button to return to the Home screen.
+        -->
         <VBox alignment="CENTER" spacing="20" maxHeight="300" maxWidth="400">
             <padding>
                 <Insets top="60"/>
             </padding>
 
+            <!-- Title Label -->
             <Label text="📊 Quiz Results"
                    style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" />
 
-            <!-- Transparent background, centered text area -->
+            <!--
+                Read-only TextArea to display quiz score and feedback.
+                Transparent background with styled border for visual appeal.
+            -->
             <TextArea fx:id="resultsTextArea"
                       editable="false" wrapText="true"
                       prefWidth="600" prefHeight="200"
                       style="-fx-background-color: transparent; -fx-text-fill: black; -fx-font-size: 28px; -fx-border-color: white; -fx-border-radius: 12;" />
 
+            <!-- Navigation Button: Returns to Home screen -->
             <Button text="Back to Home" onAction="#handleBack"
                     style="-fx-background-color: white; -fx-font-size: 16px; -fx-background-radius: 12;" />
         </VBox>

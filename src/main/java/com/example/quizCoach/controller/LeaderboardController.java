@@ -23,48 +23,92 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the Leaderboard screen.
+ * Displays a table of all past quizzes completed by users,
+ * sorted by score in descending order.
+ */
 public class LeaderboardController implements Initializable {
 
+    /** Manages session data including logged-in user and quiz access. */
     private SessionManager sessionManager;
+
+    /** TableView to display leaderboard data. */
     @FXML private TableView<Quiz> leaderboardTable;
+
+    /** TableColumn for displaying quiz IDs. */
     @FXML private TableColumn<Quiz, Integer> idColumn;
+
+    /** TableColumn for displaying quiz topics. */
     @FXML private TableColumn<Quiz, String> topicColumn;
+
+    /** TableColumn for displaying quiz difficulty values. */
     @FXML private TableColumn<Quiz, Double> difficultyColumn;
+
+    /** TableColumn for displaying user scores. */
     @FXML private TableColumn<Quiz, Integer> scoreColumn;
+
+    /** TableColumn for displaying the username of the quiz creator. */
     @FXML private TableColumn<Quiz, String> userColumn;
+
+    /** Back button to return to the home screen. */
     @FXML private Button backButton;
+
+    /** Data source for the leaderboard TableView. */
     private ObservableList<Quiz> leaderboardData = FXCollections.observableArrayList();
 
+    /**
+     * Initializes the leaderboard table.
+     * Called automatically after the FXML layout is loaded.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or null.
+     * @param resources The resources used to localize the root object, or null.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Ensure UI updates run on the JavaFX application thread
         Platform.runLater(() -> {
+            // Set up column bindings
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().GetQuizID()).asObject());
             topicColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().GetTopic()));
             difficultyColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().GetDifficulty()).asObject());
             scoreColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getScore()).asObject());
-            userColumn.setCellValueFactory(cellData -> new SimpleStringProperty(sessionManager.getAuthenticationManager().getUsernameFromID(cellData.getValue().getCreatedByUserId())));
-            loadPastQuizzes();
+            userColumn.setCellValueFactory(cellData ->
+                    new SimpleStringProperty(sessionManager.getAuthenticationManager()
+                            .getUsernameFromID(cellData.getValue().getCreatedByUserId()))
+            );
 
+            // Load quiz data and apply sorting
+            loadPastQuizzes();
             leaderboardTable.getSortOrder().add(scoreColumn);
             scoreColumn.setSortType(TableColumn.SortType.DESCENDING);
         });
     }
 
+    /**
+     * Loads all quizzes from the quiz manager and populates the leaderboard table.
+     */
     private void loadPastQuizzes() {
         leaderboardData.setAll(sessionManager.getQuizManager().getAllQuiz());
         leaderboardTable.setItems(leaderboardData);
     }
 
+    /**
+     * Injects the session manager after controller initialization.
+     * @param session the current SessionManager instance
+     */
     public void setSessionManager(SessionManager session) {
         this.sessionManager = session;
     }
 
-    /** Called when the user clicks “← Back” in the top HBox. */
+    /**
+     * Handles navigation back to the home screen when the "← Back" button is clicked.
+     * Transfers the session manager to the home controller.
+     */
     @FXML
     private void handleBackButton() {
         try {

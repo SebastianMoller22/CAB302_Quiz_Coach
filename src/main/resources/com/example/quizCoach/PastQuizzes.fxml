@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+
+<!--
+    PastQuizzes.fxml
+    Defines the layout for the "Past Quizzes" screen in IntelliTutor.
+    Displays a TableView of previously attempted quizzes by the logged-in user.
+    Controlled by PastQuizzesController.java
+-->
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -11,45 +19,55 @@
 
     <!-- ==================== Top Header (Back Button + Title) ==================== -->
     <top>
+        <!--
+            Header section with a back button and page title.
+            Aligned to the left using an HBox with padding and spacing.
+        -->
         <HBox alignment="CENTER_LEFT" spacing="10">
             <padding>
                 <Insets top="20" left="20" bottom="20" right="20"/>
             </padding>
 
-            <!-- Back Button -->
+            <!-- Back Button: Returns to Home screen -->
             <Button fx:id="backButton"
                     text="← Back"
                     onAction="#handleBackButton"
-                    style="-fx-background-color: white; -fx-font-size: 16; -fx-background-radius: 20;"/>
+                    style="-fx-background-color: white; -fx-font-size: 16; -fx-background-radius: 20;" />
 
-            <!-- Page Title -->
+            <!-- Screen Title -->
             <Label text="Past Quizzes"
-                   style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;"/>
+                   style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;" />
         </HBox>
     </top>
 
     <!-- ==================== Center TableView of Past Quizzes ==================== -->
     <center>
+        <!--
+            Main content area containing a TableView of past quiz records.
+            Each row shows the quiz ID, topic, difficulty, and score.
+        -->
         <VBox alignment="CENTER" spacing="15" maxWidth="600">
             <TableView fx:id="pastQuizzesTable"
                        prefWidth="600"
                        prefHeight="450"
                        style="-fx-background-color: rgba(255,255,255,0.9);">
                 <columns>
-                    <!-- Topic Column -->
+                    <!-- Column for Quiz ID -->
                     <TableColumn fx:id="idColumn"
                                  text="Quiz ID"
                                  prefWidth="150" />
-                    <!-- Topic Column -->
+
+                    <!-- Column for Topic -->
                     <TableColumn fx:id="topicColumn"
                                  text="Topic"
                                  prefWidth="150" />
-                    <!-- Difficulty Column -->
+
+                    <!-- Column for Difficulty Level -->
                     <TableColumn fx:id="difficultyColumn"
                                  text="Difficulty"
                                  prefWidth="150" />
 
-                    <!-- Score Column -->
+                    <!-- Column for Quiz Score -->
                     <TableColumn fx:id="scoreColumn"
                                  text="Score"
                                  prefWidth="150" />

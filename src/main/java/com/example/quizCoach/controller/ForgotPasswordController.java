@@ -9,13 +9,28 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class for the Forgot Password screen in IntelliTutor.
+ * Handles navigation to reset password, login, and sign-up screens.
+ */
 public class ForgotPasswordController {
 
+    /** TextField where the user enters their username. */
     @FXML private TextField usernameField;
+
+    /** Button to initiate password reset and navigate to the reset screen. */
     @FXML private Button resetButton;
+
+    /** Hyperlink to return to the existing account (login) screen. */
     @FXML private Hyperlink existingAccountLink;
+
+    /** Hyperlink to navigate to the account creation (sign-up) screen. */
     @FXML private Hyperlink createAccountLink;
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * Sets up event handlers for all navigation elements on the screen.
+     */
     @FXML
     public void initialize() {
         resetButton.setOnAction(e -> {

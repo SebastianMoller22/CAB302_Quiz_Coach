@@ -5,37 +5,88 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.quizCoach.controller.loginController"
-            fx:id="mainLayout" style="-fx-background-color: lightblue;" prefWidth="1000" prefHeight="600">
+<!--
+    login.fxml
+    This FXML defines the login screen layout for IntelliTutor.
+    It uses a BorderPane layout with a welcoming header and a styled login form.
+    Managed by loginController.java
+-->
 
-    <!-- Header Section -->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.quizCoach.controller.loginController"
+            fx:id="mainLayout"
+            style="-fx-background-color: lightblue;"
+            prefWidth="1000" prefHeight="600">
+
+    <!--
+        Header Section (Top):
+        Displays IntelliTutor logo and welcome text.
+        Uses a VBox layout centered with vertical spacing and padding.
+    -->
     <top>
         <VBox alignment="CENTER" spacing="10">
             <padding>
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
+
+            <!-- App Icon (Emoji) -->
             <Text text="🎓" style="-fx-font-size: 100;" />
-            <Text text="WELCOME TO" style="-fx-font-family: Arial; -fx-font-size: 20; -fx-fill: black;" />
-            <Text text="IntelliTutor" style="-fx-font-family: 'Comic Sans MS'; -fx-font-size: 30; -fx-fill: teal;" />
+
+            <!-- Welcome Message -->
+            <Text text="WELCOME TO"
+                  style="-fx-font-family: Arial; -fx-font-size: 20; -fx-fill: black;" />
+
+            <!-- App Title -->
+            <Text text="IntelliTutor"
+                  style="-fx-font-family: 'Comic Sans MS'; -fx-font-size: 30; -fx-fill: teal;" />
         </VBox>
     </top>
 
-    <!-- Login Form -->
+    <!--
+        Center Section: Login Form
+        Contains fields for username/password, login button, error message, and links.
+        Styled with padding, rounded borders, and white background.
+    -->
     <center>
-        <VBox spacing="15" style="-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 10; -fx-background-radius: 10;">
+        <VBox spacing="15"
+              style="-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 10; -fx-background-radius: 10;">
             <padding>
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
-            <Text text="LOG IN" style="-fx-font-family: Arial; -fx-font-size: 24; -fx-fill: black;" />
-            <TextField fx:id="usernameField" promptText="USERNAME" style="-fx-background-radius: 10; -fx-padding: 10;" />
-            <PasswordField fx:id="passwordField" promptText="PASSWORD" style="-fx-background-radius: 10; -fx-padding: 10;" />
+            <!-- Login Title -->
+            <Text text="LOG IN"
+                  style="-fx-font-family: Arial; -fx-font-size: 24; -fx-fill: black;" />
+
+            <!-- Username Input Field -->
+            <TextField fx:id="usernameField"
+                       promptText="USERNAME"
+                       style="-fx-background-radius: 10; -fx-padding: 10;" />
+
+            <!-- Password Input Field -->
+            <PasswordField fx:id="passwordField"
+                           promptText="PASSWORD"
+                           style="-fx-background-radius: 10; -fx-padding: 10;" />
+
+            <!-- Login Button with Error Label beside it -->
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Button fx:id="loginButton" text="LOG IN" style="-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;" />
-                <Label fx:id="errorMessage" text="" textFill="red" visible="false" wrapText="true" maxWidth="300" />
+                <!-- Submit Login -->
+                <Button fx:id="loginButton" text="LOG IN"
+                        style="-fx-background-color: teal; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10;" />
+
+                <!-- Error Message Label (Initially Hidden) -->
+                <Label fx:id="errorMessage" text=""
+                       textFill="red" visible="false"
+                       wrapText="true" maxWidth="300" />
             </HBox>
-            <Hyperlink fx:id="forgotPasswordLink" text="FORGOT PASSWORD?" />
-            <Hyperlink fx:id="createAccountLink" text="CREATE A NEW ACCOUNT?" />
+
+            <!-- Link to Forgot Password Screen -->
+            <Hyperlink fx:id="forgotPasswordLink"
+                       text="FORGOT PASSWORD?" />
+
+            <!-- Link to Sign-Up Screen -->
+            <Hyperlink fx:id="createAccountLink"
+                       text="CREATE A NEW ACCOUNT?" />
         </VBox>
     </center>
 

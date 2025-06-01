@@ -4,34 +4,63 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!--
+    Profile.fxml
+    This file defines the layout for the Profile Settings screen in IntelliTutor.
+    It allows users to update their username, email, and password.
+    Controlled by ProfileController.java
+-->
+
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.quizCoach.controller.ProfileController"
             prefWidth="1000" prefHeight="600"
             style="-fx-background-color: linear-gradient(to right, #0f3c63, #7bb1d1);">
 
+    <!-- ==================== Center Section: Profile Form ==================== -->
     <center>
+        <!--
+            VBox layout containing the profile update form.
+            Includes editable fields for username, email, and password.
+            Also includes buttons for saving changes and navigating back home.
+        -->
         <VBox alignment="CENTER" spacing="20" maxWidth="400">
             <padding>
                 <Insets top="40"/>
             </padding>
 
+            <!-- Page Title -->
             <Label text="👤 Profile Settings"
                    style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;" />
 
-            <TextField fx:id="usernameField" promptText="Change Username"
-                       style="-fx-background-radius: 10; -fx-font-size: 14px;" prefWidth="280" />
+            <!-- Input field to change username -->
+            <TextField fx:id="usernameField"
+                       promptText="Change Username"
+                       style="-fx-background-radius: 10; -fx-font-size: 14px;"
+                       prefWidth="280" />
 
-            <TextField fx:id="emailField" promptText="Change Email"
-                       style="-fx-background-radius: 10; -fx-font-size: 14px;" prefWidth="280" />
+            <!-- Input field to change email -->
+            <TextField fx:id="emailField"
+                       promptText="Change Email"
+                       style="-fx-background-radius: 10; -fx-font-size: 14px;"
+                       prefWidth="280" />
 
-            <PasswordField fx:id="passwordField" promptText="Change Password"
-                           style="-fx-background-radius: 10; -fx-font-size: 14px;" prefWidth="280" />
+            <!-- Input field to change password -->
+            <PasswordField fx:id="passwordField"
+                           promptText="Change Password"
+                           style="-fx-background-radius: 10; -fx-font-size: 14px;"
+                           prefWidth="280" />
 
-            <Button text="Save Changes" onAction="#handleSave"
-                    style="-fx-background-color: white; -fx-font-size: 16px; -fx-background-radius: 12;" prefWidth="200"/>
+            <!-- Button to save profile changes -->
+            <Button text="Save Changes"
+                    onAction="#handleSave"
+                    style="-fx-background-color: white; -fx-font-size: 16px; -fx-background-radius: 12;"
+                    prefWidth="200"/>
 
-            <Button text="⬅ Back to Home" onAction="#handleBack"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px;" prefWidth="200"/>
+            <!-- Navigation button to return to Home screen -->
+            <Button text="⬅ Back to Home"
+                    onAction="#handleBack"
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px;"
+                    prefWidth="200"/>
         </VBox>
     </center>
 </BorderPane>
