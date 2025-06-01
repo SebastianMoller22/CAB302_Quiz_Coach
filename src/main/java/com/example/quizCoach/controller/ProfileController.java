@@ -37,10 +37,11 @@ public class ProfileController {
         }
         if (sessionManager.getAuthenticationManager().validateString(newEmail, AuthenticationConstant.emailRegex)) {
             sessionManager.getAuthenticationManager().getActiveUser().setEmail(newEmail);
-            passwordupdated = true;
+
         }
         if (sessionManager.getAuthenticationManager().validateString(newPassword, AuthenticationConstant.passwordRegex)) {
-            sessionManager.getAuthenticationManager().getActiveUser().setUsername(newPassword);
+            sessionManager.getAuthenticationManager().getActiveUser().setPassword(newPassword);
+            passwordupdated = true;
         }
         sessionManager.getAuthenticationManager().updateActiveUser(passwordupdated);
 
