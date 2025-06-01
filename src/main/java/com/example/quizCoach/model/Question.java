@@ -6,8 +6,16 @@ import java.util.Random;
  * Represents a quiz question which can be either multiple-choice or short-answer type.
  */
 public class Question {
+    /**
+     * The option that the user select.
+     */
     private Option selectedOption;
+
+    /**
+     * The score that the user get for the question.
+     */
     private int score = 0;
+
     /**
      * The text of the question.
      */
@@ -116,11 +124,11 @@ public class Question {
         }
         return optiontexts;
     }
-    /**
-     * Call this after the user picks one of the shuffled options.
-     * The passed‐in Option should be the exact object from the current
-     * options[] array (e.g. options[i] from GetOptionTexts()).
-     * This sets both the selectedOption and computes score = 1 if correct, else 0.
+
+    /***
+     * Set the selected choice to the choice that the user chose
+     *
+     * @param choice the choice that the user chose
      */
     public void SetSelectedOption(String choice) {
         for (Option option: options) {
@@ -132,12 +140,16 @@ public class Question {
 
     }
 
-    /** Returns whichever Option was set via SetSelectedOption(), or null if none. */
+    /***
+     * @return the selected option
+     */
     public Option GetSelectedOption() {
         return this.selectedOption;
     }
 
-    /** Returns 1 if the last SetSelectedOption(...) was correct; otherwise 0. */
+    /***
+     * @return the score that the user get for the question
+     */
     public int GetScore() {
         return this.score;
     }

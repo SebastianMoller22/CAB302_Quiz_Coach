@@ -105,6 +105,11 @@ public class Quiz {
         this.createdByUserId = createdByUserId;
     }
 
+    /**
+     * Combine the score of all questions.
+     *
+     * @return the score of the quiz
+     */
     public int getScore() {
         int score = 0;
         for (Question question: questions) {

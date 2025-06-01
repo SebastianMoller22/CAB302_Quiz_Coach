@@ -121,12 +121,20 @@ public class QuizManager extends Thread{
      */
     public List<Quiz> getPastquiz() { return pastquizzes; }
 
+    /**
+     * Update the score of the active quiz after the user completed it.
+     */
     public void UpdateScore() {
         for (Question question: activequiz.GetQuestions()) {
             quizDatabase.updateQuestion(question);
         }
     }
 
+    /**
+     * Returns a list of all quizzes in the database.
+     *
+     * @return a list of all quizzes in the database
+     */
     public List<Quiz> getAllQuiz() {
         return quizDatabase.getAllQuizzes();
     }

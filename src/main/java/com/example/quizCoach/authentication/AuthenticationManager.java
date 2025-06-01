@@ -162,6 +162,11 @@ public class AuthenticationManager {
         userDatabase.updateUser(activeUser);
     }
 
+    /***
+     * return the username from an user id
+     * @param id the user id
+     * @return the username
+     */
     public String getUsernameFromID(int id) {
         User user = userDatabase.getUser(id);
         return user.getUsername();
