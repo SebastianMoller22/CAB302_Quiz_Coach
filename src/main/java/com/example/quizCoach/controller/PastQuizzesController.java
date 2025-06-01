@@ -30,7 +30,6 @@ public class PastQuizzesController implements Initializable {
     @FXML private TableView<Quiz> pastQuizzesTable;
     @FXML private TableColumn<Quiz, String> topicColumn;
     @FXML private TableColumn<Quiz, String> difficultyColumn;
-    @FXML private TableColumn<Quiz, String> createdbyColumn;
     @FXML private TableColumn<Quiz, String> scoreColumn;
     @FXML private Button backButton;
 

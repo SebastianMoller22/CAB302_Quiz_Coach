@@ -32,22 +32,23 @@
     <center>
         <VBox alignment="CENTER" spacing="15">
             <TableView fx:id="pastQuizzesTable"
-                       prefWidth="800"
+                       prefWidth="450"
                        prefHeight="450"
                        style="-fx-background-color: rgba(255,255,255,0.9);">
                 <columns>
-                    <!-- Date Column -->
-                    <TableColumn fx:id="dateColumn"
-                                 text="Date"
-                                 prefWidth="200" />
                     <!-- Topic Column -->
                     <TableColumn fx:id="topicColumn"
                                  text="Topic"
-                                 prefWidth="300" />
+                                 prefWidth="150" />
+                    <!-- Difficulty Column -->
+                    <TableColumn fx:id="difficultyColumn"
+                                 text="Date"
+                                 prefWidth="150" />
+
                     <!-- Score Column -->
                     <TableColumn fx:id="scoreColumn"
                                  text="Score"
-                                 prefWidth="200" />
+                                 prefWidth="150" />
                 </columns>
             </TableView>
         </VBox>
