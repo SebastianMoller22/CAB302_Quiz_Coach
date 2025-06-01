@@ -1,8 +1,16 @@
 package com.example.quizCoach.controller;
 
 import com.example.quizCoach.Session.SessionManager;
+import com.example.quizCoach.model.Quiz;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -11,62 +19,52 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LeaderboardController {
+public class LeaderboardController implements Initializable {
 
     private SessionManager sessionManager;
+    @FXML private TableView<Quiz> leaderboardTable;
+    @FXML private TableColumn<Quiz, Integer> idColumn;
+    @FXML private TableColumn<Quiz, String> topicColumn;
+    @FXML private TableColumn<Quiz, Double> difficultyColumn;
+    @FXML private TableColumn<Quiz, Integer> scoreColumn;
+    @FXML private TableColumn<Quiz, String> userColumn;
+    @FXML private Button backButton;
+    private ObservableList<Quiz> leaderboardData = FXCollections.observableArrayList();
 
-    @FXML
-    private Button backButton;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Platform.runLater(() -> {
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().GetQuizID()).asObject());
+            topicColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().GetTopic()));
+            difficultyColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().GetDifficulty()).asObject());
+            scoreColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getScore()).asObject());
+            userColumn.setCellValueFactory(cellData -> new SimpleStringProperty(sessionManager.getAuthenticationManager().getUsernameFromID(cellData.getValue().getCreatedByUserId())));
+            loadPastQuizzes();
 
-    @FXML
-    private ListView<String> leaderboardListView;
+            leaderboardTable.getSortOrder().add(scoreColumn);
+            scoreColumn.setSortType(TableColumn.SortType.DESCENDING);
+        });
+    }
 
-    @FXML
-    private BarChart<String, Number> performanceChart;
+    private void loadPastQuizzes() {
+        leaderboardData.setAll(sessionManager.getQuizManager().getAllQuiz());
+        leaderboardTable.setItems(leaderboardData);
+    }
 
     public void setSessionManager(SessionManager session) {
         this.sessionManager = session;
     }
 
-    @FXML
-    public void initialize() {
-        leaderboardListView.getItems().addAll(
-                "Alice - 95 pts",
-                "Bob - 90 pts",
-                "Charlie - 88 pts",
-                "Diana - 85 pts"
-        );
-
-        // Set up data
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>("Test 1", 95));
-        series.getData().add(new XYChart.Data<>("Test 2", 90));
-        series.getData().add(new XYChart.Data<>("Test 3", 88));
-        series.getData().add(new XYChart.Data<>("Test 4", 85));
-
-        performanceChart.getData().add(series);
-
-        // Set bar fill color (optional)
-        for (XYChart.Data<String, Number> data : series.getData()) {
-            data.getNode().setStyle("-fx-bar-fill: white;");
-        }
-
-        // Set axis label color to white (your main goal)
-        CategoryAxis xAxis = (CategoryAxis) performanceChart.getXAxis();
-        NumberAxis yAxis = (NumberAxis) performanceChart.getYAxis();
-
-        xAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
-        yAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
-
-        performanceChart.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent;");
-
-    }
-
+    /** Called when the user clicks “← Back” in the top HBox. */
     @FXML
     private void handleBackButton() {
         try {

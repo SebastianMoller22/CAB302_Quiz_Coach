@@ -1,55 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.chart.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:controller="com.example.quizCoach.controller.LeaderboardController"
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.quizCoach.controller.LeaderboardController"
             prefWidth="1000" prefHeight="600"
-            style="-fx-background-color: linear-gradient(to right, #0d2647, #14375c, #165e8c, #6090ab, #a8c2d6);"
-            xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+            style="-fx-background-color: linear-gradient(to right, #0f3c63, #7bb1d1);">
 
-    <!-- Top bar with title and icon buttons -->
+    <!-- ==================== Top Header (Back Button + Title) ==================== -->
     <top>
-        <AnchorPane prefHeight="60.0">
-            <Label layoutX="20.0" layoutY="10.0"
-                   style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"
-                   text="🎓 IntelliTutor" />
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <padding>
+                <Insets top="20" left="20" bottom="20" right="20"/>
+            </padding>
 
-            <HBox spacing="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                <Button fx:id="backButton" text="⬅️"
-                        onAction="#handleBackButton"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px;" />
-                <Button text="👤"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px;" />
-                <Button text="⚙️"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px;" />
-            </HBox>
-        </AnchorPane>
+            <!-- Back Button -->
+            <Button fx:id="backButton"
+                    text="← Back"
+                    onAction="#handleBackButton"
+                    style="-fx-background-color: white; -fx-font-size: 16; -fx-background-radius: 20;"/>
+
+            <!-- Page Title -->
+            <Label text="Leaderboard"
+                   style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;"/>
+        </HBox>
     </top>
 
-    <!-- Center content -->
+    <!-- ==================== Center TableView of Leaderboard ==================== -->
     <center>
-        <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-padding: 30;">
-            <Label text="Top Scores"
-                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+        <VBox alignment="CENTER" spacing="15" maxWidth="750">
+            <TableView fx:id="leaderboardTable"
+                       prefWidth="750"
+                       prefHeight="450"
+                       style="-fx-background-color: rgba(255,255,255,0.9);">
+                <columns>
+                    <!-- Topic Column -->
+                    <TableColumn fx:id="idColumn"
+                                 text="Quiz ID"
+                                 prefWidth="150" />
+                    <!-- Topic Column -->
+                    <TableColumn fx:id="topicColumn"
+                                 text="Topic"
+                                 prefWidth="150" />
+                    <!-- Difficulty Column -->
+                    <TableColumn fx:id="difficultyColumn"
+                                 text="Difficulty"
+                                 prefWidth="150" />
 
-            <!-- Leaderboard list -->
-            <ListView fx:id="leaderboardListView" prefWidth="400" prefHeight="120"
-                      style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-font-size: 14px;" />
-
-            <!-- Performance graph -->
-            <BarChart fx:id="performanceChart" prefHeight="200" prefWidth="500"
-                      title="Performance Overview" legendVisible="false"
-                      style="-fx-background-color: transparent;">
-                <xAxis>
-                    <CategoryAxis label="User" />
-                </xAxis>
-                <yAxis>
-                    <NumberAxis label="Score" />
-                </yAxis>
-            </BarChart>
+                    <!-- Score Column -->
+                    <TableColumn fx:id="scoreColumn"
+                                 text="Score"
+                                 prefWidth="150" />
+                    <!-- Score Column -->
+                    <TableColumn fx:id="userColumn"
+                                 text="Username"
+                                 prefWidth="150" />
+                </columns>
+            </TableView>
         </VBox>
     </center>
-
 </BorderPane>

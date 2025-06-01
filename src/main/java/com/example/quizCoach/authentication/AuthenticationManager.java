@@ -162,6 +162,11 @@ public class AuthenticationManager {
         userDatabase.updateUser(activeUser);
     }
 
+    public String getUsernameFromID(int id) {
+        User user = userDatabase.getUser(id);
+        return user.getUsername();
+    }
+
     /**
      * Generates a cryptographically secure random salt.
      *

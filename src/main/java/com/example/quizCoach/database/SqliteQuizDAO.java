@@ -284,6 +284,19 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
     }
 
+
+    public void updateQuestion(Question question) {
+        String updateQuizSql = "UPDATE questions SET selected_option_text = ?, score = ? WHERE question_text = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(updateQuizSql)) {
+            ps.setString(1, question.GetSelectedOption().GetOptionText());
+            ps.setInt(2, question.GetScore());
+            ps.setString(3, question.GetQuestionText());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void deleteQuestionsByQuizId(int quizId) throws SQLException {
         String deleteOptionsSql = "DELETE FROM options WHERE question_id IN (SELECT id FROM questions WHERE quiz_id = ?);";
         try (PreparedStatement psO = connection.prepareStatement(deleteOptionsSql)) {

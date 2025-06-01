@@ -82,6 +82,7 @@ public class QuizViewController {
     private void handleSeeResults() {
         int correctCount = quiz.getScore();
         Question[] questions = quiz.GetQuestions();
+        sessionManager.getQuizManager().UpdateScore();
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/results-view.fxml"));

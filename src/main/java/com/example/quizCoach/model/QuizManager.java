@@ -120,4 +120,14 @@ public class QuizManager extends Thread{
      * @return a list of past quizzes
      */
     public List<Quiz> getPastquiz() { return pastquizzes; }
+
+    public void UpdateScore() {
+        for (Question question: activequiz.GetQuestions()) {
+            quizDatabase.updateQuestion(question);
+        }
+    }
+
+    public List<Quiz> getAllQuiz() {
+        return quizDatabase.getAllQuizzes();
+    }
 }
