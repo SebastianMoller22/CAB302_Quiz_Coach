@@ -6,6 +6,8 @@ import java.util.Random;
  * Represents a quiz question which can be either multiple-choice or short-answer type.
  */
 public class Question {
+    private Option selectedOption;
+    private int score;
     /**
      * The text of the question.
      */
@@ -113,5 +115,25 @@ public class Question {
             optiontexts[i] = options[i].GetOptionText();
         }
         return optiontexts;
+    }
+    /**
+     * Call this after the user picks one of the shuffled options.
+     * The passed‐in Option should be the exact object from the current
+     * options[] array (e.g. options[i] from GetOptionTexts()).
+     * This sets both the selectedOption and computes score = 1 if correct, else 0.
+     */
+    public void SetSelectedOption(Option choice) {
+        this.selectedOption = choice;
+        this.score = (choice != null && choice.IsOptionCorrect()) ? 1 : 0;
+    }
+
+    /** Returns whichever Option was set via SetSelectedOption(), or null if none. */
+    public Option GetSelectedOption() {
+        return this.selectedOption;
+    }
+
+    /** Returns 1 if the last SetSelectedOption(...) was correct; otherwise 0. */
+    public int GetScore() {
+        return this.score;
     }
 }
