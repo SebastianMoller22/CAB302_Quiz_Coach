@@ -41,8 +41,8 @@ public class HomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/leaderboard-view.fxml"));
             Parent root = loader.load();
-            HomeController homeController = loader.getController();
-            homeController.setSessionManager(sessionManager);
+            LeaderboardController leaderboard = loader.getController();
+            leaderboard.setSessionManager(sessionManager);
             Stage stage = (Stage) leaderboardButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException ex) {
