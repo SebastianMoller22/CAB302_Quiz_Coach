@@ -146,7 +146,19 @@ public class AuthenticationManager_Test {
      */
     public User getUser(String username) {
         // Return the user with that username
-        return new User("Johnny", "aaBB1212@#@#", "hello@example.com");
+        return userDatabase.getUser(username);
+    }
+
+    /**
+     * update the data of the active user to the database
+     */
+    public void updateActiveUser(Boolean passwordupdated) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        if (passwordupdated) {
+            byte[] salt = generateSalt();
+            String hashedPassword = hashPassword(activeUser.getPassword(), salt);
+            activeUser.setPassword(hashedPassword);
+        }
+        userDatabase.updateUser(activeUser);
     }
 
     /**

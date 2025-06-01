@@ -1,5 +1,5 @@
-import com.example.quizCoach.authentication.AuthenticationManager_Test;
 import com.example.quizCoach.authentication.AuthenticationConstant;
+import com.example.quizCoach.authentication.AuthenticationManager_Test;
 import com.example.quizCoach.database.MockUserDAO;
 import com.example.quizCoach.model.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -152,9 +152,10 @@ public class Authentication_Test {
 
     // --------- getUser Test ---------
     @Test
-    public void testGetUserReturnsMockedUser() {
-        User user = manager.getUser("Any");
-        assertEquals("Johnny", user.getUsername()); // as per stub
+    public void testGetUserReturnsMockedUser() throws Exception {
+        manager.Signup("GetUser", "get@example.com", "Password1@");
+        User user = manager.getUser("GetUser");
+        assertEquals("GetUser", user.getUsername()); // as per stub
     }
 
     // --------- Password Hashing and Storage Behavior ---------
