@@ -48,7 +48,7 @@ public class SqliteQuizDAO implements IQuizDAO {
             stmt.execute("CREATE TABLE IF NOT EXISTS quizzes ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "topic VARCHAR NOT NULL,"
-                    + "difficulty DOUBLE NOT NULL"
+                    + "difficulty DOUBLE NOT NULL,"
                     + "user_id INTEGER NOT NULL,"
                     + "FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE"
                     + ");");
