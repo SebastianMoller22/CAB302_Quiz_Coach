@@ -36,10 +36,11 @@ public class Quiz {
      * @param difficulty the difficulty level of the quiz
      * @param questions  the array of questions in the quiz
      */
-    public Quiz(String topic, double difficulty, Question[] questions) {
+    public Quiz(String topic, double difficulty, Question[] questions, int createdByUserId) {
         this.topic = topic;
         this.difficulty = difficulty;
         this.questions = questions;
+        this.createdByUserId = createdByUserId;
     }
 
     /**

@@ -240,6 +240,9 @@ public class Quiz_Maker extends Thread{
             Question the_question = new Question(getMultipleChoiceArray().get(question).getQuestion(),options);
             questions[question] = the_question;
         }
-        return new Quiz(Topic, Skill_level, questions);
+        //TODO: REPLACE THIS WITH ACTUAL LOGIC FOR GETTING THE USER ID
+        int userID = 01;
+
+        return new Quiz(Topic, Skill_level, questions, userID);
     }
 }

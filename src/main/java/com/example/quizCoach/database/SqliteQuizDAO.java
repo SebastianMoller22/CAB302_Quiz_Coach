@@ -58,6 +58,8 @@ public class SqliteQuizDAO implements IQuizDAO {
                     + "quiz_id INTEGER NOT NULL,"
                     + "question_text TEXT NOT NULL,"
                     + "short_response TEXT,"
+                    + "selected_option_text TEXT,"
+                    + "score INTEGER,"
                     + "FOREIGN KEY(quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE"
                     + ");");
             // options table
@@ -98,21 +100,30 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
     }
 
-    private void insertQuestion(int quizId, Question question) throws SQLException {
-        String[] mcOptions = null;
+    void insertQuestion(int quizId, Question question) throws SQLException {
         String shortAns = question.GetShortResponse();
 
         if (question.GetOptions() != null && question.GetOptions().length > 0) {
             // Multiple choice
             String insertQuestionSql =
-                    "INSERT INTO questions (quiz_id, question_text) VALUES (?, ?);";
+                    "INSERT INTO questions (quiz_id, question_text, selected_option_text, score) VALUES (?, ?, ?, ?);";
             try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql, Statement.RETURN_GENERATED_KEYS)) {
                 psQ.setInt(1, quizId);
                 psQ.setString(2, question.GetQuestionText());
+
+                // If no option has been chosen yet, this is null
+                if (question.GetSelectedOption() != null) {
+                    psQ.setString(3, question.GetSelectedOption().GetOptionText());
+                } else {
+                    psQ.setNull(3, Types.VARCHAR);
+                }
+                psQ.setInt(4, question.GetScore());  // 0 or 1 (from Question.GetScore())
+
                 psQ.executeUpdate();
                 try (ResultSet rsQ = psQ.getGeneratedKeys()) {
                     if (rsQ.next()) {
                         int questionId = rsQ.getInt(1);
+                        // Insert all its Options
                         for (Option opt : question.GetOptions()) {
                             insertOption(questionId, opt);
                         }
@@ -120,17 +131,23 @@ public class SqliteQuizDAO implements IQuizDAO {
                 }
             }
         } else {
-            // Short response
+            // Short response (no Options)
             String insertQuestionSql =
-                    "INSERT INTO questions (quiz_id, question_text, short_response) VALUES (?, ?, ?);";
-            try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql, Statement.RETURN_GENERATED_KEYS)) {
+                    "INSERT INTO questions (quiz_id, question_text, short_response, selected_option_text, score) VALUES (?, ?, ?, ?, ?);";
+            try (PreparedStatement psQ = connection.prepareStatement(insertQuestionSql)) {
                 psQ.setInt(1, quizId);
                 psQ.setString(2, question.GetQuestionText());
                 psQ.setString(3, shortAns);
+
+                // Always null for multiple choice tracking on a short-answer
+                psQ.setNull(4, Types.VARCHAR);
+                psQ.setInt(5, question.GetScore());  // Typically 0, since no MCQ to score
+
                 psQ.executeUpdate();
             }
         }
     }
+
 
     private void insertOption(int questionId, Option option) throws SQLException {
         String insertOptionSql = "INSERT INTO options (question_id, option_text, is_correct) VALUES (?, ?, ?);";
@@ -158,9 +175,8 @@ public class SqliteQuizDAO implements IQuizDAO {
                     double difficulty = rs.getFloat("difficulty");
                     int userId = rs.getInt("user_id");
                     Question[] questions = loadQuestions(id);
-                    quiz = new Quiz(topic, difficulty, questions);
+                    quiz = new Quiz(topic, difficulty, questions, userId);
                     quiz.SetQuizID(id);
-                    quiz.setCreatedByUserId(userId);
                 }
             }
         } catch (SQLException e) {
@@ -171,15 +187,18 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     private Question[] loadQuestions(int quizId) throws SQLException {
         String selectQuestionsSql =
-                "SELECT id, question_text, short_response FROM questions WHERE quiz_id = ?;";
+                "SELECT id, question_text, short_response, selected_option_text, score "
+                        + "FROM questions WHERE quiz_id = ?;";
         List<Question> questions = new ArrayList<>();
         try (PreparedStatement psQ = connection.prepareStatement(selectQuestionsSql)) {
             psQ.setInt(1, quizId);
             try (ResultSet rsQ = psQ.executeQuery()) {
                 while (rsQ.next()) {
-                    int questionId    = rsQ.getInt("id");
-                    String text       = rsQ.getString("question_text");
-                    String shortAns   = rsQ.getString("short_response");
+                    int questionId        = rsQ.getInt("id");
+                    String text           = rsQ.getString("question_text");
+                    String shortAns       = rsQ.getString("short_response");
+                    String selectedText   = rsQ.getString("selected_option_text");
+                    int storedScore     = rsQ.getInt("score");
 
                     if (shortAns != null && !shortAns.isEmpty()) {
                         // Short response
@@ -189,6 +208,16 @@ public class SqliteQuizDAO implements IQuizDAO {
                         // Multiple Choice
                         Option[] options = loadOptions(questionId);
                         Question q = new Question(text, options);
+
+                        if (selectedText != null && !selectedText.isEmpty()) {
+                            // Find the matching Option instance by text
+                            for (Option opt : options) {
+                                if (opt.GetOptionText().equals(selectedText)) {
+                                    q.SetSelectedOption(opt);
+                                    break;
+                                }
+                            }
+                        }
                         questions.add(q);
                     }
                 }
