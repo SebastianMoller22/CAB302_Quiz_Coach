@@ -31,6 +31,7 @@ public class ResultsController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
             Parent root = loader.load();
+            sessionManager.getQuizManager().return_home();
             HomeController homeController = loader.getController();
             homeController.setSessionManager(sessionManager);
             Stage stage = (Stage) resultsTextArea.getScene().getWindow();

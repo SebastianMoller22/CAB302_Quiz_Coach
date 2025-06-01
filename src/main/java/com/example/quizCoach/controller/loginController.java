@@ -40,6 +40,8 @@ public class loginController {
                 HomeController homeController = loader.getController();
                 SessionManager session = new SessionManager();
                 session.setAuthenticationManager(authentication);
+                session.getQuizManager().setActivequizuserid(session.getAuthenticationManager().getActiveUser().getId());
+                session.getQuizManager().setsPastquizzes();
                 homeController.setSessionManager(session);
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.setScene(new Scene(root, 800, 700));

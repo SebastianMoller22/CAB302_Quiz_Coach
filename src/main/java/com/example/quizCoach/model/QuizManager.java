@@ -4,21 +4,24 @@ import com.example.quizCoach.AI.Get_Sub_topics;
 import com.example.quizCoach.AI.Quiz_Maker;
 import com.example.quizCoach.database.SqliteQuizDAO;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class QuizManager extends Thread{
     private Quiz activequiz;
+    private int activequizuserid;
     private SqliteQuizDAO quizDatabase;
     Quiz_Maker quizMaker;
-    private Quiz[] pastquizzes;
+    private List<Quiz> pastquizzes;
 
     public QuizManager() {
         quizDatabase = new SqliteQuizDAO();
+        pastquizzes = new ArrayList<Quiz>();
     }
 
     public void MakeQuiz(String topic, int difficulty, int numMCQs) {
         quizMaker = new Quiz_Maker(topic, difficulty, numMCQs, 0);
-
     }
 
     @Override
@@ -33,13 +36,27 @@ public class QuizManager extends Thread{
             }
         }
         activequiz = quizMaker.get_quiz();
+        activequiz.setCreatedByUserId(activequizuserid);
         quizDatabase.addQuiz(activequiz);
-
     }
+
+    public void setActivequizuserid(int user_id) {this.activequizuserid = user_id;}
 
     public Quiz getActivequiz() {return activequiz;}
 
-    public void setPastquizzes(User user) {}
+    public void setsPastquizzes() {
+        List<Quiz> quizzlist = quizDatabase.getAllQuizzes();
+        for (Quiz quiz: quizzlist) {
+            if (quiz.getCreatedByUserId() == activequizuserid) {
+                pastquizzes.add(quiz);
+            }
+        }
+    }
 
-    public Quiz[] getPastquiz() { return pastquizzes; }
+    public void return_home() {
+        pastquizzes.add(activequiz);
+        activequiz = null;
+    }
+
+    public List<Quiz> getPastquiz() { return pastquizzes; }
 }
