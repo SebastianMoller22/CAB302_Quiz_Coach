@@ -41,6 +41,8 @@ public class HomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/leaderboard-view.fxml"));
             Parent root = loader.load();
+            HomeController homeController = loader.getController();
+            homeController.setSessionManager(sessionManager);
             Stage stage = (Stage) leaderboardButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException ex) {
@@ -101,7 +103,7 @@ public class HomeController {
 
             PastQuizzesController pqController = loader.getController();
             // (If you later add setSessionManager(...) inside PastQuizzesController, you can re-enable that.)
-
+            pqController.setSessionManager(sessionManager);
             Stage stage = (Stage) pastQuizzesButton.getScene().getWindow();
             stage.setScene(new Scene(root, 1000, 600));
         } catch (IOException ex) {

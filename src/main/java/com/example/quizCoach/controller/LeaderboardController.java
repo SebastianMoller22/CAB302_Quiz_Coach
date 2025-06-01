@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.Session.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,8 @@ import java.io.IOException;
 
 public class LeaderboardController {
 
+    private SessionManager sessionManager;
+
     @FXML
     private Button backButton;
 
@@ -25,6 +28,10 @@ public class LeaderboardController {
 
     @FXML
     private BarChart<String, Number> performanceChart;
+
+    public void setSessionManager(SessionManager session) {
+        this.sessionManager = session;
+    }
 
     @FXML
     public void initialize() {
@@ -65,6 +72,8 @@ public class LeaderboardController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
             Parent root = loader.load();
+            HomeController homeController = loader.getController();
+            homeController.setSessionManager(sessionManager);
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {

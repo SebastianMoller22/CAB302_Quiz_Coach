@@ -1,5 +1,6 @@
 package com.example.quizCoach.controller;
 
+import com.example.quizCoach.Session.SessionManager;
 import com.example.quizCoach.model.Quiz;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,9 +26,11 @@ import java.util.ResourceBundle;
  */
 public class PastQuizzesController implements Initializable {
 
+    private SessionManager sessionManager;
     @FXML private TableView<Quiz> pastQuizzesTable;
-    @FXML private TableColumn<Quiz, String> dateColumn;
     @FXML private TableColumn<Quiz, String> topicColumn;
+    @FXML private TableColumn<Quiz, String> difficultyColumn;
+    @FXML private TableColumn<Quiz, String> createdbyColumn;
     @FXML private TableColumn<Quiz, String> scoreColumn;
     @FXML private Button backButton;
 
@@ -47,13 +50,8 @@ public class PastQuizzesController implements Initializable {
         // 2) Do NOT populate pastQuizzesTable here.  Instead, wait for setQuizData(...) to be called.
     }
 
-    /**
-     * External code must call this method once it has an ObservableList<Quiz> (e.g. from the DAO).
-     *
-     * @param quizList an ObservableList of Quiz objects to display
-     */
-    public void setQuizData(ObservableList<Quiz> quizList) {
-        pastQuizzesTable.setItems(quizList);
+    public void setSessionManager(SessionManager session) {
+        this.sessionManager = session;
     }
 
     /** Called when the user clicks “← Back” in the top HBox. */
@@ -62,6 +60,8 @@ public class PastQuizzesController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
             Parent root = loader.load();
+            HomeController homeController = loader.getController();
+            homeController.setSessionManager(sessionManager);
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {

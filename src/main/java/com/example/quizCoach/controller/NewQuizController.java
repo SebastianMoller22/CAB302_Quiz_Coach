@@ -109,6 +109,8 @@ public class NewQuizController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
             Parent root = loader.load();
+            HomeController homeController = loader.getController();
+            homeController.setSessionManager(sessionManager);
             Stage stage = (Stage) createQuizButton.getScene().getWindow(); // Get stage from an existing node
             stage.setScene(new Scene(root, 1000, 600));
         } catch (IOException e) {
