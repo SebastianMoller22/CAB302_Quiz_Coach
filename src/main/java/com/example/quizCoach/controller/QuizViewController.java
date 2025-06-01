@@ -71,7 +71,7 @@ public class QuizViewController {
         group.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
             if (newToggle != null) {
                 RadioButton selected = (RadioButton) newToggle;
-                userAnswers.put(question, selected.getText());
+                question.SetSelectedOption(selected.getText());
             }
         });
 
@@ -80,16 +80,8 @@ public class QuizViewController {
 
     @FXML
     private void handleSeeResults() {
-        int correctCount = 0;
+        int correctCount = quiz.getScore();
         Question[] questions = quiz.GetQuestions();
-
-        for (Question question : questions) {
-            String userAnswer = userAnswers.get(question);
-            String correctAnswer = question.GetCorrectOptionText();
-            if (correctAnswer.equals(userAnswer)) {
-                correctCount++;
-            }
-        }
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/results-view.fxml"));

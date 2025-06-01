@@ -104,4 +104,12 @@ public class Quiz {
     public void setCreatedByUserId(int createdByUserId) {
         this.createdByUserId = createdByUserId;
     }
+
+    public int getScore() {
+        int score = 0;
+        for (Question question: questions) {
+            score += question.GetScore();
+        }
+        return score;
+    }
 }

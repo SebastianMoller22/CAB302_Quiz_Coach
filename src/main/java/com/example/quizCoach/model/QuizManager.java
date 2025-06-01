@@ -3,6 +3,7 @@ package com.example.quizCoach.model;
 import com.example.quizCoach.AI.Get_Sub_topics;
 import com.example.quizCoach.AI.Quiz_Maker;
 import com.example.quizCoach.database.SqliteQuizDAO;
+import javafx.concurrent.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,20 +63,21 @@ public class QuizManager extends Thread{
      * Executes the quiz creation thread.
      * Waits for the quiz to be generated, then stores it and associates it with a user.
      */
-    @Override
-    public void run(){
-        quizMaker.start();
-        while (quizMaker.isAlive()){
-            System.out.println("waiting");
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+    public Task<Void> generateQuizTask(String topic, int difficulty, int numMCQs) {
+        return new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                quizMaker = new Quiz_Maker(topic, difficulty, numMCQs, 0);
+                quizMaker.start();
+                while (quizMaker.isAlive()) {
+                    Thread.sleep(500); // optionally updateProgress here
+                }
+                activequiz = quizMaker.get_quiz();
+                activequiz.setCreatedByUserId(activequizuserid);
+                quizDatabase.addQuiz(activequiz);
+                return null;
             }
-        }
-        activequiz = quizMaker.get_quiz();
-        activequiz.setCreatedByUserId(activequizuserid);
-        quizDatabase.addQuiz(activequiz);
+        };
     }
 
     /**

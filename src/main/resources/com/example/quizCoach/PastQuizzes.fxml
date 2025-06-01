@@ -30,19 +30,23 @@
 
     <!-- ==================== Center TableView of Past Quizzes ==================== -->
     <center>
-        <VBox alignment="CENTER" spacing="15">
+        <VBox alignment="CENTER" spacing="15" maxWidth="600">
             <TableView fx:id="pastQuizzesTable"
-                       prefWidth="450"
+                       prefWidth="600"
                        prefHeight="450"
                        style="-fx-background-color: rgba(255,255,255,0.9);">
                 <columns>
+                    <!-- Topic Column -->
+                    <TableColumn fx:id="idColumn"
+                                 text="Quiz ID"
+                                 prefWidth="150" />
                     <!-- Topic Column -->
                     <TableColumn fx:id="topicColumn"
                                  text="Topic"
                                  prefWidth="150" />
                     <!-- Difficulty Column -->
                     <TableColumn fx:id="difficultyColumn"
-                                 text="Date"
+                                 text="Difficulty"
                                  prefWidth="150" />
 
                     <!-- Score Column -->

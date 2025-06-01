@@ -213,7 +213,7 @@ public class SqliteQuizDAO implements IQuizDAO {
                             // Find the matching Option instance by text
                             for (Option opt : options) {
                                 if (opt.GetOptionText().equals(selectedText)) {
-                                    q.SetSelectedOption(opt);
+                                    q.SetSelectedOption(opt.GetOptionText());
                                     break;
                                 }
                             }

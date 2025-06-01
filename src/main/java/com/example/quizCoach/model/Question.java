@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class Question {
     private Option selectedOption;
-    private int score;
+    private int score = 0;
     /**
      * The text of the question.
      */
@@ -122,9 +122,14 @@ public class Question {
      * options[] array (e.g. options[i] from GetOptionTexts()).
      * This sets both the selectedOption and computes score = 1 if correct, else 0.
      */
-    public void SetSelectedOption(Option choice) {
-        this.selectedOption = choice;
-        this.score = (choice != null && choice.IsOptionCorrect()) ? 1 : 0;
+    public void SetSelectedOption(String choice) {
+        for (Option option: options) {
+            if (option.GetOptionText().equals(choice)) {
+                this.selectedOption = option;
+                this.score = (option != null && option.IsOptionCorrect()) ? 1 : 0;
+            }
+        }
+
     }
 
     /** Returns whichever Option was set via SetSelectedOption(), or null if none. */

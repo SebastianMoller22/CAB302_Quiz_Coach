@@ -1,7 +1,13 @@
 package com.example.quizCoach.controller;
 
 import com.example.quizCoach.Session.SessionManager;
+import com.example.quizCoach.model.Question;
 import com.example.quizCoach.model.Quiz;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,25 +34,28 @@ public class PastQuizzesController implements Initializable {
 
     private SessionManager sessionManager;
     @FXML private TableView<Quiz> pastQuizzesTable;
+    @FXML private TableColumn<Quiz, Integer> idColumn;
     @FXML private TableColumn<Quiz, String> topicColumn;
-    @FXML private TableColumn<Quiz, String> difficultyColumn;
-    @FXML private TableColumn<Quiz, String> scoreColumn;
+    @FXML private TableColumn<Quiz, Double> difficultyColumn;
+    @FXML private TableColumn<Quiz, Integer> scoreColumn;
     @FXML private Button backButton;
+    private ObservableList<Quiz> quizData = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // 1) Configure each column to read from the Quiz model:
-        //
-        //    dateColumn  ← Quiz.getDateProperty()
-        //    topicColumn ← Quiz.getTopicProperty()
-        //    scoreColumn ← Quiz.getScoreProperty()
-        //
-        // Note: Quiz must expose these as StringProperty or ObservableValue<String>.
-        //dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        //topicColumn.setCellValueFactory(cellData -> cellData.getValue().topicProperty());
-        //scoreColumn.setCellValueFactory(cellData -> cellData.getValue().scoreProperty());
+        Platform.runLater(() -> {
+            idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().GetQuizID()).asObject());
+            topicColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().GetTopic()));
+            difficultyColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().GetDifficulty()).asObject());
+            scoreColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getScore()).asObject());
 
-        // 2) Do NOT populate pastQuizzesTable here.  Instead, wait for setQuizData(...) to be called.
+            loadPastQuizzes();
+        });
+    }
+
+    private void loadPastQuizzes() {
+        quizData.setAll(sessionManager.getQuizManager().getPastquiz());
+        pastQuizzesTable.setItems(quizData);
     }
 
     public void setSessionManager(SessionManager session) {

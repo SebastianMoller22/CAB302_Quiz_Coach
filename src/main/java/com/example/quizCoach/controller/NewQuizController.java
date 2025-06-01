@@ -6,18 +6,16 @@ import com.example.quizCoach.model.QuizManager;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -25,6 +23,8 @@ import java.io.IOException;
 public class NewQuizController {
 
     private SessionManager sessionManager;
+
+    Thread quizcreation;
 
     @FXML
     private TextField topicField;
@@ -65,30 +65,18 @@ public class NewQuizController {
      */
     private void handleKeyframe(ActionEvent event){
         if (quiz_start){
-            if(sessionManager.getQuizManager().isAlive()){
+            if(quizcreation.isAlive()){
 
             }
             else{
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/quiz-view.fxml"));
-                Parent root = null;
-                try {
-                    root = loader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
 
-                QuizViewController quizViewController = loader.getController();
-                quizViewController.setSessionManager(sessionManager);
-                Stage stage = (Stage) createQuizButton.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                timeleine.stop();
             }
         }
     }
 
     @FXML
-    private void handleCreateQuiz() {
+    private void handleCreateQuiz(ActionEvent event) throws IOException {
         if (quiz_start == false) {
             String topic = topicField.getText();
             int difficulty = (int) difficultySlider.getValue();
@@ -97,9 +85,41 @@ public class NewQuizController {
 
             System.out.println("Creating quiz on topic: " + topic + " with difficulty: " + difficulty);
 
-            sessionManager.getQuizManager().MakeQuiz(topic, difficulty, numQuestions);
-            sessionManager.getQuizManager().start();
+            Task<Void> quizTask = sessionManager.getQuizManager().generateQuizTask(topic, difficulty, numQuestions);
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+            quizTask.setOnSucceeded(e -> {
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Quiz Ready");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Your quiz has been successfully generated.");
+                    alert.showAndWait();
+
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/quiz-view.fxml"));
+                        Parent root = loader.load();
+                        QuizViewController quizview = loader.getController();
+                        quizview.setSessionManager(sessionManager);
+                        stage.setScene(new Scene(root));
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+            });
+
+            quizcreation = new Thread(quizTask);
+
+            quizcreation.start();
+
             quiz_start = true;
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/home-page.fxml"));
+            Parent root = loader.load();
+            HomeController home = loader.getController();
+            home.setSessionManager(sessionManager);
+            stage.setScene(new Scene(root));
         }
 
     }
