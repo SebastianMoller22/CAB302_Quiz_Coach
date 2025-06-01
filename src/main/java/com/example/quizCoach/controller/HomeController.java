@@ -96,13 +96,9 @@ public class HomeController {
     @FXML
     private void handlePastQuizzes() {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/example/quizCoach/PastQuizzes.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quizCoach/PastQuizzes.fxml"));
             Parent root = loader.load();
-
             PastQuizzesController pqController = loader.getController();
-            // (If you later add setSessionManager(...) inside PastQuizzesController, you can re-enable that.)
             pqController.setSessionManager(sessionManager);
             Stage stage = (Stage) pastQuizzesButton.getScene().getWindow();
             stage.setScene(new Scene(root, 1000, 600));
