@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.quizCoach.controller.PastQuizzesController"
+            prefWidth="1000" prefHeight="600"
+            style="-fx-background-color: linear-gradient(to right, #0f3c63, #7bb1d1);">
+
+    <!-- ==================== Top Header (Back Button + Title) ==================== -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <padding>
+                <Insets top="20" left="20" bottom="20" right="20"/>
+            </padding>
+
+            <!-- Back Button -->
+            <Button fx:id="backButton"
+                    text="← Back"
+                    onAction="#handleBackButton"
+                    style="-fx-background-color: white; -fx-font-size: 16; -fx-background-radius: 20;"/>
+
+            <!-- Page Title -->
+            <Label text="Past Quizzes"
+                   style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <!-- ==================== Center TableView of Past Quizzes ==================== -->
+    <center>
+        <VBox alignment="CENTER" spacing="15">
+            <TableView fx:id="pastQuizzesTable"
+                       prefWidth="800"
+                       prefHeight="450"
+                       style="-fx-background-color: rgba(255,255,255,0.9);">
+                <columns>
+                    <!-- Date Column -->
+                    <TableColumn fx:id="dateColumn"
+                                 text="Date"
+                                 prefWidth="200" />
+                    <!-- Topic Column -->
+                    <TableColumn fx:id="topicColumn"
+                                 text="Topic"
+                                 prefWidth="300" />
+                    <!-- Score Column -->
+                    <TableColumn fx:id="scoreColumn"
+                                 text="Score"
+                                 prefWidth="200" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
