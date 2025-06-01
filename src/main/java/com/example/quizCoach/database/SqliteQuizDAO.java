@@ -284,7 +284,10 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
     }
 
-
+    /**
+     * Updates an existing Question's score and selected option in the database
+     * @param question The Question object with updated information.
+     */
     public void updateQuestion(Question question) {
         String updateQuizSql = "UPDATE questions SET selected_option_text = ?, score = ? WHERE question_text = ?;";
         try (PreparedStatement ps = connection.prepareStatement(updateQuizSql)) {
@@ -297,6 +300,11 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
     }
 
+    /***
+     * Delete question by using the quiz ID
+     * @param quizId the quiz ID
+     * @throws SQLException
+     */
     private void deleteQuestionsByQuizId(int quizId) throws SQLException {
         String deleteOptionsSql = "DELETE FROM options WHERE question_id IN (SELECT id FROM questions WHERE quiz_id = ?);";
         try (PreparedStatement psO = connection.prepareStatement(deleteOptionsSql)) {
